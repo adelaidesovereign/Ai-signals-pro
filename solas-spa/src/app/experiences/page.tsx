@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {
   AnimatedSection,
   StaggerChildren,
   StaggerItem,
 } from "@/components/AnimatedSection";
+import { images } from "@/lib/images";
 
 const experiences = [
   {
@@ -58,12 +60,8 @@ export default function ExperiencesPage() {
     <>
       {/* Hero */}
       <section className="relative h-[70vh] min-h-[500px] flex items-end overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{
-            background: "linear-gradient(160deg, #2d3a2e 0%, #3a4a35 30%, #1a2818 70%, #0d1210 100%)",
-          }}
-        />
+        <Image src={images.mountainSunrise} alt="Blue Ridge mountain sunrise" fill className="object-cover" priority sizes="100vw" />
+        <div className="absolute inset-0 bg-forest/45" />
         <div className="absolute inset-0 atmosphere-mist" />
         <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pb-16 md:pb-24 w-full">
           <AnimatedSection>

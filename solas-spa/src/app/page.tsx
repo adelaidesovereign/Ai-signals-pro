@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import {
@@ -10,6 +11,7 @@ import {
   LineReveal,
 } from "@/components/AnimatedSection";
 import { MagneticButton } from "@/components/MagneticButton";
+import { images } from "@/lib/images";
 
 const easeExpo = [0.16, 1, 0.3, 1] as const;
 
@@ -20,19 +22,19 @@ const spaHighlights = [
     title: "Thermal Waters",
     description:
       "Natural mineral pools fed by ancient mountain springs, maintained at varying temperatures for a complete hydrotherapy journey.",
-    image: "linear-gradient(145deg, #2d3a2e 0%, #1a1f16 60%, #0d1210 100%)",
+    image: images.hotSpring,
   },
   {
     title: "Forest Bathing",
     description:
       "Guided Shinrin-yoku through old-growth hemlock and rhododendron, where the canopy filters light into healing warmth.",
-    image: "linear-gradient(145deg, #3a4a35 0%, #2d3a2e 60%, #1a1f16 100%)",
+    image: images.forestSunrays,
   },
   {
     title: "Stone & Sage",
     description:
       "Our signature treatment combines heated Appalachian river stones with wild mountain sage oil in a 90-minute ritual.",
-    image: "linear-gradient(145deg, #4a3a2e 0%, #2d2a1e 60%, #1a1816 100%)",
+    image: images.spaStones,
   },
 ];
 
@@ -48,19 +50,19 @@ const accommodationTypes = [
     name: "Mountain Suite",
     size: "850 sq ft",
     detail: "Panoramic valley views, private terrace, soaking tub",
-    gradient: "linear-gradient(135deg, #2d3a2e 0%, #1a2318 100%)",
+    image: images.hotelSuite,
   },
   {
     name: "Canopy Treehouse",
     size: "620 sq ft",
     detail: "Suspended among century-old oaks, glass floor panels",
-    gradient: "linear-gradient(135deg, #3a3a2e 0%, #252518 100%)",
+    image: images.treehouse,
   },
   {
     name: "Creekside Cottage",
     size: "1,100 sq ft",
     detail: "Private hot spring pool, outdoor rain shower, firepit",
-    gradient: "linear-gradient(135deg, #2e3a3a 0%, #182525 100%)",
+    image: images.cabin,
   },
 ];
 
@@ -76,21 +78,20 @@ function HeroSection() {
 
   return (
     <section ref={ref} className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
-      {/* Background with parallax */}
-      <motion.div
-        className="absolute inset-0"
-        style={{
-          scale,
-          background:
-            "linear-gradient(160deg, #1a1f16 0%, #2d3a2e 30%, #1a2818 60%, #0d1210 100%)",
-        }}
-      />
-      {/* Noise texture */}
+      {/* Background image with parallax */}
+      <motion.div className="absolute inset-0" style={{ scale }}>
+        <Image
+          src={images.hero}
+          alt="Blue Ridge Mountains at sunset"
+          fill
+          className="object-cover"
+          priority
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-forest/50" />
+      </motion.div>
       <div className="absolute inset-0 noise-overlay" />
-      {/* Atmospheric overlays */}
       <div className="absolute inset-0 atmosphere-mist" />
-      <div className="absolute inset-0 atmosphere-warm" />
-      {/* Animated glow */}
       <motion.div
         className="absolute inset-0"
         animate={{
@@ -102,25 +103,8 @@ function HeroSection() {
         }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
-      {/* Mountain silhouette */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-[40%]"
-        style={{
-          background: "linear-gradient(to top, rgba(10,14,8,0.6) 0%, transparent 100%)",
-        }}
-      />
-      <svg
-        className="absolute bottom-0 left-0 right-0 w-full h-auto opacity-20"
-        viewBox="0 0 1440 200"
-        preserveAspectRatio="none"
-      >
-        <path
-          d="M0,200 L0,140 Q120,80 240,120 Q360,40 480,90 Q600,20 720,70 Q840,30 960,80 Q1080,50 1200,100 Q1320,60 1440,110 L1440,200 Z"
-          fill="#0a0e08"
-        />
-      </svg>
 
-      {/* Content with scroll fade */}
+      {/* Content */}
       <motion.div className="relative z-10 text-center px-6" style={{ opacity, y }}>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -154,7 +138,7 @@ function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.2, ease: easeExpo }}
-          className="text-cream/50 text-base md:text-lg max-w-lg mx-auto mb-12 font-body leading-relaxed"
+          className="text-cream/60 text-base md:text-lg max-w-lg mx-auto mb-12 font-body leading-relaxed"
         >
           A sanctuary where the ancient mountains hold space
           for your renewal
@@ -187,9 +171,7 @@ function HeroSection() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
         style={{ opacity }}
       >
-        <span className="text-[10px] tracking-[0.3em] uppercase text-cream/30">
-          Scroll
-        </span>
+        <span className="text-[10px] tracking-[0.3em] uppercase text-cream/30">Scroll</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
@@ -265,16 +247,19 @@ export default function Home() {
                 {spaHighlights.map((item) => (
                   <StaggerItem key={item.title}>
                     <div className="group">
-                      <div
-                        className="aspect-[16/9] md:aspect-[21/9] mb-6 img-zoom noise-overlay"
-                        style={{ background: item.image }}
-                      >
-                        <div className="w-full h-full flex items-end p-8 md:p-12 bg-gradient-to-t from-black/50 via-black/10 to-transparent relative z-10">
-                          <div>
-                            <h3 className="font-display text-2xl md:text-3xl text-cream group-hover:text-gold transition-colors duration-500">
-                              {item.title}
-                            </h3>
-                          </div>
+                      <div className="relative aspect-[16/9] md:aspect-[21/9] mb-6 img-zoom overflow-hidden">
+                        <Image
+                          src={item.image}
+                          alt={item.title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 1024px) 100vw, 66vw"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent z-10" />
+                        <div className="absolute inset-0 flex items-end p-8 md:p-12 z-20">
+                          <h3 className="font-display text-2xl md:text-3xl text-cream group-hover:text-gold transition-colors duration-500">
+                            {item.title}
+                          </h3>
                         </div>
                       </div>
                       <p className="text-stone text-sm md:text-base leading-relaxed max-w-xl">
@@ -289,17 +274,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Full-width atmospheric break - SIGNATURE MOMENT */}
-      <section className="relative h-[60vh] md:h-[70vh] overflow-hidden noise-overlay">
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(135deg, #2d3a2e 0%, #1a2818 40%, #1a1f16 100%)",
-          }}
+      {/* Full-width atmospheric break */}
+      <section className="relative h-[60vh] md:h-[70vh] overflow-hidden">
+        <Image
+          src={images.forestMist}
+          alt="Misty forest in the Blue Ridge Mountains"
+          fill
+          className="object-cover"
+          sizes="100vw"
         />
-        <div className="absolute inset-0 atmosphere-mist" />
-        {/* Large decorative letter */}
+        <div className="absolute inset-0 bg-forest/60" />
+        <div className="absolute inset-0 noise-overlay" />
         <div className="absolute inset-0 flex items-center justify-center opacity-[0.03]">
           <span className="font-display text-cream text-[40vw] leading-none select-none">
             S
@@ -324,25 +309,17 @@ export default function Home() {
       <section className="py-24 md:py-36 lg:py-44">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-            {/* Image placeholder with overlapping element */}
             <AnimatedSection direction="left" className="relative">
-              <div
-                className="aspect-[4/5] overflow-hidden noise-overlay"
-                style={{
-                  background:
-                    "linear-gradient(160deg, #3a2e20 0%, #2d2418 40%, #1a1610 100%)",
-                }}
-              >
-                <div className="w-full h-full flex flex-col items-center justify-center atmosphere-warm p-12 relative z-10">
-                  <span className="font-display text-cream/20 text-[120px] md:text-[180px] leading-none">
-                    R
-                  </span>
-                  <span className="text-cream/30 text-[11px] tracking-[0.3em] uppercase mt-4">
-                    Rootwood Restaurant
-                  </span>
-                </div>
+              <div className="relative aspect-[4/5] img-zoom overflow-hidden">
+                <Image
+                  src={images.fineDining}
+                  alt="Fine dining at Rootwood restaurant"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-forest/20" />
               </div>
-              {/* Overlapping detail card */}
               <AnimatedSection delay={0.3} className="absolute -bottom-8 -right-4 md:-right-8 bg-cream p-6 md:p-8 shadow-2xl max-w-[240px] z-20">
                 <span className="overline text-[10px] block mb-2">Award-Winning</span>
                 <span className="font-display text-lg leading-tight">
@@ -351,7 +328,6 @@ export default function Home() {
               </AnimatedSection>
             </AnimatedSection>
 
-            {/* Content */}
             <div>
               <AnimatedSection>
                 <p className="overline mb-4">Dining</p>
@@ -425,11 +401,16 @@ export default function Home() {
             {accommodationTypes.map((room) => (
               <StaggerItem key={room.name}>
                 <Link href="/accommodations" className="group block card-lift">
-                  <div
-                    className="aspect-[3/4] mb-6 overflow-hidden img-zoom noise-overlay"
-                    style={{ background: room.gradient }}
-                  >
-                    <div className="w-full h-full flex flex-col justify-end p-8 bg-gradient-to-t from-black/60 via-black/20 to-transparent relative z-10">
+                  <div className="relative aspect-[3/4] mb-6 img-zoom overflow-hidden">
+                    <Image
+                      src={room.image}
+                      alt={room.name}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10" />
+                    <div className="absolute inset-0 flex flex-col justify-end p-8 z-20">
                       <span className="text-cream/30 text-[11px] tracking-[0.2em] uppercase mb-2">
                         {room.size}
                       </span>
@@ -475,34 +456,26 @@ export default function Home() {
             </AnimatedSection>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-forest/10">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              {
-                title: "Mountain Trails",
-                desc: "Guided hikes through old-growth forest to hidden waterfalls and panoramic overlooks",
-              },
-              {
-                title: "River Arts",
-                desc: "Private studio visits with Asheville\u2019s celebrated artisan community",
-              },
-              {
-                title: "Blue Ridge Parkway",
-                desc: "Curated drives along America\u2019s most scenic highway with gourmet picnic service",
-              },
-              {
-                title: "Stargazing",
-                desc: "Evening astronomy sessions from our mountaintop observatory deck",
-              },
+              { title: "Mountain Trails", desc: "Guided hikes through old-growth forest to hidden waterfalls and panoramic overlooks", image: images.hiking },
+              { title: "River Arts", desc: "Private studio visits with Asheville\u2019s celebrated artisan community", image: images.pottery },
+              { title: "Blue Ridge Parkway", desc: "Curated drives along America\u2019s most scenic highway with gourmet picnic service", image: images.blueRidge },
+              { title: "Stargazing", desc: "Evening astronomy sessions from our mountaintop observatory deck", image: images.stargazing },
             ].map((exp, i) => (
               <AnimatedSection key={exp.title} delay={i * 0.1}>
-                <div className="bg-cream p-8 md:p-10 h-full group hover:bg-cream-light transition-all duration-700 card-lift">
-                  <span className="text-gold text-[11px] tracking-[0.2em] uppercase">
-                    0{i + 1}
-                  </span>
-                  <h3 className="font-display text-xl md:text-2xl mt-4 mb-4 group-hover:text-gold transition-colors duration-500">
-                    {exp.title}
-                  </h3>
-                  <p className="text-stone text-sm leading-relaxed">{exp.desc}</p>
+                <div className="group card-lift overflow-hidden bg-cream-light">
+                  <div className="relative aspect-[4/3] img-zoom overflow-hidden">
+                    <Image src={exp.image} alt={exp.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 25vw" />
+                    <div className="absolute inset-0 bg-forest/20 group-hover:bg-forest/10 transition-colors duration-500" />
+                  </div>
+                  <div className="p-6 md:p-8">
+                    <span className="text-gold text-[11px] tracking-[0.2em] uppercase">0{i + 1}</span>
+                    <h3 className="font-display text-xl md:text-2xl mt-3 mb-3 group-hover:text-gold transition-colors duration-500">
+                      {exp.title}
+                    </h3>
+                    <p className="text-stone text-sm leading-relaxed">{exp.desc}</p>
+                  </div>
                 </div>
               </AnimatedSection>
             ))}
@@ -522,23 +495,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Awards / Recognition */}
+      {/* Awards */}
       <section className="py-16 md:py-20 border-t border-forest/8">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
           <AnimatedSection>
             <p className="overline text-center mb-10 text-stone/50">As Featured In</p>
             <div className="flex flex-wrap justify-center items-center gap-x-16 gap-y-8 opacity-30">
-              {[
-                "Forbes Travel Guide",
-                "Cond\u00e9 Nast Traveler",
-                "Travel + Leisure",
-                "Robb Report",
-                "Departures",
-              ].map((pub) => (
-                <span
-                  key={pub}
-                  className="text-[13px] tracking-[0.15em] uppercase text-forest whitespace-nowrap hover:opacity-100 transition-opacity duration-500"
-                >
+              {["Forbes Travel Guide", "Cond\u00e9 Nast Traveler", "Travel + Leisure", "Robb Report", "Departures"].map((pub) => (
+                <span key={pub} className="text-[13px] tracking-[0.15em] uppercase text-forest whitespace-nowrap hover:opacity-100 transition-opacity duration-500">
                   {pub}
                 </span>
               ))}

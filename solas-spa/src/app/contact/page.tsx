@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import {
   AnimatedSection,
   StaggerChildren,
   StaggerItem,
 } from "@/components/AnimatedSection";
+import { images } from "@/lib/images";
 
 const inquiryTypes = [
   "Room Reservation",
@@ -43,12 +45,8 @@ export default function ContactPage() {
     <>
       {/* Hero */}
       <section className="relative h-[50vh] min-h-[400px] flex items-end overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{
-            background: "linear-gradient(160deg, #2d3a2e 0%, #1a2818 50%, #0d1210 100%)",
-          }}
-        />
+        <Image src={images.mountainMist} alt="Mountain vista" fill className="object-cover" priority sizes="100vw" />
+        <div className="absolute inset-0 bg-forest/50" />
         <div className="absolute inset-0 atmosphere-mist" />
         <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pb-16 md:pb-24 w-full">
           <AnimatedSection>
@@ -331,12 +329,8 @@ export default function ContactPage() {
 
       {/* Map placeholder */}
       <section className="relative h-[400px] overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{
-            background: "linear-gradient(135deg, #2d3a2e 0%, #1a2818 50%, #1a1f16 100%)",
-          }}
-        />
+        <Image src={images.blueRidge} alt="Blue Ridge Mountains panorama" fill className="object-cover" sizes="100vw" />
+        <div className="absolute inset-0 bg-forest/60" />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center">
             <span className="font-display text-cream/20 text-6xl block mb-4">

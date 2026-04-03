@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {
   AnimatedSection,
   StaggerChildren,
   StaggerItem,
   LineReveal,
 } from "@/components/AnimatedSection";
+import { images } from "@/lib/images";
 
 const timeline = [
   { year: "2016", event: "Founders Elena & James Ashworth discover the 200-acre property while hiking the Blue Ridge" },
@@ -21,11 +23,11 @@ const timeline = [
 ];
 
 const team = [
-  { name: "Elena Ashworth", role: "Co-Founder & Creative Director", bio: "Former interior architect whose vision for Solas began with a sketchbook and a sunset on the Blue Ridge Parkway." },
-  { name: "James Ashworth", role: "Co-Founder & Managing Director", bio: "Hospitality veteran with two decades at Four Seasons and Aman. His philosophy: luxury is attention to the unseen details." },
-  { name: "Margaux Chen", role: "Executive Chef", bio: "Trained at Noma and Narisawa before falling in love with Appalachian ingredients. Her tasting menus have earned national acclaim." },
-  { name: "Dr. Lena Okafor", role: "Wellness Director", bio: "Integrative medicine practitioner who designed our holistic wellness program blending Eastern and Appalachian healing traditions." },
-  { name: "Tomoko Sato", role: "Architect", bio: "The Tokyo-born, Asheville-based architect who designed Solas to disappear into the forest rather than impose upon it." },
+  { name: "Elena Ashworth", role: "Co-Founder & Creative Director", bio: "Former interior architect whose vision for Solas began with a sketchbook and a sunset on the Blue Ridge Parkway.", image: images.portrait4 },
+  { name: "James Ashworth", role: "Co-Founder & Managing Director", bio: "Hospitality veteran with two decades at Four Seasons and Aman. His philosophy: luxury is attention to the unseen details.", image: images.portrait2 },
+  { name: "Margaux Chen", role: "Executive Chef", bio: "Trained at Noma and Narisawa before falling in love with Appalachian ingredients. Her tasting menus have earned national acclaim.", image: images.portrait1 },
+  { name: "Dr. Lena Okafor", role: "Wellness Director", bio: "Integrative medicine practitioner who designed our holistic wellness program blending Eastern and Appalachian healing traditions.", image: images.portrait3 },
+  { name: "Tomoko Sato", role: "Architect", bio: "The Tokyo-born, Asheville-based architect who designed Solas to disappear into the forest rather than impose upon it.", image: images.portrait5 },
 ];
 
 const values = [
@@ -40,12 +42,8 @@ export default function AboutPage() {
     <>
       {/* Hero */}
       <section className="relative h-[70vh] min-h-[500px] flex items-end overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{
-            background: "linear-gradient(160deg, #2d3a2e 0%, #1a2818 50%, #1a1f16 100%)",
-          }}
-        />
+        <Image src={images.forestSunrays} alt="Sunlight through Blue Ridge forest" fill className="object-cover" priority sizes="100vw" />
+        <div className="absolute inset-0 bg-forest/50" />
         <div className="absolute inset-0 atmosphere-mist" />
         <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pb-16 md:pb-24 w-full">
           <AnimatedSection>
@@ -107,20 +105,9 @@ export default function AboutPage() {
             </div>
 
             <AnimatedSection direction="left" className="lg:sticky lg:top-32">
-              <div
-                className="aspect-[3/4]"
-                style={{
-                  background: "linear-gradient(135deg, #3a4a35 0%, #2d3a2e 50%, #1a2318 100%)",
-                }}
-              >
-                <div className="w-full h-full flex flex-col items-center justify-center atmosphere-mist p-12">
-                  <span className="font-display text-cream/15 text-[120px] md:text-[180px] leading-none italic">
-                    S
-                  </span>
-                  <span className="text-cream/30 text-[11px] tracking-[0.3em] uppercase mt-6">
-                    Est. 2019
-                  </span>
-                </div>
+              <div className="relative aspect-[3/4] overflow-hidden">
+                <Image src={images.forestPath} alt="Forest path at Solas" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+                <div className="absolute inset-0 bg-forest/30" />
               </div>
             </AnimatedSection>
           </div>
@@ -201,17 +188,9 @@ export default function AboutPage() {
             {team.map((person) => (
               <StaggerItem key={person.name}>
                 <div className="group">
-                  <div
-                    className="aspect-[3/4] mb-6"
-                    style={{
-                      background: "linear-gradient(135deg, #2d3a2e 0%, #1a2318 100%)",
-                    }}
-                  >
-                    <div className="w-full h-full flex items-center justify-center">
-                      <span className="font-display text-cream/10 text-[80px]">
-                        {person.name.split(" ").map(n => n[0]).join("")}
-                      </span>
-                    </div>
+                  <div className="relative aspect-[3/4] mb-6 img-zoom overflow-hidden">
+                    <Image src={person.image} alt={person.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+                    <div className="absolute inset-0 bg-forest/10 group-hover:bg-forest/0 transition-colors duration-500" />
                   </div>
                   <h3 className="font-display text-cream text-xl mb-1 group-hover:text-gold transition-colors duration-500">
                     {person.name}

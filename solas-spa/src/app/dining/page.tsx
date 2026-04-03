@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {
   AnimatedSection,
   StaggerChildren,
   StaggerItem,
   LineReveal,
 } from "@/components/AnimatedSection";
+import { images } from "@/lib/images";
 
 const venues = [
   {
@@ -24,7 +26,7 @@ const venues = [
       { course: "Cheese", dish: "Appalachian cheese selection, sourwood honeycomb, walnut bread" },
       { course: "Dessert", dish: "Dark chocolate terrine, raspberry coulis, gold leaf" },
     ],
-    gradient: "linear-gradient(160deg, #2d2418 0%, #1a1610 60%, #0d0c08 100%)",
+    image: images.platedFood,
   },
   {
     name: "The Canopy Bar",
@@ -40,7 +42,7 @@ const venues = [
       { course: "Plate", dish: "Charcuterie: house-cured meats, pickled vegetables, grilled bread" },
       { course: "Plate", dish: "Truffle fries, parmesan cream, fresh herbs" },
     ],
-    gradient: "linear-gradient(160deg, #1a2818 0%, #162018 60%, #0d1210 100%)",
+    image: images.cocktail,
   },
   {
     name: "Morning Light",
@@ -56,7 +58,7 @@ const venues = [
       { course: "Light", dish: "Acai bowl, house granola, local honey, seasonal fruit" },
       { course: "Brunch", dish: "Smoked trout benedict, dill hollandaise, capers, brioche" },
     ],
-    gradient: "linear-gradient(160deg, #3a3020 0%, #2d2818 60%, #1a1a10 100%)",
+    image: images.breakfast,
   },
 ];
 
@@ -74,12 +76,8 @@ export default function DiningPage() {
     <>
       {/* Hero */}
       <section className="relative h-[70vh] min-h-[500px] flex items-end overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{
-            background: "linear-gradient(160deg, #3a2e20 0%, #2d2418 50%, #1a1610 100%)",
-          }}
-        />
+        <Image src={images.restaurant} alt="Rootwood restaurant" fill className="object-cover" priority sizes="100vw" />
+        <div className="absolute inset-0 bg-forest/55" />
         <div className="absolute inset-0 atmosphere-warm" />
         <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pb-16 md:pb-24 w-full">
           <AnimatedSection>
@@ -106,18 +104,9 @@ export default function DiningPage() {
             <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
               {/* Image */}
               <AnimatedSection direction={venueIndex % 2 === 0 ? "left" : "right"} className={venueIndex % 2 === 1 ? "lg:order-2" : ""}>
-                <div
-                  className="aspect-[4/5] lg:aspect-[3/4]"
-                  style={{ background: venue.gradient }}
-                >
-                  <div className="w-full h-full flex flex-col items-center justify-center p-12">
-                    <span className="font-display text-cream/15 text-[100px] md:text-[140px] leading-none">
-                      {venue.name.charAt(0)}
-                    </span>
-                    <span className="text-cream/25 text-[11px] tracking-[0.3em] uppercase mt-4">
-                      {venue.name}
-                    </span>
-                  </div>
+                <div className="relative aspect-[4/5] lg:aspect-[3/4] img-zoom overflow-hidden">
+                  <Image src={venue.image} alt={venue.name} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+                  <div className="absolute inset-0 bg-forest/15" />
                 </div>
               </AnimatedSection>
 

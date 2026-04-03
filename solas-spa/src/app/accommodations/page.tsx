@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {
   AnimatedSection,
   StaggerChildren,
   StaggerItem,
 } from "@/components/AnimatedSection";
+import { images } from "@/lib/images";
 
 const rooms = [
   {
@@ -13,42 +15,42 @@ const rooms = [
     size: "450 sq ft",
     price: "From $495 / night",
     features: ["King bed with organic linens", "Private balcony with valley views", "Rainfall shower, heated floors", "Nespresso machine & curated minibar"],
-    gradient: "linear-gradient(135deg, #2d3a2e 0%, #1a2318 100%)",
+    image: images.hotelSuite,
   },
   {
     name: "Forest Suite",
     size: "700 sq ft",
     price: "From $725 / night",
     features: ["King bed & separate living area", "Deep soaking tub with forest views", "Wood-burning fireplace", "Private garden terrace"],
-    gradient: "linear-gradient(135deg, #3a4a35 0%, #2d3a2e 100%)",
+    image: images.hotelBed,
   },
   {
     name: "Mountain Suite",
     size: "850 sq ft",
     price: "From $950 / night",
     features: ["Panoramic 180-degree valley views", "Oversized soaking tub & walk-in shower", "Living area with fireplace", "Private wraparound terrace"],
-    gradient: "linear-gradient(135deg, #2d3a2e 0%, #1a1f16 100%)",
+    image: images.luxuryBath,
   },
   {
     name: "Canopy Treehouse",
     size: "620 sq ft",
     price: "From $1,200 / night",
     features: ["Suspended 35 feet among ancient oaks", "Glass floor panels & retractable roof", "Outdoor rain shower", "Private rope bridge entrance"],
-    gradient: "linear-gradient(135deg, #3a3a2e 0%, #252518 100%)",
+    image: images.treehouse,
   },
   {
     name: "Creekside Cottage",
     size: "1,100 sq ft",
     price: "From $1,450 / night",
     features: ["Private hot spring-fed soaking pool", "Two bedrooms, full kitchen", "Outdoor rain shower & firepit", "30 feet from mountain creek"],
-    gradient: "linear-gradient(135deg, #2e3a3a 0%, #182525 100%)",
+    image: images.cabin,
   },
   {
     name: "The Summit Residence",
     size: "2,400 sq ft",
     price: "From $3,200 / night",
     features: ["Three bedrooms, each with en-suite bath", "Full gourmet kitchen & dining for 8", "Private infinity pool overlooking valley", "Dedicated butler service"],
-    gradient: "linear-gradient(135deg, #2d2418 0%, #1a1610 100%)",
+    image: images.cottageInterior,
   },
 ];
 
@@ -72,12 +74,8 @@ export default function AccommodationsPage() {
     <>
       {/* Hero */}
       <section className="relative h-[70vh] min-h-[500px] flex items-end overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{
-            background: "linear-gradient(160deg, #1a2818 0%, #2d3a2e 50%, #1a1f16 100%)",
-          }}
-        />
+        <Image src={images.hotelBed} alt="Luxury suite" fill className="object-cover" priority sizes="100vw" />
+        <div className="absolute inset-0 bg-forest/50" />
         <div className="absolute inset-0 atmosphere-mist" />
         <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pb-16 md:pb-24 w-full">
           <AnimatedSection>
@@ -128,16 +126,12 @@ export default function AccommodationsPage() {
           <StaggerChildren stagger={0.1} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {rooms.map((room) => (
               <StaggerItem key={room.name + room.size}>
-                <div className="group">
-                  <div
-                    className="aspect-[3/4] mb-6 overflow-hidden transition-transform duration-700 group-hover:scale-[0.98]"
-                    style={{
-                      background: room.gradient,
-                      transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
-                    }}
-                  >
-                    <div className="w-full h-full flex flex-col justify-between p-8">
-                      <span className="text-cream/20 text-[11px] tracking-[0.2em] uppercase">
+                <div className="group card-lift">
+                  <div className="relative aspect-[3/4] mb-6 img-zoom overflow-hidden">
+                    <Image src={room.image} alt={room.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
+                    <div className="absolute inset-0 flex flex-col justify-between p-8 z-20">
+                      <span className="text-cream/30 text-[11px] tracking-[0.2em] uppercase">
                         {room.size}
                       </span>
                       <div>
