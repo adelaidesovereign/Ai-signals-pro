@@ -121,3 +121,58 @@
 | Automated email click rate lift | +152% | Justifies investing in email sequences |
 | Affiliate avg commission (fashion) | 13-15% | Our 18% rate will attract top affiliates |
 | Course delivery marginal cost | ~$0 | Every sale after the first is nearly pure profit |
+
+---
+
+## TIKTOK SHOP FEE STRUCTURE (2026)
+
+### Seller Fees:
+- **Standard referral fee**: 6% on most products (range: 5-9% by category)
+- **New seller discount**: 3% rate for 30 days (if first sale within 60 days of onboarding)
+- **Payment processing**: 1.02% - 3.78%
+- **Fulfilled by TikTok (FBT)**: Starts at $3.58/item, 30 days free storage
+- **Refund admin fee**: 20% of original referral fee, capped at $5/SKU
+- **Seller approval**: U.S. residency required, 24-48 hour approval
+
+### Implication for Adelaide's:
+At 6% referral + ~2.5% processing = ~8.5% total TikTok Shop fees. With 50-70% margins on jewelry/accessories, this leaves 40-60% gross profit per sale — highly profitable.
+
+**Source**: [Podbase](https://www.podbase.com/blogs/tiktok-shop-fees), [Dark Room Agency](https://www.darkroomagency.com/observatory/tiktok-shop-fees-seller-cost-breakdown-2026)
+
+---
+
+## PLATFORM COMPARISON: DIGITAL PRODUCT SALES
+
+| Platform | Monthly Cost | Transaction Fee | Best For |
+|----------|-------------|----------------|----------|
+| **Stan Store** | $29/mo | 0% platform cut | Social-first creators, TikTok/IG traffic, all-in-one storefront |
+| **Gumroad** | $0/mo | 10% per sale | Indie creators, zero upfront cost, simplicity |
+| **Shopify** | ~$39/mo | Varies by plan | Long-term brand building, full control, scalability |
+
+### Recommendation for Addie:
+**Start with Stan Store** ($29/mo, no platform cut) for digital products — it's built for social-media-driven sales with funnels, upsells, and email capture built in. Migrate to Shopify when ready to unify boutique + digital under one branded storefront.
+
+**Source**: [Unkoa](https://www.unkoa.com/stan-store-vs-gumroad-2025-the-best-choice-for-social-first-creators/), [Conversion Pro Plus](https://conversionproplus.com/blog/best-platform-for-selling-digital-products-in-2026-complete-guide)
+
+---
+
+## EMAIL LIST SIZE → LAUNCH REVENUE MATH
+
+### Conversion Benchmark:
+- Industry average: **1-2% of email list converts** to course buyers
+- With warm, topic-relevant list: up to **3-5%** conversion
+- **Critical**: List quality > list size. Untargeted subscribers = sub-1% conversion
+
+### Revenue Projections by List Size:
+
+| Email List Size | 1.5% Conv. Rate | 3% Conv. Rate (warm) | Revenue @ $297 |
+|----------------|-----------------|----------------------|----------------|
+| 500 | 7-8 sales | 15 sales | $2,079 - $4,455 |
+| 1,000 | 15 sales | 30 sales | $4,455 - $8,910 |
+| 2,000 | 30 sales | 60 sales | $8,910 - $17,820 |
+| 3,000 | 45 sales | 90 sales | $13,365 - $26,730 |
+
+### What This Means for the $50K Sprint:
+To hit the $18K digital product target, Addie needs ~2,000 warm subscribers by Week 3 launch. Combined with live sales (bypassing email entirely), the target is achievable with 1,500+ subscribers + aggressive live selling.
+
+**Source**: [Acceleroi](https://www.acceleroi.com/blog/unlocking-success-exploring-the-average-conversion-rate-for-online-courses), [Paige Brunton](https://www.paigebrunton.com/blog/email-list-size-online-course)
