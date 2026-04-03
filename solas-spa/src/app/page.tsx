@@ -1,13 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import {
   AnimatedSection,
   StaggerChildren,
   StaggerItem,
   LineReveal,
 } from "@/components/AnimatedSection";
+import { MagneticButton } from "@/components/MagneticButton";
 
 const easeExpo = [0.16, 1, 0.3, 1] as const;
 
@@ -62,128 +64,157 @@ const accommodationTypes = [
   },
 ];
 
+function HeroSection() {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.8], [1, 1.1]);
+  const y = useTransform(scrollYProgress, [0, 0.8], [0, 100]);
+
+  return (
+    <section ref={ref} className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
+      {/* Background with parallax */}
+      <motion.div
+        className="absolute inset-0"
+        style={{
+          scale,
+          background:
+            "linear-gradient(160deg, #1a1f16 0%, #2d3a2e 30%, #1a2818 60%, #0d1210 100%)",
+        }}
+      />
+      {/* Noise texture */}
+      <div className="absolute inset-0 noise-overlay" />
+      {/* Atmospheric overlays */}
+      <div className="absolute inset-0 atmosphere-mist" />
+      <div className="absolute inset-0 atmosphere-warm" />
+      {/* Animated glow */}
+      <motion.div
+        className="absolute inset-0"
+        animate={{
+          background: [
+            "radial-gradient(ellipse at 30% 40%, rgba(184,134,11,0.06) 0%, transparent 50%)",
+            "radial-gradient(ellipse at 70% 60%, rgba(184,134,11,0.06) 0%, transparent 50%)",
+            "radial-gradient(ellipse at 30% 40%, rgba(184,134,11,0.06) 0%, transparent 50%)",
+          ],
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
+      {/* Mountain silhouette */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-[40%]"
+        style={{
+          background: "linear-gradient(to top, rgba(10,14,8,0.6) 0%, transparent 100%)",
+        }}
+      />
+      <svg
+        className="absolute bottom-0 left-0 right-0 w-full h-auto opacity-20"
+        viewBox="0 0 1440 200"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M0,200 L0,140 Q120,80 240,120 Q360,40 480,90 Q600,20 720,70 Q840,30 960,80 Q1080,50 1200,100 Q1320,60 1440,110 L1440,200 Z"
+          fill="#0a0e08"
+        />
+      </svg>
+
+      {/* Content with scroll fade */}
+      <motion.div className="relative z-10 text-center px-6" style={{ opacity, y }}>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: easeExpo }}
+          className="overline text-gold mb-8"
+        >
+          Blue Ridge Mountains &middot; Asheville, NC
+        </motion.p>
+
+        <h1 className="font-display text-cream mb-8">
+          {heroWords.map((word, i) => (
+            <span key={word} className="inline-block overflow-hidden mx-2 md:mx-4">
+              <motion.span
+                className="inline-block text-6xl md:text-8xl lg:text-[140px] xl:text-[160px] leading-[0.9] tracking-[-0.03em]"
+                initial={{ y: "120%", rotateX: 40 }}
+                animate={{ y: "0%", rotateX: 0 }}
+                transition={{
+                  duration: 1.2,
+                  delay: 0.5 + i * 0.12,
+                  ease: easeExpo,
+                }}
+              >
+                {word}
+              </motion.span>
+            </span>
+          ))}
+        </h1>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.2, ease: easeExpo }}
+          className="text-cream/50 text-base md:text-lg max-w-lg mx-auto mb-12 font-body leading-relaxed"
+        >
+          A sanctuary where the ancient mountains hold space
+          for your renewal
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.5, ease: easeExpo }}
+          className="flex flex-col sm:flex-row gap-4 justify-center"
+        >
+          <MagneticButton as="a" href="/contact" strength={0.2}>
+            <span className="inline-block text-[12px] tracking-[0.2em] uppercase font-body px-10 py-4 bg-gold text-cream hover:bg-gold-light transition-all duration-500">
+              Reserve Your Stay
+            </span>
+          </MagneticButton>
+          <MagneticButton as="a" href="/spa" strength={0.2}>
+            <span className="inline-block text-[12px] tracking-[0.2em] uppercase font-body px-10 py-4 border border-cream/25 text-cream btn-fill-light transition-all duration-500">
+              Explore Wellness
+            </span>
+          </MagneticButton>
+        </motion.div>
+      </motion.div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2.5, duration: 1 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+        style={{ opacity }}
+      >
+        <span className="text-[10px] tracking-[0.3em] uppercase text-cream/30">
+          Scroll
+        </span>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="w-px h-8 bg-gradient-to-b from-cream/40 to-transparent"
+        />
+      </motion.div>
+    </section>
+  );
+}
+
 export default function Home() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(160deg, #1a1f16 0%, #2d3a2e 30%, #1a2818 60%, #0d1210 100%)",
-          }}
-        />
-        <div className="absolute inset-0 atmosphere-mist" />
-        <div className="absolute inset-0 atmosphere-warm" />
-        <div
-          className="absolute bottom-0 left-0 right-0 h-[40%]"
-          style={{
-            background:
-              "linear-gradient(to top, rgba(10,14,8,0.6) 0%, transparent 100%)",
-          }}
-        />
-        <svg
-          className="absolute bottom-0 left-0 right-0 w-full h-auto opacity-20"
-          viewBox="0 0 1440 200"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M0,200 L0,140 Q120,80 240,120 Q360,40 480,90 Q600,20 720,70 Q840,30 960,80 Q1080,50 1200,100 Q1320,60 1440,110 L1440,200 Z"
-            fill="#0a0e08"
-          />
-        </svg>
-
-        <div className="relative z-10 text-center px-6">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: easeExpo }}
-            className="text-[11px] tracking-[0.4em] uppercase text-gold mb-8"
-          >
-            Blue Ridge Mountains &middot; Asheville, NC
-          </motion.p>
-
-          <h1 className="font-display text-cream mb-8">
-            {heroWords.map((word, i) => (
-              <span key={word} className="inline-block overflow-hidden mx-2 md:mx-4">
-                <motion.span
-                  className="inline-block text-6xl md:text-8xl lg:text-[140px] xl:text-[160px] leading-[0.9] tracking-[-0.02em]"
-                  initial={{ y: "120%" }}
-                  animate={{ y: "0%" }}
-                  transition={{
-                    duration: 1,
-                    delay: 0.5 + i * 0.12,
-                    ease: easeExpo,
-                  }}
-                >
-                  {word}
-                </motion.span>
-              </span>
-            ))}
-          </h1>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.2, ease: easeExpo }}
-            className="text-cream/50 text-base md:text-lg max-w-lg mx-auto mb-12 font-body leading-relaxed"
-          >
-            A sanctuary where the ancient mountains hold space
-            for your renewal
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.5, ease: easeExpo }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Link
-              href="/contact"
-              className="inline-block text-[12px] tracking-[0.2em] uppercase font-body px-10 py-4 bg-gold text-cream hover:bg-gold-light transition-all duration-500"
-              style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
-            >
-              Reserve Your Stay
-            </Link>
-            <Link
-              href="/spa"
-              className="inline-block text-[12px] tracking-[0.2em] uppercase font-body px-10 py-4 border border-cream/25 text-cream hover:bg-cream/10 transition-all duration-500"
-              style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
-            >
-              Explore Wellness
-            </Link>
-          </motion.div>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 1 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
-        >
-          <span className="text-[10px] tracking-[0.3em] uppercase text-cream/30">
-            Scroll
-          </span>
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-px h-8 bg-gradient-to-b from-cream/40 to-transparent"
-          />
-        </motion.div>
-      </section>
+      <HeroSection />
 
       {/* Intro Statement */}
-      <section className="py-24 md:py-36 lg:py-44">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
+      <section className="py-24 md:py-36 lg:py-44 relative">
+        <div className="absolute inset-0 atmosphere-glow" />
+        <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 relative">
           <div className="max-w-4xl mx-auto text-center">
             <AnimatedSection>
-              <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-8">
-                Est. 2019
-              </p>
+              <p className="overline mb-8">Est. 2019</p>
             </AnimatedSection>
             <AnimatedSection delay={0.15}>
-              <h2 className="font-display text-3xl md:text-5xl lg:text-6xl leading-[1.15] mb-8">
+              <h2 className="font-display text-3xl md:text-5xl lg:text-[3.5rem] leading-[1.15] mb-8 tracking-[-0.01em]">
                 Where the Appalachian mist meets
                 <span className="text-gold italic"> timeless luxury</span>
               </h2>
@@ -197,6 +228,9 @@ export default function Home() {
                 pace of the mountains.
               </p>
             </AnimatedSection>
+            <AnimatedSection delay={0.45}>
+              <div className="divider-gold max-w-32 mx-auto mt-12" />
+            </AnimatedSection>
           </div>
         </div>
       </section>
@@ -206,10 +240,8 @@ export default function Home() {
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
           <div className="flex flex-col lg:flex-row items-start gap-16 lg:gap-24 mb-20">
             <AnimatedSection className="lg:w-1/3 lg:sticky lg:top-32" direction="left">
-              <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
-                Spa & Wellness
-              </p>
-              <h2 className="font-display text-4xl md:text-5xl leading-[1.1] mb-6">
+              <p className="overline mb-4">Spa & Wellness</p>
+              <h2 className="font-display text-4xl md:text-5xl leading-[1.1] mb-6 tracking-[-0.01em]">
                 Rituals of
                 <br />
                 Restoration
@@ -221,7 +253,7 @@ export default function Home() {
               </p>
               <Link
                 href="/spa"
-                className="inline-flex items-center gap-3 text-[12px] tracking-[0.15em] uppercase text-forest hover:text-gold transition-colors duration-500 group"
+                className="link-reveal inline-flex items-center gap-3 text-[12px] tracking-[0.15em] uppercase text-forest hover:text-gold transition-colors duration-500 group"
               >
                 <span>Explore Treatments</span>
                 <span className="inline-block w-8 h-px bg-current transition-all duration-500 group-hover:w-12" />
@@ -234,13 +266,15 @@ export default function Home() {
                   <StaggerItem key={item.title}>
                     <div className="group">
                       <div
-                        className="aspect-[16/9] md:aspect-[21/9] mb-6 overflow-hidden"
+                        className="aspect-[16/9] md:aspect-[21/9] mb-6 img-zoom noise-overlay"
                         style={{ background: item.image }}
                       >
-                        <div className="w-full h-full flex items-end p-8 md:p-12 bg-gradient-to-t from-black/40 to-transparent">
-                          <h3 className="font-display text-2xl md:text-3xl text-cream group-hover:text-gold transition-colors duration-500">
-                            {item.title}
-                          </h3>
+                        <div className="w-full h-full flex items-end p-8 md:p-12 bg-gradient-to-t from-black/50 via-black/10 to-transparent relative z-10">
+                          <div>
+                            <h3 className="font-display text-2xl md:text-3xl text-cream group-hover:text-gold transition-colors duration-500">
+                              {item.title}
+                            </h3>
+                          </div>
                         </div>
                       </div>
                       <p className="text-stone text-sm md:text-base leading-relaxed max-w-xl">
@@ -255,8 +289,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Full-width atmospheric break */}
-      <section className="relative h-[50vh] md:h-[60vh] overflow-hidden">
+      {/* Full-width atmospheric break - SIGNATURE MOMENT */}
+      <section className="relative h-[60vh] md:h-[70vh] overflow-hidden noise-overlay">
         <div
           className="absolute inset-0"
           style={{
@@ -265,13 +299,20 @@ export default function Home() {
           }}
         />
         <div className="absolute inset-0 atmosphere-mist" />
-        <div className="absolute inset-0 flex items-center justify-center">
+        {/* Large decorative letter */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-[0.03]">
+          <span className="font-display text-cream text-[40vw] leading-none select-none">
+            S
+          </span>
+        </div>
+        <div className="absolute inset-0 flex items-center justify-center relative z-10">
           <AnimatedSection>
             <blockquote className="text-center px-6">
-              <p className="font-display text-cream text-3xl md:text-5xl lg:text-6xl max-w-3xl leading-[1.2] italic">
+              <p className="font-display text-cream text-3xl md:text-5xl lg:text-6xl xl:text-7xl max-w-4xl leading-[1.15] italic tracking-[-0.02em]">
                 &ldquo;The mountains are calling and I must go&rdquo;
               </p>
-              <cite className="block text-cream/40 text-sm mt-6 not-italic tracking-[0.15em] uppercase">
+              <div className="divider-gold max-w-16 mx-auto mt-8 mb-6" />
+              <cite className="block text-cream/40 text-sm not-italic tracking-[0.15em] uppercase">
                 John Muir
               </cite>
             </blockquote>
@@ -283,15 +324,16 @@ export default function Home() {
       <section className="py-24 md:py-36 lg:py-44">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-            <AnimatedSection direction="left">
+            {/* Image placeholder with overlapping element */}
+            <AnimatedSection direction="left" className="relative">
               <div
-                className="aspect-[4/5] overflow-hidden"
+                className="aspect-[4/5] overflow-hidden noise-overlay"
                 style={{
                   background:
                     "linear-gradient(160deg, #3a2e20 0%, #2d2418 40%, #1a1610 100%)",
                 }}
               >
-                <div className="w-full h-full flex flex-col items-center justify-center atmosphere-warm p-12">
+                <div className="w-full h-full flex flex-col items-center justify-center atmosphere-warm p-12 relative z-10">
                   <span className="font-display text-cream/20 text-[120px] md:text-[180px] leading-none">
                     R
                   </span>
@@ -300,14 +342,20 @@ export default function Home() {
                   </span>
                 </div>
               </div>
+              {/* Overlapping detail card */}
+              <AnimatedSection delay={0.3} className="absolute -bottom-8 -right-4 md:-right-8 bg-cream p-6 md:p-8 shadow-2xl max-w-[240px] z-20">
+                <span className="overline text-[10px] block mb-2">Award-Winning</span>
+                <span className="font-display text-lg leading-tight">
+                  Forbes Five-Star Dining 2024
+                </span>
+              </AnimatedSection>
             </AnimatedSection>
 
+            {/* Content */}
             <div>
               <AnimatedSection>
-                <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
-                  Dining
-                </p>
-                <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.1] mb-6">
+                <p className="overline mb-4">Dining</p>
+                <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.1] mb-6 tracking-[-0.01em]">
                   From Mountain
                   <br />
                   to Table
@@ -327,8 +375,8 @@ export default function Home() {
                 <div className="space-y-0">
                   {diningFeatures.map((item) => (
                     <StaggerItem key={item.label}>
-                      <div className="py-5 border-b border-forest/10 flex justify-between items-baseline">
-                        <span className="text-sm tracking-[0.05em]">
+                      <div className="py-5 border-b border-forest/10 flex justify-between items-baseline group hover:border-gold/30 transition-colors duration-500">
+                        <span className="text-sm tracking-[0.05em] group-hover:text-gold transition-colors duration-500">
                           {item.label}
                         </span>
                         <span className="text-stone text-sm">{item.detail}</span>
@@ -341,7 +389,7 @@ export default function Home() {
               <AnimatedSection delay={0.5} className="mt-10">
                 <Link
                   href="/dining"
-                  className="inline-flex items-center gap-3 text-[12px] tracking-[0.15em] uppercase text-forest hover:text-gold transition-colors duration-500 group"
+                  className="link-reveal inline-flex items-center gap-3 text-[12px] tracking-[0.15em] uppercase text-forest hover:text-gold transition-colors duration-500 group"
                 >
                   <span>View Menus & Hours</span>
                   <span className="inline-block w-8 h-px bg-current transition-all duration-500 group-hover:w-12" />
@@ -353,16 +401,14 @@ export default function Home() {
       </section>
 
       {/* Accommodations Preview */}
-      <section className="py-24 md:py-36 bg-forest">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
+      <section className="py-24 md:py-36 bg-forest relative noise-overlay">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 relative z-10">
           <div className="text-center mb-16 md:mb-20">
             <AnimatedSection>
-              <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
-                Accommodations
-              </p>
+              <p className="overline mb-4">Accommodations</p>
             </AnimatedSection>
             <AnimatedSection delay={0.1}>
-              <h2 className="font-display text-cream text-4xl md:text-5xl lg:text-6xl leading-[1.1] mb-6">
+              <h2 className="font-display text-cream text-4xl md:text-5xl lg:text-6xl leading-[1.1] mb-6 tracking-[-0.01em]">
                 Rest Among the Canopy
               </h2>
             </AnimatedSection>
@@ -378,15 +424,12 @@ export default function Home() {
           <StaggerChildren stagger={0.12} className="grid md:grid-cols-3 gap-6 md:gap-8">
             {accommodationTypes.map((room) => (
               <StaggerItem key={room.name}>
-                <Link href="/accommodations" className="group block">
+                <Link href="/accommodations" className="group block card-lift">
                   <div
-                    className="aspect-[3/4] mb-6 overflow-hidden transition-transform duration-700 group-hover:scale-[0.98]"
-                    style={{
-                      background: room.gradient,
-                      transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
-                    }}
+                    className="aspect-[3/4] mb-6 overflow-hidden img-zoom noise-overlay"
+                    style={{ background: room.gradient }}
                   >
-                    <div className="w-full h-full flex flex-col justify-end p-8 bg-gradient-to-t from-black/50 via-transparent to-transparent">
+                    <div className="w-full h-full flex flex-col justify-end p-8 bg-gradient-to-t from-black/60 via-black/20 to-transparent relative z-10">
                       <span className="text-cream/30 text-[11px] tracking-[0.2em] uppercase mb-2">
                         {room.size}
                       </span>
@@ -404,13 +447,11 @@ export default function Home() {
           </StaggerChildren>
 
           <AnimatedSection delay={0.4} className="text-center mt-16">
-            <Link
-              href="/accommodations"
-              className="inline-block text-[12px] tracking-[0.2em] uppercase font-body px-10 py-4 border border-cream/20 text-cream hover:bg-cream hover:text-forest transition-all duration-500"
-              style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
-            >
-              View All Accommodations
-            </Link>
+            <MagneticButton as="a" href="/accommodations" strength={0.15}>
+              <span className="inline-block text-[12px] tracking-[0.2em] uppercase font-body px-10 py-4 border border-cream/20 text-cream btn-fill-light transition-all duration-500">
+                View All Accommodations
+              </span>
+            </MagneticButton>
           </AnimatedSection>
         </div>
       </section>
@@ -420,10 +461,8 @@ export default function Home() {
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
           <div className="max-w-2xl mb-16">
             <AnimatedSection>
-              <p className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
-                Experiences
-              </p>
-              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.1] mb-6">
+              <p className="overline mb-4">Experiences</p>
+              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.1] mb-6 tracking-[-0.01em]">
                 Beyond the Spa
               </h2>
             </AnimatedSection>
@@ -444,11 +483,11 @@ export default function Home() {
               },
               {
                 title: "River Arts",
-                desc: "Private studio visits with Asheville's celebrated artisan community",
+                desc: "Private studio visits with Asheville\u2019s celebrated artisan community",
               },
               {
                 title: "Blue Ridge Parkway",
-                desc: "Curated drives along America's most scenic highway with gourmet picnic service",
+                desc: "Curated drives along America\u2019s most scenic highway with gourmet picnic service",
               },
               {
                 title: "Stargazing",
@@ -456,7 +495,7 @@ export default function Home() {
               },
             ].map((exp, i) => (
               <AnimatedSection key={exp.title} delay={i * 0.1}>
-                <div className="bg-cream p-8 md:p-10 h-full group hover:bg-cream-light transition-colors duration-500">
+                <div className="bg-cream p-8 md:p-10 h-full group hover:bg-cream-light transition-all duration-700 card-lift">
                   <span className="text-gold text-[11px] tracking-[0.2em] uppercase">
                     0{i + 1}
                   </span>
@@ -474,7 +513,7 @@ export default function Home() {
           <AnimatedSection delay={0.2} className="mt-10">
             <Link
               href="/experiences"
-              className="inline-flex items-center gap-3 text-[12px] tracking-[0.15em] uppercase text-forest hover:text-gold transition-colors duration-500 group"
+              className="link-reveal inline-flex items-center gap-3 text-[12px] tracking-[0.15em] uppercase text-forest hover:text-gold transition-colors duration-500 group"
             >
               <span>All Experiences</span>
               <span className="inline-block w-8 h-px bg-current transition-all duration-500 group-hover:w-12" />
@@ -487,7 +526,8 @@ export default function Home() {
       <section className="py-16 md:py-20 border-t border-forest/8">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
           <AnimatedSection>
-            <div className="flex flex-wrap justify-center items-center gap-x-16 gap-y-8 opacity-40">
+            <p className="overline text-center mb-10 text-stone/50">As Featured In</p>
+            <div className="flex flex-wrap justify-center items-center gap-x-16 gap-y-8 opacity-30">
               {[
                 "Forbes Travel Guide",
                 "Cond\u00e9 Nast Traveler",
@@ -497,7 +537,7 @@ export default function Home() {
               ].map((pub) => (
                 <span
                   key={pub}
-                  className="text-[13px] tracking-[0.15em] uppercase text-forest whitespace-nowrap"
+                  className="text-[13px] tracking-[0.15em] uppercase text-forest whitespace-nowrap hover:opacity-100 transition-opacity duration-500"
                 >
                   {pub}
                 </span>

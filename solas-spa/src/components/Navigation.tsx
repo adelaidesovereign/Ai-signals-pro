@@ -87,8 +87,7 @@ export function Navigation() {
             {/* Book Now - Desktop */}
             <Link
               href="/contact"
-              className="hidden lg:block text-[12px] tracking-[0.15em] uppercase font-body px-7 py-3 border border-forest/20 hover:bg-forest hover:text-cream transition-all duration-500"
-              style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
+              className="hidden lg:block text-[12px] tracking-[0.15em] uppercase font-body px-7 py-3 border border-forest/20 btn-fill transition-all duration-500"
             >
               Book Now
             </Link>

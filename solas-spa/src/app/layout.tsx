@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { SmoothScroll } from "@/components/SmoothScroll";
 
 export const metadata: Metadata = {
   title: "Solas Spa | Blue Ridge Mountain Sanctuary",
@@ -17,9 +18,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="antialiased">
       <body className="min-h-screen flex flex-col bg-cream text-forest">
-        <Navigation />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <SmoothScroll>
+          <Navigation />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );
