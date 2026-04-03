@@ -1,0 +1,2260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sovereign Strategy — Addie Taylor</title>
+<style>
+/* === RESET & BASE === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #1a1a2e;
+  --navy-deep: #0f0f1e;
+  --gold: #c9a84c;
+  --gold-light: #d4b96a;
+  --gold-dark: #a88a3a;
+  --cream: #faf8f5;
+  --cream-dark: #f0ece5;
+  --text: #2c2c3a;
+  --text-light: #5a5a6e;
+  --text-muted: #8a8a9a;
+  --white: #ffffff;
+  --border: #e0dcd5;
+  --code-bg: #1e1e2e;
+  --success: #4a9e6e;
+}
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* === COVER PAGE === */
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(170deg, var(--navy-deep) 0%, var(--navy) 50%, #252547 100%);
+  color: var(--cream);
+  text-align: center;
+  padding: 3rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at 30% 20%, rgba(201,168,76,0.08) 0%, transparent 50%),
+              radial-gradient(ellipse at 70% 80%, rgba(201,168,76,0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.cover-ornament {
+  width: 80px;
+  height: 2px;
+  background: var(--gold);
+  margin: 0 auto 2.5rem;
+  position: relative;
+}
+.cover-ornament::before, .cover-ornament::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid var(--gold);
+  transform: rotate(45deg);
+}
+.cover-ornament::before { left: -16px; }
+.cover-ornament::after { right: -16px; }
+
+.cover-label {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+
+.cover h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+  line-height: 1.15;
+}
+
+.cover h1 span {
+  display: block;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cover-subtitle {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  color: var(--cream-dark);
+  margin-top: 1rem;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.cover-divider {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  margin: 2.5rem auto;
+  opacity: 0.6;
+}
+
+/* === TABLE OF CONTENTS === */
+.toc {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2rem 2.5rem;
+  margin-top: 2.5rem;
+  text-align: left;
+  max-width: 560px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.toc h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.toc ol {
+  list-style: none;
+  counter-reset: toc-counter;
+}
+
+.toc li {
+  counter-increment: toc-counter;
+  margin-bottom: 0.6rem;
+}
+
+.toc li a {
+  display: flex;
+  align-items: baseline;
+  text-decoration: none;
+  color: var(--navy);
+  font-size: 0.92rem;
+  padding: 0.3rem 0;
+  transition: color 0.2s;
+}
+
+.toc li a:hover { color: var(--gold); }
+
+.toc li a::before {
+  content: "0" counter(toc-counter);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.8rem;
+  color: var(--gold);
+  min-width: 2rem;
+  font-weight: 600;
+}
+
+.toc li a::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px dotted var(--border);
+  margin: 0 0.5rem;
+  position: relative;
+  top: -4px;
+}
+
+.toc li a .toc-title { order: 0; }
+.toc li a .toc-page { order: 2; font-size: 0.8rem; color: var(--text-muted); }
+
+.cover-footer {
+  margin-top: 3rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  position: relative;
+  z-index: 1;
+}
+
+/* === MAIN CONTENT === */
+.content-wrapper {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* === SECTIONS === */
+.section {
+  padding: 4rem 0 3rem;
+  page-break-before: always;
+}
+
+.section:first-of-type { page-break-before: auto; }
+
+.section-number {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.section-divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
+  margin: 1.5rem 0 2rem;
+}
+
+/* === TYPOGRAPHY === */
+h1, h2, h3, h4, h5, h6 {
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.3;
+  color: var(--navy);
+}
+
+h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 0.5rem; }
+
+h2 {
+  font-size: clamp(1.3rem, 3vw, 1.75rem);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+h3 {
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: var(--navy);
+}
+
+h4 {
+  font-size: 1.05rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--gold-dark);
+}
+
+p { margin-bottom: 1rem; }
+
+strong { color: var(--navy); font-weight: 600; }
+
+em { font-style: italic; color: var(--text-light); }
+
+a { color: var(--gold-dark); text-decoration: underline; text-underline-offset: 2px; }
+a:hover { color: var(--gold); }
+
+hr {
+  border: none;
+  height: 1px;
+  background: var(--border);
+  margin: 2.5rem 0;
+}
+
+/* === LISTS === */
+ul, ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.4rem;
+  padding-left: 0.25rem;
+}
+
+li::marker { color: var(--gold); }
+
+/* === TABLES === */
+.table-wrap {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  min-width: 500px;
+}
+
+thead th {
+  background: var(--navy);
+  color: var(--gold-light);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+tbody td {
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+tbody tr:nth-child(even) { background: var(--cream-dark); }
+tbody tr:nth-child(odd) { background: var(--white); }
+tbody tr:hover { background: #f5f0e8; }
+tbody tr:last-child td { border-bottom: none; }
+
+/* === BLOCKQUOTES === */
+blockquote {
+  border-left: 3px solid var(--gold);
+  background: var(--white);
+  margin: 1.5rem 0;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 6px 6px 0;
+  font-style: italic;
+  color: var(--text-light);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+blockquote p { margin-bottom: 0.5rem; }
+blockquote p:last-child { margin-bottom: 0; }
+blockquote strong { color: var(--navy); font-style: normal; }
+
+/* === CODE BLOCKS === */
+pre {
+  background: var(--code-bg);
+  color: #cdd6f4;
+  padding: 1.25rem 1.5rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-family: "SF Mono", "Cascadia Code", "Fira Code", Consolas, monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin: 1.25rem 0;
+  border: 1px solid #2a2a3e;
+}
+
+code {
+  font-family: "SF Mono", "Cascadia Code", "Fira Code", Consolas, monospace;
+  font-size: 0.88em;
+  background: var(--cream-dark);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+  color: var(--gold-dark);
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* === CHECKLIST === */
+.checklist {
+  list-style: none;
+  padding-left: 0;
+}
+
+.checklist li {
+  padding: 0.35rem 0 0.35rem 1.8rem;
+  position: relative;
+}
+
+.checklist li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid var(--gold);
+  border-radius: 3px;
+  background: var(--white);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .content-wrapper { padding: 0 1.25rem; }
+  .section { padding: 2.5rem 0 2rem; }
+  .toc { padding: 1.5rem; }
+  table { font-size: 0.82rem; }
+  thead th, tbody td { padding: 0.5rem 0.65rem; }
+  pre { padding: 1rem; font-size: 0.8rem; }
+  blockquote { padding: 1rem 1.25rem; }
+}
+
+@media (max-width: 480px) {
+  .cover { padding: 2rem 1.5rem; }
+  .toc { padding: 1.25rem; }
+  .toc li a { font-size: 0.85rem; }
+  h2 { font-size: 1.2rem; }
+  h3 { font-size: 1.05rem; }
+}
+
+/* === PRINT === */
+@media print {
+  body { background: white; font-size: 11pt; color: #000; }
+  .cover {
+    background: white !important;
+    color: #000 !important;
+    min-height: auto;
+    padding: 3cm 2cm;
+    border-bottom: 3pt solid #c9a84c;
+  }
+  .cover h1 { color: #1a1a2e !important; }
+  .cover h1 span {
+    -webkit-text-fill-color: #c9a84c !important;
+    color: #c9a84c !important;
+  }
+  .cover-label, .section-number { color: #c9a84c !important; }
+  .cover-subtitle, .cover-footer { color: #555 !important; }
+  .toc { border: 1pt solid #ccc; }
+  .toc li a { color: #000 !important; }
+  .section { page-break-before: always; padding: 1.5cm 0; }
+  .section:first-of-type { page-break-before: auto; }
+  h1, h2, h3, h4 { color: #1a1a2e !important; page-break-after: avoid; }
+  table, pre, blockquote { page-break-inside: avoid; }
+  thead th { background: #1a1a2e !important; color: #c9a84c !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  tbody tr:nth-child(even) { background: #f5f5f5 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  a { color: #000 !important; text-decoration: none !important; }
+  .cover::before { display: none; }
+  pre { background: #f0f0f0 !important; color: #000 !important; border: 1pt solid #ccc !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ COVER PAGE ============ -->
+<div class="cover">
+  <div class="cover-ornament"></div>
+  <div class="cover-label">A Confidential Strategy Document</div>
+  <h1>THE<br><span>SOVEREIGN STRATEGY</span></h1>
+  <p class="cover-subtitle">Addie Taylor&rsquo;s $50K/30-Day Revenue Architecture</p>
+  <div class="cover-divider"></div>
+
+  <nav class="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+      <li><a href="#section-00"><span class="toc-title">Master Revenue Architecture</span></a></li>
+      <li><a href="#section-01"><span class="toc-title">Brand Voice &amp; Positioning</span></a></li>
+      <li><a href="#section-02"><span class="toc-title">TikTok Live Playbook</span></a></li>
+      <li><a href="#section-03"><span class="toc-title">Website Copy &amp; Funnels</span></a></li>
+      <li><a href="#section-04"><span class="toc-title">Digital Product Launch System</span></a></li>
+      <li><a href="#section-05"><span class="toc-title">Content Calendar &amp; Daily Ops</span></a></li>
+      <li><a href="#section-06"><span class="toc-title">Affiliate &amp; Partnership Strategy</span></a></li>
+      <li><a href="#section-07"><span class="toc-title">Market Research &mdash; 2026</span></a></li>
+    </ol>
+  </nav>
+
+  <p class="cover-footer">Confidential &mdash; April 2026</p>
+</div>
+
+<div class="content-wrapper">
+
+<!-- ============ SECTION 00: MASTER REVENUE ARCHITECTURE ============ -->
+<div class="section" id="section-00">
+  <span class="section-number">Section 00</span>
+  <h1>The Sovereign Revenue Architecture</h1>
+  <p><strong>Addie Taylor&rsquo;s $50K/30-Day Sprint Blueprint</strong></p>
+  <div class="section-divider"></div>
+
+  <h2>The Three Pillars</h2>
+
+  <h3>Pillar 1: Adelaide&rsquo;s Luxury Boutique (Dropshipping)</h3>
+  <p><strong>Revenue Target: $20,000 in 30 days</strong></p>
+  <ul>
+    <li>Luxury-positioned fashion &amp; lifestyle dropshipping store</li>
+    <li>Premium price points ($49&ndash;$299 range)</li>
+    <li>TikTok Shop integration + standalone Shopify</li>
+    <li>Aesthetic: dark feminine, old money meets new ambition</li>
+  </ul>
+
+  <h3>Pillar 2: Digital Products &amp; Courses</h3>
+  <p><strong>Revenue Target: $18,000 in 30 days</strong></p>
+  <ul>
+    <li>&ldquo;The Sovereign Self&rdquo; digital product suite</li>
+    <li>Flagship: &ldquo;Build Your Empire&rdquo; course ($297&ndash;$997)</li>
+    <li>Mid-tier: Digital business starter kits ($47&ndash;$97)</li>
+    <li>Entry: Notion templates, guides, planners ($9&ndash;$27)</li>
+    <li>Platform: Gumroad / Stan Store / Shopify digital</li>
+  </ul>
+
+  <h3>Pillar 3: TikTok Live Revenue Engine</h3>
+  <p><strong>Revenue Target: $12,000 in 30 days</strong></p>
+  <ul>
+    <li>Daily LIVE sessions (monetized via gifts + product pushes)</li>
+    <li>&ldquo;Get Ready With Me&rdquo; &rarr; product placement for boutique</li>
+    <li>&ldquo;Build With Me&rdquo; &rarr; digital product demos + course sells</li>
+    <li>Affiliate drops during lives</li>
+    <li>Goal: 2 lives/day minimum, 45&ndash;90 min each</li>
+  </ul>
+
+  <hr>
+
+  <h2>30-Day Sprint: Week-by-Week Breakdown</h2>
+
+  <h3>Week 1 (Days 1&ndash;7): Foundation &amp; First Cash</h3>
+  <p><strong>Theme: &ldquo;Light the match.&rdquo;</strong></p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Day</th><th>Action</th><th>Revenue Driver</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Finalize boutique product catalog (15&ndash;20 hero products)</td><td>&mdash;</td></tr>
+      <tr><td>1</td><td>Launch Stan Store / Gumroad with 3 digital products</td><td>Immediate sales</td></tr>
+      <tr><td>2</td><td>First TikTok Live: &ldquo;I&rsquo;m building a $50K month &mdash; watch me&rdquo;</td><td>Gifts + engagement</td></tr>
+      <tr><td>2</td><td>Post 3 short-form videos (hook-based, trend-aware)</td><td>Algorithm seeding</td></tr>
+      <tr><td>3</td><td>Email list setup (free lead magnet: &ldquo;5 Steps to Your First $1K Online&rdquo;)</td><td>List building</td></tr>
+      <tr><td>3</td><td>Second TikTok Live: boutique product showcase</td><td>First boutique sales</td></tr>
+      <tr><td>4</td><td>Launch boutique &ldquo;Founding Collection&rdquo; with urgency (48hr early access)</td><td>$1,500&ndash;$3,000</td></tr>
+      <tr><td>5</td><td>Digital product bundle flash sale (24 hrs only)</td><td>$500&ndash;$1,000</td></tr>
+      <tr><td>6</td><td>Affiliate partnership outreach (5&ndash;10 micro-creators)</td><td>Pipeline</td></tr>
+      <tr><td>7</td><td>Week 1 review + double down on what converted</td><td>Optimization</td></tr>
+    </tbody>
+  </table></div>
+  <p><strong>Week 1 Target: $3,000&ndash;$5,000</strong></p>
+
+  <h3>Week 2 (Days 8&ndash;14): Momentum &amp; Social Proof</h3>
+  <p><strong>Theme: &ldquo;Now they&rsquo;re watching.&rdquo;</strong></p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Day</th><th>Action</th><th>Revenue Driver</th></tr></thead>
+    <tbody>
+      <tr><td>8&ndash;9</td><td>Launch &ldquo;The Sovereign Self&rdquo; mini-course ($47)</td><td>$2,000&ndash;$4,000</td></tr>
+      <tr><td>8&ndash;9</td><td>Customer testimonial collection &rarr; UGC content</td><td>Social proof</td></tr>
+      <tr><td>10</td><td>TikTok Live: &ldquo;How I made $X in my first week&rdquo; (transparent revenue share)</td><td>Virality trigger</td></tr>
+      <tr><td>11</td><td>Boutique restock + new arrivals drop</td><td>$2,000&ndash;$3,000</td></tr>
+      <tr><td>12</td><td>Collaborate with 2&ndash;3 creators for cross-promotion</td><td>Audience expansion</td></tr>
+      <tr><td>13</td><td>Email sequence: nurture &rarr; pitch flagship course waitlist</td><td>Pipeline warming</td></tr>
+      <tr><td>14</td><td>Week 2 review + scale ad spend on winning products</td><td>Optimization</td></tr>
+    </tbody>
+  </table></div>
+  <p><strong>Week 2 Target: $8,000&ndash;$12,000</strong></p>
+
+  <h3>Week 3 (Days 15&ndash;21): Scale &amp; Flagship Launch</h3>
+  <p><strong>Theme: &ldquo;This is the week everything changes.&rdquo;</strong></p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Day</th><th>Action</th><th>Revenue Driver</th></tr></thead>
+    <tbody>
+      <tr><td>15&ndash;16</td><td>Pre-launch hype: flagship course &ldquo;Build Your Empire&rdquo; ($297&ndash;$997)</td><td>Anticipation</td></tr>
+      <tr><td>17</td><td>LAUNCH DAY: Open cart for flagship course</td><td>$5,000&ndash;$8,000</td></tr>
+      <tr><td>17</td><td>TikTok Live: 2-hour launch event with bonuses for live buyers</td><td>Urgency + FOMO</td></tr>
+      <tr><td>18</td><td>Boutique &ldquo;Best Sellers Restock&rdquo; + bundle deals</td><td>$2,000&ndash;$3,000</td></tr>
+      <tr><td>19</td><td>Mid-launch email: testimonials + bonus stack reminder</td><td>Conversions</td></tr>
+      <tr><td>20</td><td>TikTok Live: Q&amp;A about the course + live student wins</td><td>Trust building</td></tr>
+      <tr><td>21</td><td>Cart close warning (48 hrs) + scarcity push</td><td>Conversion spike</td></tr>
+    </tbody>
+  </table></div>
+  <p><strong>Week 3 Target: $15,000&ndash;$20,000</strong></p>
+
+  <h3>Week 4 (Days 22&ndash;30): Close Hard &amp; Set Up Recurring</h3>
+  <p><strong>Theme: &ldquo;Finish what you started. Then build what lasts.&rdquo;</strong></p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Day</th><th>Action</th><th>Revenue Driver</th></tr></thead>
+    <tbody>
+      <tr><td>22</td><td>Final cart close for flagship course (with last-chance bonus)</td><td>$3,000&ndash;$5,000</td></tr>
+      <tr><td>23&ndash;24</td><td>Boutique end-of-month sale (flash deals, bundles)</td><td>$3,000&ndash;$4,000</td></tr>
+      <tr><td>25</td><td>Launch subscription/membership waitlist for Month 2</td><td>Recurring revenue</td></tr>
+      <tr><td>26</td><td>Affiliate payouts + recruit round 2 affiliates</td><td>Compounding</td></tr>
+      <tr><td>27&ndash;28</td><td>Evergreen funnel setup: automated email &rarr; digital products</td><td>Passive income</td></tr>
+      <tr><td>29</td><td>TikTok Live: &ldquo;$50K month recap &mdash; here&rsquo;s exactly what I did&rdquo;</td><td>Virality + authority</td></tr>
+      <tr><td>30</td><td>Full audit: what stays, what scales, what dies</td><td>Strategic clarity</td></tr>
+    </tbody>
+  </table></div>
+  <p><strong>Week 4 Target: $12,000&ndash;$15,000</strong></p>
+
+  <hr>
+
+  <h2>Revenue Stack Summary</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Revenue Stream</th><th>Conservative</th><th>Aggressive</th></tr></thead>
+    <tbody>
+      <tr><td>Adelaide&rsquo;s Boutique (dropship)</td><td>$12,000</td><td>$22,000</td></tr>
+      <tr><td>Digital Products (mini + flagship)</td><td>$14,000</td><td>$20,000</td></tr>
+      <tr><td>TikTok Live (gifts + conversions)</td><td>$6,000</td><td>$12,000</td></tr>
+      <tr><td>Affiliate Revenue</td><td>$1,000</td><td>$3,000</td></tr>
+      <tr><td><strong>TOTAL</strong></td><td><strong>$33,000</strong></td><td><strong>$57,000</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p><strong>Realistic Target: $50,000</strong> (requires consistent daily execution + 1&ndash;2 viral moments)</p>
+
+  <hr>
+
+  <h2>Critical Success Metrics (Daily Tracking)</h2>
+  <ul>
+    <li><strong>Revenue</strong>: Track hourly during launches, daily otherwise</li>
+    <li><strong>TikTok Live viewers</strong>: Target 100+ concurrent by Week 2, 500+ by Week 4</li>
+    <li><strong>Email list size</strong>: Target 1,000 subscribers by Day 14, 3,000 by Day 30</li>
+    <li><strong>Conversion rate</strong>: Boutique 2&ndash;4%, Digital products 5&ndash;8%, Course 3&ndash;5%</li>
+    <li><strong>Content output</strong>: Minimum 3 short-form videos/day + 2 lives/day</li>
+    <li><strong>Customer messages</strong>: Respond within 2 hours during business hours</li>
+  </ul>
+
+  <hr>
+
+  <h2>Non-Negotiable Daily Actions</h2>
+  <ol>
+    <li><strong>Morning (8&ndash;10am)</strong>: Content batch &mdash; film 3&ndash;5 short-form clips</li>
+    <li><strong>Late Morning (11am&ndash;12:30pm)</strong>: First TikTok Live (boutique focus)</li>
+    <li><strong>Afternoon (1&ndash;3pm)</strong>: Business operations &mdash; orders, emails, DMs, planning</li>
+    <li><strong>Evening (7&ndash;9pm)</strong>: Second TikTok Live (digital products / mindset / community)</li>
+    <li><strong>Night (9&ndash;10pm)</strong>: Review metrics, plan tomorrow, mindset journaling</li>
+  </ol>
+
+  <hr>
+
+  <h2>The Sovereign Mindset Framework</h2>
+  <blockquote><p>&ldquo;I am not building a side hustle. I am building generational infrastructure.&rdquo;</p></blockquote>
+
+  <h3>Daily Identity Anchors:</h3>
+  <ol>
+    <li>&ldquo;I am a $50K/month CEO. I operate accordingly.&rdquo;</li>
+    <li>&ldquo;My audience doesn&rsquo;t need convincing &mdash; they need access.&rdquo;</li>
+    <li>&ldquo;Every live, every post, every product is a deposit into my empire.&rdquo;</li>
+    <li>&ldquo;I don&rsquo;t chase virality. I create inevitability through volume.&rdquo;</li>
+    <li>&ldquo;The money is already mine. I&rsquo;m just collecting it.&rdquo;</li>
+  </ol>
+
+  <h3>When Doubt Hits (Emergency Protocol):</h3>
+  <ul>
+    <li>Stop. Breathe. Open your revenue tracker.</li>
+    <li>Look at what HAS worked, not what hasn&rsquo;t.</li>
+    <li>Go live. Action kills anxiety. Revenue kills doubt.</li>
+    <li>Remember: most people quit in Week 2. You are not most people.</li>
+  </ul>
+</div>
+
+<!-- ============ SECTION 01: BRAND VOICE & POSITIONING ============ -->
+<div class="section" id="section-01">
+  <span class="section-number">Section 01</span>
+  <h1>Brand Voice &amp; Positioning Guide</h1>
+  <p><strong>The Addie Taylor Universe</strong></p>
+  <div class="section-divider"></div>
+
+  <h2>Brand Architecture Overview</h2>
+  <p>Addie Taylor is not three separate brands. She is <strong>one sovereign identity</strong> with three expressions:</p>
+  <pre><code>                    ADDIE TAYLOR
+                   (The Personal Brand)
+                   /       |       \
+          Adelaide's    The Sovereign    TikTok Live
+          Boutique      Self (Digital)    Revenue Engine
+          (Product)     (Knowledge)       (Community)</code></pre>
+  <p><strong>The throughline</strong>: A young woman building generational wealth in real time, and bringing her audience along for the ride.</p>
+
+  <hr>
+
+  <h2>The Addie Taylor Personal Brand</h2>
+
+  <h3>Brand Archetype: The Sovereign Creator</h3>
+  <ul>
+    <li>Part luxury curator, part raw hustler, part wise-beyond-her-years mentor</li>
+    <li>She&rsquo;s not &ldquo;relatable&rdquo; in a self-deprecating way &mdash; she&rsquo;s relatable because she&rsquo;s transparent about the climb</li>
+    <li>She makes money look inevitable, not lucky</li>
+  </ul>
+
+  <h3>Voice Characteristics:</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Trait</th><th>What It Sounds Like</th><th>What It NEVER Sounds Like</th></tr></thead>
+    <tbody>
+      <tr><td>Confident</td><td>&ldquo;This is how you do it.&rdquo;</td><td>&ldquo;I think maybe you could try&hellip;&rdquo;</td></tr>
+      <tr><td>Direct</td><td>&ldquo;Stop overthinking. Start selling.&rdquo;</td><td>&ldquo;There are many approaches to consider&hellip;&rdquo;</td></tr>
+      <tr><td>Luxe-casual</td><td>&ldquo;Obsessed with this piece&rdquo;</td><td>&ldquo;OMG you guys this is SO cute!!!&rdquo;</td></tr>
+      <tr><td>Aspirational</td><td>&ldquo;This is the life you&rsquo;re building toward&rdquo;</td><td>&ldquo;Wouldn&rsquo;t it be nice if&hellip;&rdquo;</td></tr>
+      <tr><td>Honest</td><td>&ldquo;Week 1 was hard. Here&rsquo;s what I learned.&rdquo;</td><td>&ldquo;Everything is perfect all the time!&rdquo;</td></tr>
+      <tr><td>Warm authority</td><td>&ldquo;I&rsquo;ve got you. Let me show you.&rdquo;</td><td>&ldquo;You NEED to buy this NOW&rdquo;</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Signature Phrases &amp; Hooks:</h3>
+  <ul>
+    <li>&ldquo;Let me put you on to something&hellip;&rdquo;</li>
+    <li>&ldquo;This is your sign to [action]&rdquo;</li>
+    <li>&ldquo;The algorithm brought you here for a reason&rdquo;</li>
+    <li>&ldquo;Main character energy only&rdquo;</li>
+    <li>&ldquo;Building in public, profiting in private&rdquo;</li>
+    <li>&ldquo;You don&rsquo;t need permission. You need a plan.&rdquo;</li>
+    <li>&ldquo;Sovereign behavior only.&rdquo;</li>
+    <li>&ldquo;The bag is not going to secure itself.&rdquo;</li>
+  </ul>
+
+  <h3>What Addie Talks About:</h3>
+  <ul>
+    <li>Building businesses from zero (transparent revenue journaling)</li>
+    <li>Luxury lifestyle on a self-made budget</li>
+    <li>Fashion, aesthetics, and curated living</li>
+    <li>Mindset shifts that actually move the needle</li>
+    <li>Digital entrepreneurship for women who refuse to settle</li>
+    <li>The real behind the polished (showing the work, not just the wins)</li>
+  </ul>
+
+  <h3>What Addie NEVER Talks About:</h3>
+  <ul>
+    <li>Get-rich-quick schemes</li>
+    <li>Specific political opinions (she stays sovereign, not partisan)</li>
+    <li>Putting down other creators or brands</li>
+    <li>Desperation or scarcity messaging (&ldquo;I need sales&rdquo; energy)</li>
+    <li>Anything that undermines the premium positioning</li>
+  </ul>
+
+  <hr>
+
+  <h2>Pillar 1: Adelaide&rsquo;s Luxury Boutique</h2>
+
+  <h3>Brand Positioning:</h3>
+  <p><strong>&ldquo;Curated luxury for the woman who&rsquo;s building something.&rdquo;</strong></p>
+  <p>This is NOT a typical dropshipping store. This is a curated boutique experience that feels like shopping at a high-end concept store &mdash; but at accessible price points.</p>
+
+  <h3>Visual Identity:</h3>
+  <ul>
+    <li><strong>Color palette</strong>: Black, cream, gold accents, deep burgundy</li>
+    <li><strong>Typography</strong>: Clean serif headers (Playfair Display), modern sans body (Inter/Lato)</li>
+    <li><strong>Photography style</strong>: Flat lays on marble/linen, lifestyle shots with warm lighting</li>
+    <li><strong>Packaging language</strong>: &ldquo;Curated for you by Adelaide&rsquo;s&rdquo; &mdash; even if dropshipped, the brand experience is premium</li>
+  </ul>
+
+  <h3>Product Categories &amp; Positioning:</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Category</th><th>Price Range</th><th>Positioning</th></tr></thead>
+    <tbody>
+      <tr><td>Statement jewelry</td><td>$29&ndash;$89</td><td>&ldquo;The piece that starts conversations&rdquo;</td></tr>
+      <tr><td>Bags &amp; accessories</td><td>$49&ndash;$149</td><td>&ldquo;Investment pieces for your collection&rdquo;</td></tr>
+      <tr><td>Lifestyle/home</td><td>$29&ndash;$99</td><td>&ldquo;Elevate your everyday&rdquo;</td></tr>
+      <tr><td>Seasonal capsules</td><td>$39&ndash;$199</td><td>&ldquo;Limited edition &mdash; when it&rsquo;s gone, it&rsquo;s gone&rdquo;</td></tr>
+      <tr><td>Bundles</td><td>$79&ndash;$299</td><td>&ldquo;The full Adelaide&rsquo;s experience&rdquo;</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Copy Voice for Boutique:</h3>
+  <ul>
+    <li>Product descriptions read like a stylish friend recommending her favorites</li>
+    <li>Never use &ldquo;cheap&rdquo; or &ldquo;affordable&rdquo; &mdash; use &ldquo;accessible luxury&rdquo; or &ldquo;attainable elegance&rdquo;</li>
+    <li>Every product tells a micro-story: who wears it, where, why it matters</li>
+    <li>Urgency is built through scarcity (&ldquo;limited restock&rdquo;) not desperation (&ldquo;BUY NOW!!!&rdquo;)</li>
+  </ul>
+
+  <h3>Example Product Description:</h3>
+  <blockquote>
+    <p><strong>The Sovereign Chain Necklace &mdash; Gold</strong></p>
+    <p>This is the necklace you reach for when you mean business. Layered 18K gold-plated chain with adjustable clasp. Pairs with everything from your boardroom blazer to your Friday night top.</p>
+    <p><em>&ldquo;I wore this on the live where I hit my first $5K day.&rdquo; &mdash; Addie</em></p>
+    <p>$59 | Limited restock &mdash; 47 available</p>
+  </blockquote>
+
+  <hr>
+
+  <h2>Pillar 2: The Sovereign Self (Digital Products)</h2>
+
+  <h3>Brand Positioning:</h3>
+  <p><strong>&ldquo;The blueprint for women who build their own tables.&rdquo;</strong></p>
+  <p>This is where Addie monetizes her journey, frameworks, and expertise. Not guru energy &mdash; builder energy.</p>
+
+  <h3>Visual Identity:</h3>
+  <ul>
+    <li><strong>Color palette</strong>: Deep navy, gold, cream, soft blush accents</li>
+    <li><strong>Typography</strong>: Bold, modern headers &mdash; sophisticated but not corporate</li>
+    <li><strong>Design style</strong>: Clean, minimal, high-contrast &mdash; looks like a $2,000 course at a $297 price point</li>
+    <li><strong>Photography</strong>: Addie at her desk, on her phone, in her element &mdash; behind-the-scenes of building</li>
+  </ul>
+
+  <h3>Product Ladder:</h3>
+
+  <h4>Tier 1 &mdash; Entry ($9&ndash;$27): &ldquo;The Gateway&rdquo;</h4>
+  <ul>
+    <li>Notion planning templates</li>
+    <li>&ldquo;First $1K Online&rdquo; mini-guide (PDF)</li>
+    <li>TikTok content calendar template</li>
+    <li>Aesthetic business planner</li>
+    <li><em>Purpose: List building, brand introduction, impulse purchases</em></li>
+  </ul>
+
+  <h4>Tier 2 &mdash; Mid ($47&ndash;$97): &ldquo;The Toolkit&rdquo;</h4>
+  <ul>
+    <li>&ldquo;The Sovereign Self&rdquo; mini-course (video + worksheets)</li>
+    <li>&ldquo;TikTok to $10K&rdquo; strategy guide</li>
+    <li>Dropshipping starter toolkit</li>
+    <li>Brand identity DIY workshop</li>
+    <li><em>Purpose: Revenue generation + course pipeline warming</em></li>
+  </ul>
+
+  <h4>Tier 3 &mdash; Flagship ($297&ndash;$997): &ldquo;The Transformation&rdquo;</h4>
+  <ul>
+    <li>&ldquo;Build Your Empire&rdquo; comprehensive course
+      <ul>
+        <li>Module 1: Sovereign Mindset &amp; Identity Architecture</li>
+        <li>Module 2: Pick Your Revenue Pillar (dropship vs. digital vs. service)</li>
+        <li>Module 3: Brand Building That Sells Without Selling</li>
+        <li>Module 4: TikTok Monetization Machine</li>
+        <li>Module 5: Systems, Automation &amp; Scaling to $10K/month</li>
+        <li>Module 6: The $50K Sprint &mdash; Putting It All Together</li>
+        <li>Bonus: Private community access (30 days)</li>
+        <li>Bonus: 1x group coaching call</li>
+      </ul>
+    </li>
+    <li><em>Purpose: Major revenue driver, authority positioning, community building</em></li>
+  </ul>
+
+  <h3>Copy Voice for Digital Products:</h3>
+  <ul>
+    <li>Speak as a mentor, not a teacher &mdash; &ldquo;Here&rsquo;s what I did&rdquo; not &ldquo;Here&rsquo;s what you should do&rdquo;</li>
+    <li>Emphasize results and transformation, not features</li>
+    <li>Use social proof aggressively (screenshots, testimonials, before/after)</li>
+    <li>Price anchoring: always show the value stack before revealing price</li>
+  </ul>
+
+  <hr>
+
+  <h2>Pillar 3: TikTok Live Revenue Engine</h2>
+
+  <h3>Brand Positioning:</h3>
+  <p><strong>&ldquo;The most valuable live on your FYP.&rdquo;</strong></p>
+  <p>Addie&rsquo;s lives are not random chats. They are strategic revenue events disguised as authentic connection.</p>
+
+  <h3>Live Show Formats:</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Format</th><th>When</th><th>Revenue Mechanism</th></tr></thead>
+    <tbody>
+      <tr><td>&ldquo;GRWM + Business Talk&rdquo;</td><td>Morning (11am)</td><td>Boutique product placement + gifts</td></tr>
+      <tr><td>&ldquo;Build With Me&rdquo;</td><td>Evening (7pm)</td><td>Digital product demos + course pitch</td></tr>
+      <tr><td>&ldquo;Real Talk&rdquo;</td><td>Spontaneous</td><td>Community building + gift revenue</td></tr>
+      <tr><td>&ldquo;Shopping Event&rdquo;</td><td>Weekly (Sat 2pm)</td><td>Boutique flash sales + TikTok Shop</td></tr>
+      <tr><td>&ldquo;Launch Party&rdquo;</td><td>During launches</td><td>Direct course/product sales</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>On-Camera Voice:</h3>
+  <ul>
+    <li><strong>Energy</strong>: Warm, confident, slightly conspiratorial (&ldquo;let me tell you something&hellip;&rdquo;)</li>
+    <li><strong>Pacing</strong>: Not rushed, not slow &mdash; intentional. Pauses for effect.</li>
+    <li><strong>Engagement</strong>: Calls out viewers by name, asks questions, creates micro-moments</li>
+    <li><strong>Selling</strong>: Weaves products into conversation naturally &mdash; never hard-cuts to a pitch</li>
+  </ul>
+
+  <hr>
+
+  <h2>Cross-Brand Consistency Rules</h2>
+  <ol>
+    <li><strong>Every touchpoint feels premium</strong> &mdash; from a DM reply to a shipping notification</li>
+    <li><strong>Addie is always the throughline</strong> &mdash; people buy from HER, products are the vehicle</li>
+    <li><strong>Scarcity is real, never fabricated</strong> &mdash; limited restocks, genuine cart closes, actual deadlines</li>
+    <li><strong>Transparency builds trust</strong> &mdash; share real numbers, real struggles, real wins</li>
+    <li><strong>The brand never begs</strong> &mdash; confidence in every caption, every live, every email</li>
+    <li><strong>Community over customers</strong> &mdash; people who buy become part of something, not just a transaction</li>
+  </ol>
+</div>
+
+<!-- ============ SECTION 02: TIKTOK LIVE PLAYBOOK ============ -->
+<div class="section" id="section-02">
+  <span class="section-number">Section 02</span>
+  <h1>TikTok Live Monetization Playbook</h1>
+  <p><strong>The Sovereign Live Revenue System</strong></p>
+  <div class="section-divider"></div>
+
+  <h2>The Live Revenue Formula</h2>
+  <pre><code>Live Revenue = (Viewers x Engagement Rate x Conversion Rate x AOV) + Gift Revenue</code></pre>
+  <p><strong>Target by Week 4:</strong></p>
+  <ul>
+    <li>Average concurrent viewers: 300&ndash;500</li>
+    <li>Engagement rate: 15&ndash;25% (comments, shares, follows)</li>
+    <li>Conversion rate: 2&ndash;5% of viewers take a buying action</li>
+    <li>Average order value: $47&ndash;$89</li>
+    <li>Gift revenue per live: $50&ndash;$200</li>
+  </ul>
+
+  <hr>
+
+  <h2>Daily Live Schedule</h2>
+
+  <h3>Live 1: &ldquo;Morning Momentum&rdquo; (11:00 AM &ndash; 12:15 PM EST)</h3>
+  <p><strong>Format</strong>: Get Ready With Me + Business Talk<br>
+  <strong>Vibe</strong>: Casual luxury &mdash; doing hair/makeup while dropping gems</p>
+  <p><strong>Structure:</strong></p>
+  <ul>
+    <li><strong>0&ndash;5 min</strong>: &ldquo;Hey! Welcome in. Drop where you&rsquo;re tuning in from.&rdquo; (Warm-up, let viewers accumulate)</li>
+    <li><strong>5&ndash;15 min</strong>: &ldquo;So here&rsquo;s what happened yesterday&hellip;&rdquo; (Story hook &mdash; revenue update, funny moment, lesson learned)</li>
+    <li><strong>15&ndash;25 min</strong>: Product showcase #1 &mdash; wear/show a boutique piece naturally. &ldquo;This necklace? It&rsquo;s from my boutique. Link&rsquo;s in bio.&rdquo;</li>
+    <li><strong>25&ndash;40 min</strong>: Value bomb &mdash; teach ONE actionable business tip. &ldquo;Here&rsquo;s exactly how I got my first 100 sales&hellip;&rdquo;</li>
+    <li><strong>40&ndash;55 min</strong>: Q&amp;A &mdash; &ldquo;Drop your questions, I&rsquo;ll answer the best ones&rdquo;</li>
+    <li><strong>55&ndash;75 min</strong>: Product showcase #2 + digital product mention. &ldquo;If you want the full system, my guide walks you through everything &mdash; link in bio&rdquo;</li>
+    <li><strong>Last 5 min</strong>: &ldquo;Follow if you&rsquo;re not following. Share this live. Tomorrow I&rsquo;m [tease next live topic].&rdquo;</li>
+  </ul>
+
+  <h3>Live 2: &ldquo;Evening Empire&rdquo; (7:00 PM &ndash; 8:30 PM EST)</h3>
+  <p><strong>Format</strong>: Build With Me / Real Talk<br>
+  <strong>Vibe</strong>: Deeper, more intimate, community-focused</p>
+  <p><strong>Structure:</strong></p>
+  <ul>
+    <li><strong>0&ndash;5 min</strong>: Welcome + energy check. &ldquo;Rate your day 1&ndash;10 in the comments&rdquo;</li>
+    <li><strong>5&ndash;20 min</strong>: &ldquo;Let me show you what I&rsquo;m working on&hellip;&rdquo; (Screen share or demo &mdash; building a product page, editing content, packaging orders)</li>
+    <li><strong>20&ndash;35 min</strong>: Teaching segment &mdash; deeper dive into a business concept</li>
+    <li><strong>35&ndash;50 min</strong>: Digital product deep-dive. &ldquo;Let me walk you through exactly what&rsquo;s inside [product name]&rdquo;</li>
+    <li><strong>50&ndash;70 min</strong>: Community Q&amp;A + shoutouts</li>
+    <li><strong>70&ndash;85 min</strong>: Mindset close. End with an identity anchor. &ldquo;Remember &mdash; you&rsquo;re not just watching. You&rsquo;re building.&rdquo;</li>
+    <li><strong>Last 5 min</strong>: CTA + tomorrow tease</li>
+  </ul>
+
+  <hr>
+
+  <h2>The 7 Live Monetization Triggers</h2>
+
+  <h3>Trigger 1: The Casual Mention</h3>
+  <blockquote><p>&ldquo;This top? Oh, it&rsquo;s from my boutique actually. I literally wear my own stuff because I only stock things I&rsquo;m obsessed with. Link&rsquo;s in my bio if you want it.&rdquo;</p></blockquote>
+  <p><strong>Why it works</strong>: No pressure. Curiosity-driven. Feels like a friend recommendation.</p>
+
+  <h3>Trigger 2: The Social Proof Drop</h3>
+  <blockquote><p>&ldquo;Someone in the chat just said they got the Sovereign Chain last week &mdash; how are you liking it? &hellip; See? That&rsquo;s what I&rsquo;m talking about. Quality speaks.&rdquo;</p></blockquote>
+  <p><strong>Why it works</strong>: Third-party validation is 10x more powerful than self-promotion.</p>
+
+  <h3>Trigger 3: The Scarcity Nudge</h3>
+  <blockquote><p>&ldquo;We have like 30 of these left from the last restock and I&rsquo;m not sure when we&rsquo;re getting more. Just saying.&rdquo;</p></blockquote>
+  <p><strong>Why it works</strong>: Real scarcity creates urgency without pressure.</p>
+
+  <h3>Trigger 4: The Transformation Story</h3>
+  <blockquote><p>&ldquo;Six months ago I was [relatable struggle]. Now I&rsquo;m [current reality]. The difference? I built systems. That&rsquo;s literally what my course teaches.&rdquo;</p></blockquote>
+  <p><strong>Why it works</strong>: People buy transformations, not products.</p>
+
+  <h3>Trigger 5: The Behind-the-Scenes Reveal</h3>
+  <blockquote><p>&ldquo;Want to see my actual revenue dashboard? Let me show you&hellip; [shows screen]. This is from digital products alone. And I built this with the exact framework I teach.&rdquo;</p></blockquote>
+  <p><strong>Why it works</strong>: Transparency creates trust. Trust creates buyers.</p>
+
+  <h3>Trigger 6: The Live-Only Offer</h3>
+  <blockquote><p>&ldquo;Okay, for everyone on this live right now &mdash; I&rsquo;m dropping a code that expires in one hour. LIVEFAM gets 20% off anything in the boutique. That&rsquo;s only for y&rsquo;all.&rdquo;</p></blockquote>
+  <p><strong>Why it works</strong>: Exclusivity + urgency + reward for showing up live.</p>
+
+  <h3>Trigger 7: The Gift Prompt (Subtle)</h3>
+  <blockquote><p>&ldquo;If this tip just saved you hours of research, show some love. Roses keep me caffeinated and on these lives for you.&rdquo;</p></blockquote>
+  <p><strong>Why it works</strong>: Frames gifts as a value exchange, not begging.</p>
+
+  <hr>
+
+  <h2>Viral Live Moments (Engineer These)</h2>
+
+  <h3>The Revenue Reveal</h3>
+  <p>Go live and show real-time sales notifications coming in. &ldquo;Watch this&hellip; [notification pops] &hellip; that&rsquo;s another $89. This is what happens when your systems work while you sleep.&rdquo;</p>
+
+  <h3>The Unboxing</h3>
+  <p>Unbox your own boutique products on camera. React genuinely. &ldquo;Okay the quality on this batch is INSANE. Feel this. This is $59, not $500.&rdquo;</p>
+
+  <h3>The Challenge</h3>
+  <p>&ldquo;I&rsquo;m going to try to make $1,000 on this live. Help me out &mdash; share this to your story and let&rsquo;s see what happens.&rdquo;</p>
+
+  <h3>The Giveaway</h3>
+  <p>&ldquo;At 500 viewers, I&rsquo;m giving away [boutique product]. Share this live and comment SOVEREIGN to enter.&rdquo; (Drives shares + algorithm boost)</p>
+
+  <h3>The Collaboration</h3>
+  <p>Bring a friend/fellow creator on the live. Cross-pollinate audiences. &ldquo;My girl [name] just launched [thing]. Tell them about it.&rdquo;</p>
+
+  <hr>
+
+  <h2>TikTok Shop Integration</h2>
+
+  <h3>Setup Priorities:</h3>
+  <ol>
+    <li>Connect TikTok Shop to boutique inventory (Shopify integration)</li>
+    <li>Tag products in every live &mdash; yellow basket icon always visible</li>
+    <li>Pin best-selling product to top of live shopping tab</li>
+    <li>Use product showcase videos (15&ndash;30 sec) as pre-live promotion</li>
+  </ol>
+
+  <h3>During Lives:</h3>
+  <ul>
+    <li>&ldquo;Tap the yellow basket to see everything I&rsquo;m showing today&rdquo;</li>
+    <li>Flash product on screen when mentioning it</li>
+    <li>Use TikTok Shop&rsquo;s &ldquo;flash deal&rdquo; feature for live-only pricing</li>
+    <li>Pin a product every 15 minutes to keep the shopping tab active</li>
+  </ul>
+
+  <h3>Post-Live:</h3>
+  <ul>
+    <li>Download live replay &rarr; clip 3&ndash;5 best moments &rarr; post as short-form content</li>
+    <li>Each clip should have ONE product/offer focus</li>
+    <li>Best clip format: &ldquo;The moment I [hook] on my live&rdquo; &rarr; 15&ndash;30 sec &rarr; CTA</li>
+  </ul>
+
+  <hr>
+
+  <h2>Live Metrics &amp; Optimization</h2>
+
+  <h3>Track After Every Live:</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Metric</th><th>Week 1 Goal</th><th>Week 4 Goal</th></tr></thead>
+    <tbody>
+      <tr><td>Peak concurrent viewers</td><td>50</td><td>500</td></tr>
+      <tr><td>Average watch time</td><td>3 min</td><td>8 min</td></tr>
+      <tr><td>New followers from live</td><td>20</td><td>200</td></tr>
+      <tr><td>Products sold during live</td><td>2&ndash;5</td><td>20&ndash;50</td></tr>
+      <tr><td>Gift revenue</td><td>$10&ndash;30</td><td>$100&ndash;300</td></tr>
+      <tr><td>Comments received</td><td>50</td><td>500+</td></tr>
+      <tr><td>Shares</td><td>5</td><td>50+</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Optimization Rules:</h3>
+  <ol>
+    <li><strong>If viewers drop below 20</strong>: Increase energy, ask a question, start a poll</li>
+    <li><strong>If no sales in 20 min</strong>: Shift to a product showcase or drop a flash code</li>
+    <li><strong>If comments slow down</strong>: &ldquo;Type [word] if you [relatable thing]&rdquo; &mdash; restart engagement</li>
+    <li><strong>If gifts are flowing</strong>: Acknowledge EVERY gifter by name &mdash; this triggers more gifts</li>
+    <li><strong>After every live</strong>: Note your top moment, worst moment, and one thing to try next time</li>
+  </ol>
+
+  <hr>
+
+  <h2>Pre-Live Checklist</h2>
+  <ul class="checklist">
+    <li>Ring light positioned, camera angle flattering</li>
+    <li>Products to showcase within arm&rsquo;s reach</li>
+    <li>TikTok Shop products tagged and basket enabled</li>
+    <li>Discount code of the day ready</li>
+    <li>Water bottle nearby (you&rsquo;re talking for 60&ndash;90 min)</li>
+    <li>Phone on Do Not Disturb (no notification interruptions)</li>
+    <li>Opening hook planned (first 30 seconds determine if people stay)</li>
+    <li>Posted a &ldquo;Going live in 30 min&rdquo; story/video</li>
+    <li>Energy is UP &mdash; if you&rsquo;re not feeling it, do a 5-min pump-up playlist first</li>
+  </ul>
+
+  <hr>
+
+  <h2>Live Content Calendar (Weekly Rotation)</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Day</th><th>Live 1 (11am)</th><th>Live 2 (7pm)</th></tr></thead>
+    <tbody>
+      <tr><td>Monday</td><td>GRWM + Week Goals</td><td>Build With Me: Content Planning</td></tr>
+      <tr><td>Tuesday</td><td>New Arrivals Showcase</td><td>Real Talk: Mindset Monday Recap</td></tr>
+      <tr><td>Wednesday</td><td>&ldquo;How I Made $X This Week&rdquo;</td><td>Digital Product Deep Dive</td></tr>
+      <tr><td>Thursday</td><td>Styling Session (boutique)</td><td>Q&amp;A: Ask Me Anything Business</td></tr>
+      <tr><td>Friday</td><td>Flash Sale Friday</td><td>Community Night: Wins &amp; Celebrations</td></tr>
+      <tr><td>Saturday</td><td>Weekend Shopping Event (2pm)</td><td>Off or spontaneous</td></tr>
+      <tr><td>Sunday</td><td>Batch prep (no live)</td><td>Soft live: Sunday Reset + Planning</td></tr>
+    </tbody>
+  </table></div>
+</div>
+
+<!-- ============ SECTION 03: WEBSITE COPY & FUNNELS ============ -->
+<div class="section" id="section-03">
+  <span class="section-number">Section 03</span>
+  <h1>Website Copy &amp; High-Converting Funnel Scripts</h1>
+  <p><strong>Every Word Engineered to Sell</strong></p>
+  <div class="section-divider"></div>
+
+  <h2>Adelaide&rsquo;s Boutique &mdash; Homepage Copy</h2>
+
+  <h3>Above the Fold:</h3>
+  <ul>
+    <li><strong>Headline</strong>: Curated for the Woman Who&rsquo;s Building Something.</li>
+    <li><strong>Subheadline</strong>: Luxury pieces. Accessible prices. Obsessively selected by Addie.</li>
+    <li><strong>CTA Button</strong>: Shop the Collection</li>
+    <li><strong>Secondary CTA</strong>: See What&rsquo;s Trending</li>
+  </ul>
+
+  <h3>Social Proof Bar (below hero):</h3>
+  <blockquote>
+    <p>&ldquo;I get more compliments on my Adelaide&rsquo;s pieces than anything in my closet.&rdquo; &mdash; @realcustomer</p>
+    <p>2,400+ pieces shipped | 4.8/5 average rating | As seen on TikTok Live</p>
+  </blockquote>
+
+  <h3>Collection Section Headlines:</h3>
+  <ul>
+    <li><strong>New Arrivals</strong>: &ldquo;Fresh off the curation board.&rdquo;</li>
+    <li><strong>Best Sellers</strong>: &ldquo;What everyone&rsquo;s wearing right now.&rdquo;</li>
+    <li><strong>Limited Edition</strong>: &ldquo;When it&rsquo;s gone, it&rsquo;s gone.&rdquo;</li>
+    <li><strong>Bundles</strong>: &ldquo;The full Adelaide&rsquo;s experience &mdash; at a better price.&rdquo;</li>
+  </ul>
+
+  <h3>About Section:</h3>
+  <blockquote>
+    <p>Adelaide&rsquo;s isn&rsquo;t just a store &mdash; it&rsquo;s a point of view. Every piece is hand-selected by Addie Taylor, tested against one question: <em>&ldquo;Would I wear this to my next big moment?&rdquo;</em></p>
+    <p>If the answer isn&rsquo;t an immediate yes, it doesn&rsquo;t make the cut.</p>
+    <p>This is accessible luxury for women who refuse to blend in.</p>
+  </blockquote>
+
+  <h3>Footer CTA:</h3>
+  <ul>
+    <li><strong>Headline</strong>: Join the Inner Circle</li>
+    <li><strong>Copy</strong>: First access to new drops. Exclusive discounts. Style tips from Addie.</li>
+    <li><strong>Input</strong>: Your best email</li>
+    <li><strong>Button</strong>: I&rsquo;m In</li>
+  </ul>
+
+  <hr>
+
+  <h2>The Sovereign Self &mdash; Digital Products Landing Page</h2>
+
+  <h3>Hero Section:</h3>
+  <ul>
+    <li><strong>Headline</strong>: Stop Scrolling. Start Building.</li>
+    <li><strong>Subheadline</strong>: Digital tools, courses, and blueprints for women who are done waiting for permission to be wealthy.</li>
+    <li><strong>CTA</strong>: Browse the Vault</li>
+  </ul>
+
+  <h3>Value Proposition Grid:</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Icon</th><th>Headline</th><th>Copy</th></tr></thead>
+    <tbody>
+      <tr><td>Blueprint</td><td>Battle-Tested Frameworks</td><td>Not theory. Every product comes from what Addie actually did to build three businesses.</td></tr>
+      <tr><td>Clock</td><td>Instant Access</td><td>Download immediately. No shipping. No waiting. Start building tonight.</td></tr>
+      <tr><td>Fire</td><td>Built for Action</td><td>No fluff. No filler. Every page, every module is designed to get you moving.</td></tr>
+      <tr><td>Lock</td><td>Lifetime Access</td><td>Buy once, own forever. Updates included.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Product Showcase Template:</h3>
+  <pre><code>[Product Name]
+[One-line hook]
+[Price] — [Original "value" price crossed out]
+[Star rating] ([number] reviews)
+[CTA Button: Get Instant Access]</code></pre>
+
+  <p><strong>Example:</strong></p>
+  <pre><code>The $1K Quick-Start Guide
+Everything I did to make my first $1,000 online — in 14 days.
+$27 — $97
+★★★★★ (142 reviews)
+[Get Instant Access]</code></pre>
+
+  <h3>Testimonial Section:</h3>
+  <p><strong>Headline</strong>: Don&rsquo;t Take My Word For It.</p>
+  <blockquote>
+    <p>&ldquo;I made my money back on the first product within 48 hours of applying Addie&rsquo;s framework.&rdquo; &mdash; Sarah M.</p>
+    <p>&ldquo;I&rsquo;ve bought $2,000 courses that gave me less than Addie&rsquo;s $47 guide.&rdquo; &mdash; Jasmine T.</p>
+    <p>&ldquo;This isn&rsquo;t just business advice. It changed how I see myself.&rdquo; &mdash; Monique R.</p>
+  </blockquote>
+
+  <h3>FAQ Section:</h3>
+  <p><strong>Q: Is this just for beginners?</strong><br>
+  A: No. Beginners get the foundations. If you&rsquo;re already making money, you&rsquo;ll find the systems to scale.</p>
+  <p><strong>Q: What if I don&rsquo;t have a business idea yet?</strong><br>
+  A: Module 2 of Build Your Empire walks you through choosing your revenue pillar. You&rsquo;ll leave with a plan.</p>
+  <p><strong>Q: Can I get a refund?</strong><br>
+  A: Digital products are non-refundable due to instant access. But honestly? The ROI speaks for itself.</p>
+  <p><strong>Q: How is this different from free content on TikTok?</strong><br>
+  A: My free content gives you the &ldquo;what.&rdquo; My products give you the &ldquo;how&rdquo; &mdash; with templates, frameworks, and step-by-step systems you can implement immediately.</p>
+
+  <hr>
+
+  <h2>&ldquo;Build Your Empire&rdquo; Flagship Course &mdash; Sales Page</h2>
+
+  <h3>Pre-Headline:</h3>
+  <p><em>For women who are tired of consuming content and ready to start collecting revenue.</em></p>
+
+  <h3>Headline:</h3>
+  <h2 style="border:none; margin-top:0.5rem;">Build Your Empire</h2>
+  <p><strong>The complete system for going from $0 to $10K/month &mdash; without a huge following, a trust fund, or a business degree.</strong></p>
+
+  <h3>Opening Copy:</h3>
+  <blockquote>
+    <p>You&rsquo;ve watched enough TikToks about making money online.<br>
+    You&rsquo;ve saved enough Instagram posts about &ldquo;passive income.&rdquo;<br>
+    You&rsquo;ve told yourself &ldquo;I&rsquo;ll start Monday&rdquo; enough times to fill a calendar.</p>
+    <p><strong>This is Monday.</strong></p>
+    <p>Build Your Empire is the exact system I used to build three revenue streams from my phone. Not the highlight reel &mdash; the actual playbook. Every framework. Every template. Every script. Every system.</p>
+    <p>This isn&rsquo;t motivation. This is architecture.</p>
+  </blockquote>
+
+  <h3>What&rsquo;s Inside (Module Breakdown):</h3>
+
+  <h4>Module 1: Sovereign Mindset &amp; Identity Architecture</h4>
+  <ul>
+    <li>Rewire your self-concept from consumer to CEO</li>
+    <li>The &ldquo;Future Self&rdquo; framework that makes action feel inevitable</li>
+    <li>Daily rituals that compound into a millionaire operating system</li>
+  </ul>
+
+  <h4>Module 2: Choose Your Revenue Pillar</h4>
+  <ul>
+    <li>The 3 business models that work in 2026 (and which one fits YOU)</li>
+    <li>My &ldquo;Revenue Match&rdquo; quiz to find your ideal starting point</li>
+    <li>Market validation in 48 hours &mdash; before you spend a dime</li>
+  </ul>
+
+  <h4>Module 3: Brand Building That Sells Without Selling</h4>
+  <ul>
+    <li>How to build a personal brand that attracts buyers on autopilot</li>
+    <li>The exact content strategy I use (with templates)</li>
+    <li>Visual branding on a budget &mdash; look like a million before you make it</li>
+  </ul>
+
+  <h4>Module 4: TikTok Monetization Machine</h4>
+  <ul>
+    <li>My live streaming formula for $500+ per live session</li>
+    <li>The algorithm cheat sheet: what actually gets pushed in 2026</li>
+    <li>From 0 to 10K followers in 30 days &mdash; my exact playbook</li>
+  </ul>
+
+  <h4>Module 5: Systems, Automation &amp; Scaling</h4>
+  <ul>
+    <li>Set up once, profit forever: email funnels, auto-DMs, scheduling</li>
+    <li>The tools I use (with tutorials) &mdash; all under $100/month total</li>
+    <li>Hiring your first VA for $5/hour to 10x your output</li>
+  </ul>
+
+  <h4>Module 6: The $50K Sprint</h4>
+  <ul>
+    <li>My 30-day revenue sprint framework (the one you&rsquo;re watching me execute)</li>
+    <li>Daily action plans, revenue trackers, and accountability systems</li>
+    <li>What to do when things break (because they will)</li>
+  </ul>
+
+  <h3>Bonus Stack:</h3>
+  <ul>
+    <li><strong>Bonus 1</strong>: Private Community Access (30 days) &mdash; Value: $297</li>
+    <li><strong>Bonus 2</strong>: Live Group Coaching Call with Addie &mdash; Value: $497</li>
+    <li><strong>Bonus 3</strong>: Swipe File: 50 TikTok Hooks That Convert &mdash; Value: $97</li>
+    <li><strong>Bonus 4</strong>: Revenue Tracker Notion Dashboard &mdash; Value: $47</li>
+  </ul>
+  <p><strong>Total Value: $2,935</strong></p>
+
+  <h3>Price Reveal:</h3>
+  <blockquote>
+    <p>You&rsquo;re not paying $2,935.<br>
+    You&rsquo;re not even paying $997.</p>
+    <p><strong>Build Your Empire: $297</strong><br>
+    <em>(or 3 payments of $109)</em></p>
+    <p>This is the price of a weekend shopping trip. Except this one pays you back.</p>
+  </blockquote>
+
+  <h3>Final CTA:</h3>
+  <ul>
+    <li><strong>Button</strong>: Join Build Your Empire Now</li>
+    <li><strong>Subtext</strong>: Instant access. Lifetime updates. No risk &mdash; just results.</li>
+  </ul>
+
+  <h3>Urgency Bar:</h3>
+  <blockquote><p>Founding member pricing ends [DATE]. After that, this goes to $497. The bonuses disappear. The price goes up. Your future self is watching what you do next.</p></blockquote>
+
+  <hr>
+
+  <h2>Lead Magnet Funnel &mdash; &ldquo;5 Steps to Your First $1K Online&rdquo;</h2>
+
+  <h3>Opt-in Page:</h3>
+  <p><strong>Headline</strong>: Your First $1K Is Closer Than You Think.<br>
+  <strong>Subheadline</strong>: The free 5-step blueprint I&rsquo;d give my best friend if she asked me how to start making money online &mdash; today.</p>
+
+  <p><strong>What You&rsquo;ll Learn:</strong></p>
+  <ol>
+    <li>The #1 product type that sells without a following</li>
+    <li>How to validate your idea in 24 hours (before you build anything)</li>
+    <li>My &ldquo;minimum viable offer&rdquo; template &mdash; launch in a weekend</li>
+    <li>The free traffic strategy that brought me my first 100 buyers</li>
+    <li>The mindset shift that separates $0 months from $1K months</li>
+  </ol>
+
+  <p><strong>Form</strong>: Name + Email<br>
+  <strong>Button</strong>: Send Me the Blueprint<br>
+  <strong>Trust line</strong>: No spam. Unsubscribe anytime. I respect your inbox like I respect my revenue.</p>
+
+  <h3>Thank You Page:</h3>
+  <blockquote>
+    <p><strong>Check your inbox.</strong> Your blueprint is on the way.</p>
+    <p>While you wait &mdash; here&rsquo;s a special offer just for new members of the community:</p>
+    <p><strong>Get &ldquo;The $1K Quick-Start Guide&rdquo; for $17 (normally $27)</strong><br>
+    This is the expanded version with templates, scripts, and my personal framework.</p>
+    <p><em>This price disappears in 15 minutes.</em></p>
+    <p>[Get It for $17] &nbsp; [No thanks, I&rsquo;ll stick with the free version]</p>
+  </blockquote>
+
+  <hr>
+
+  <h2>Email Opt-in Popups (Boutique)</h2>
+
+  <h3>Exit-Intent Popup:</h3>
+  <ul>
+    <li><strong>Headline</strong>: Wait &mdash; don&rsquo;t leave empty-handed.</li>
+    <li><strong>Copy</strong>: Get 15% off your first order. Plus early access to every new drop.</li>
+    <li><strong>Input</strong>: Email</li>
+    <li><strong>Button</strong>: Unlock My Discount</li>
+    <li><strong>Code delivered</strong>: SOVEREIGN15</li>
+  </ul>
+
+  <h3>Scroll Popup (after 60 seconds):</h3>
+  <ul>
+    <li><strong>Headline</strong>: You have great taste.</li>
+    <li><strong>Copy</strong>: Join 2,400+ women who get first dibs on new arrivals + exclusive deals.</li>
+    <li><strong>Button</strong>: Join the List</li>
+  </ul>
+
+  <hr>
+
+  <h2>TikTok Bio &amp; Link-in-Bio Copy</h2>
+
+  <h3>TikTok Bio:</h3>
+  <pre><code>Building a $50K month in real time
+Adelaide's Boutique | Digital Products | TikTok Live
+Your sign to stop scrolling &amp; start building
+Shop + free blueprint below</code></pre>
+
+  <h3>Link-in-Bio (Stan Store / Linktree layout):</h3>
+  <ol>
+    <li><strong>Shop Adelaide&rsquo;s Boutique</strong> &mdash; &ldquo;Curated luxury. Accessible prices.&rdquo;</li>
+    <li><strong>FREE: 5 Steps to Your First $1K</strong> &mdash; &ldquo;The blueprint I&rsquo;d give my best friend.&rdquo;</li>
+    <li><strong>The Sovereign Self Digital Vault</strong> &mdash; &ldquo;Courses, guides &amp; templates.&rdquo;</li>
+    <li><strong>Build Your Empire Course</strong> &mdash; &ldquo;From $0 to $10K/month. The full system.&rdquo;</li>
+    <li><strong>Book a 1:1 Strategy Call</strong> &mdash; &ldquo;Limited spots. Apply now.&rdquo; <em>(future upsell)</em></li>
+  </ol>
+</div>
+
+<!-- ============ SECTION 04: DIGITAL PRODUCT LAUNCH SYSTEM ============ -->
+<div class="section" id="section-04">
+  <span class="section-number">Section 04</span>
+  <h1>Digital Product Launch System</h1>
+  <p><strong>The Sovereign Launch Framework</strong></p>
+  <p><em>Informed by 2026 market data: Email marketing ROI of $40&ndash;$50 per $1 spent, automated sequences generate 152% higher click rates, and segmented lists drive 2&ndash;3x higher conversions.</em></p>
+  <div class="section-divider"></div>
+
+  <h2>Launch Architecture Overview</h2>
+  <pre><code>Week 1-2: SEED   → Build anticipation, grow list, warm audience
+Week 3:   LAUNCH → Open cart, drive sales, create urgency
+Week 4:   CLOSE  → Final push, cart close, transition to evergreen</code></pre>
+
+  <hr>
+
+  <h2>Phase 1: Seed (Days 1&ndash;14)</h2>
+
+  <h3>Goals:</h3>
+  <ul>
+    <li>Build email list to 500&ndash;1,000 subscribers minimum</li>
+    <li>Create 10+ pieces of pre-launch content</li>
+    <li>Establish authority on the topic</li>
+    <li>Generate waitlist of 200+ interested buyers</li>
+  </ul>
+
+  <h3>Tactics:</h3>
+  <ol>
+    <li><strong>Lead magnet launch</strong>: &ldquo;5 Steps to Your First $1K Online&rdquo; (free PDF)</li>
+    <li><strong>Daily TikTok content</strong>: 3 videos/day hitting pain points the course solves</li>
+    <li><strong>TikTok Lives</strong>: 2x daily, teaching snippets from the course</li>
+    <li><strong>Instagram Stories</strong>: Behind-the-scenes of course creation</li>
+    <li><strong>Email sequence</strong>: Welcome &rarr; Value &rarr; Value &rarr; Story &rarr; Waitlist invite</li>
+  </ol>
+
+  <h3>Pre-Launch Email Sequence (5 emails over 7 days):</h3>
+
+  <h4>Email 1 &mdash; Welcome (Immediate)</h4>
+  <p>Subject: &ldquo;You&rsquo;re in. Here&rsquo;s your blueprint.&rdquo;</p>
+  <pre><code>Hey [Name],
+
+Welcome to the inner circle.
+
+Your "5 Steps to Your First $1K" blueprint is attached.
+But before you dive in, let me tell you something:
+
+That guide? It's the appetizer.
+
+I'm building something that's going to change the game for women
+who are ready to stop watching and start building.
+
+More on that soon.
+
+For now — download the guide, take action on Step 1 today,
+and reply to this email telling me: what's the #1 thing
+holding you back from making money online?
+
+I read every reply.
+
+— Addie
+
+P.S. Follow my TikTok if you haven't already.
+I'm sharing behind-the-scenes of everything I'm building.
+It's going to be fun to watch.</code></pre>
+
+  <h4>Email 2 &mdash; Value Bomb (Day 2)</h4>
+  <p>Subject: &ldquo;The mistake that cost me 3 months&rdquo;</p>
+  <pre><code>[Name],
+
+When I started my first business, I made a mistake that
+cost me three months and about $800.
+
+I tried to build the "perfect" product before I had a single customer.
+
+Here's what I'd do differently:
+
+[Teach the "minimum viable offer" concept — give real value]
+
+This is one of the frameworks inside something I'm building.
+Stay tuned.
+
+— Addie</code></pre>
+
+  <h4>Email 3 &mdash; Social Proof (Day 4)</h4>
+  <p>Subject: &ldquo;She made $1,200 in her first week&rdquo;</p>
+  <pre><code>[Name],
+
+I shared my framework with a friend last month.
+Not the guide you downloaded — the FULL system.
+
+She made $1,200 in her first week.
+
+Here's exactly what she did differently:
+
+[Share the story, tie it to the upcoming course]
+
+I'm almost ready to share this full system with you.
+Want to be first in line?
+
+Reply "YES" and I'll add you to the VIP list.
+
+— Addie</code></pre>
+
+  <h4>Email 4 &mdash; Story (Day 6)</h4>
+  <p>Subject: &ldquo;6 months ago, I had $47 in my bank account&rdquo;</p>
+  <pre><code>[Name],
+
+I don't share this often, but I think you need to hear it.
+
+6 months ago: $47 in my checking account. No backup plan.
+
+Today: Three businesses. Revenue I never imagined.
+
+What changed wasn't my circumstances. It was my identity.
+
+I stopped calling myself someone who "wanted" to make money
+and started operating like someone who already had it.
+
+The frameworks came after the mindset shift.
+
+And that's exactly why Module 1 of what I'm building
+starts with identity — not tactics.
+
+More details dropping in 48 hours.
+
+— Addie</code></pre>
+
+  <h4>Email 5 &mdash; Waitlist (Day 7)</h4>
+  <p>Subject: &ldquo;It&rsquo;s called Build Your Empire. And doors open [DATE].&rdquo;</p>
+  <pre><code>[Name],
+
+I've been hinting at this all week. Here it is:
+
+BUILD YOUR EMPIRE
+The complete system for going from $0 to $10K/month.
+
+6 modules. Templates. Scripts. A private community.
+Live coaching with me.
+
+Doors open [DATE] at 12pm EST.
+
+But here's the thing — founding members get a price
+that will never exist again. And a bonus stack that
+disappears when the cart opens to the public.
+
+Want founding member access?
+
+[BUTTON: Put Me on the VIP List]
+
+This is going to sell out. Not because of hype —
+because of what's inside.
+
+See you on launch day.
+
+— Addie</code></pre>
+
+  <hr>
+
+  <h2>Phase 2: Launch (Days 15&ndash;21)</h2>
+
+  <h3>Launch Week Email Sequence (7 emails):</h3>
+
+  <h4>Email 6 &mdash; Cart Open (Day 15)</h4>
+  <p>Subject: &ldquo;Doors are OPEN. Build Your Empire is live.&rdquo;</p>
+  <ul>
+    <li>Full sales pitch with module breakdown</li>
+    <li>Founding member price + bonus stack</li>
+    <li>48-hour early access bonus for email list</li>
+    <li>CTA: Enroll Now</li>
+  </ul>
+
+  <h4>Email 7 &mdash; Social Proof (Day 16)</h4>
+  <p>Subject: &ldquo;47 women enrolled in the first 6 hours&rdquo;</p>
+  <ul>
+    <li>Share enrollment numbers</li>
+    <li>Student excitement screenshots</li>
+    <li>Emphasize momentum + community</li>
+    <li>CTA: Join them</li>
+  </ul>
+
+  <h4>Email 8 &mdash; Objection Crusher (Day 17)</h4>
+  <p>Subject: &ldquo;You&rsquo;re thinking about it. Let me help.&rdquo;</p>
+  <ul>
+    <li>Address top 3 objections: time, money, &ldquo;will this work for me?&rdquo;</li>
+    <li>Use FAQ format</li>
+    <li>End with risk-reversal</li>
+    <li>CTA: Your future self will thank you</li>
+  </ul>
+
+  <h4>Email 9 &mdash; Testimonial Deep Dive (Day 18)</h4>
+  <p>Subject: &ldquo;She quit her 9-5 in 90 days&rdquo;</p>
+  <ul>
+    <li>Full case study of a beta student</li>
+    <li>Before/after transformation</li>
+    <li>Specific revenue numbers</li>
+    <li>CTA: This could be your story</li>
+  </ul>
+
+  <h4>Email 10 &mdash; Bonus Reminder (Day 19)</h4>
+  <p>Subject: &ldquo;These bonuses expire in 48 hours&rdquo;</p>
+  <ul>
+    <li>Re-list the bonus stack with values</li>
+    <li>Emphasize the live coaching call (limited spots)</li>
+    <li>Scarcity is REAL &mdash; the call can&rsquo;t hold unlimited people</li>
+    <li>CTA: Don&rsquo;t miss this</li>
+  </ul>
+
+  <h4>Email 11 &mdash; Last Day (Day 20)</h4>
+  <p>Subject: &ldquo;Final call. Cart closes at midnight.&rdquo;</p>
+  <ul>
+    <li>Emotional + urgent</li>
+    <li>&ldquo;A year from now, you&rsquo;ll wish you started today&rdquo;</li>
+    <li>Recap everything they get</li>
+    <li>Last chance for founding price</li>
+    <li>CTA: This is it</li>
+  </ul>
+
+  <h4>Email 12 &mdash; Cart Closed / Waitlist (Day 21)</h4>
+  <p>Subject: &ldquo;Doors are closed. But&hellip;&rdquo;</p>
+  <ul>
+    <li>Thank buyers, welcome them</li>
+    <li>For non-buyers: &ldquo;The price goes up. But you can join the waitlist for next round.&rdquo;</li>
+    <li>No shame, no pressure &mdash; just facts</li>
+    <li>CTA: Join the waitlist</li>
+  </ul>
+
+  <hr>
+
+  <h2>Phase 3: Evergreen Transition (Days 22&ndash;30)</h2>
+
+  <h3>Automated Evergreen Funnel:</h3>
+  <pre><code>New subscriber → Lead magnet → Welcome sequence (5 emails)
+→ Waitlist/sales page → Automated webinar replay
+→ 48-hour urgency sequence → Purchase or nurture loop</code></pre>
+
+  <h3>Nurture Loop (non-buyers):</h3>
+  <ul>
+    <li>Weekly value email every Tuesday</li>
+    <li>Monthly &ldquo;doors open&rdquo; flash launch (3-day windows)</li>
+    <li>Continuous TikTok content driving to lead magnet</li>
+  </ul>
+
+  <hr>
+
+  <h2>Launch Day TikTok Live Script</h2>
+  <h3>&ldquo;Build Your Empire Launch Party&rdquo; (2-hour event)</h3>
+
+  <h4>0:00&ndash;0:15 &mdash; Hype &amp; Welcome</h4>
+  <blockquote><p>&ldquo;TODAY IS THE DAY. If you&rsquo;ve been following along, you know what this is. Build Your Empire is officially LIVE. Stay on this live because I&rsquo;m going to walk you through everything &mdash; and there&rsquo;s a live-only bonus that expires when I end this stream.&rdquo;</p></blockquote>
+
+  <h4>0:15&ndash;0:45 &mdash; Module Walkthrough</h4>
+  <blockquote><p>Walk through each module with screen shares or slides. For each module: &ldquo;Here&rsquo;s what you&rsquo;ll learn, here&rsquo;s WHY it matters, and here&rsquo;s a quick win from inside the module.&rdquo;</p></blockquote>
+
+  <h4>0:45&ndash;1:00 &mdash; Student Spotlight</h4>
+  <blockquote><p>Bring a beta student on (or read their message). Let them share their experience in their own words.</p></blockquote>
+
+  <h4>1:00&ndash;1:15 &mdash; Bonus Stack Reveal</h4>
+  <blockquote><p>&ldquo;Now here&rsquo;s what makes this insane for founding members&hellip;&rdquo; List every bonus, show the value stack, let it sink in.</p></blockquote>
+
+  <h4>1:15&ndash;1:30 &mdash; Live Q&amp;A</h4>
+  <blockquote><p>Answer every question. Address objections in real time. This is where trust converts to transactions.</p></blockquote>
+
+  <h4>1:30&ndash;1:45 &mdash; Price Reveal + Live-Only Bonus</h4>
+  <blockquote><p>&ldquo;The investment is $297. But for everyone on this live right now &mdash; I&rsquo;m adding a bonus that&rsquo;s NOT on the sales page. [Reveal live-only bonus]. Drop &lsquo;EMPIRE&rsquo; in the chat to get the link.&rdquo;</p></blockquote>
+
+  <h4>1:45&ndash;2:00 &mdash; Final Push + Celebration</h4>
+  <blockquote><p>Celebrate live enrollments as they come in. Shout out names. Create a party atmosphere. End with: &ldquo;This is just the beginning. See you inside.&rdquo;</p></blockquote>
+
+  <hr>
+
+  <h2>Conversion Benchmarks (2026 Data)</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Metric</th><th>Industry Avg</th><th>Our Target</th></tr></thead>
+    <tbody>
+      <tr><td>Email open rate</td><td>21&ndash;31%</td><td>40%+ (warm list)</td></tr>
+      <tr><td>Email click rate</td><td>2&ndash;5%</td><td>8&ndash;12%</td></tr>
+      <tr><td>Sales page conversion</td><td>1&ndash;3%</td><td>5&ndash;8% (launch heat)</td></tr>
+      <tr><td>Webinar attendance rate</td><td>25&ndash;40%</td><td>45%+</td></tr>
+      <tr><td>Webinar-to-sale conversion</td><td>5&ndash;15%</td><td>12&ndash;20%</td></tr>
+      <tr><td>Cart abandonment recovery</td><td>5&ndash;10%</td><td>15%</td></tr>
+      <tr><td>Launch email ROI</td><td>$40&ndash;50 per $1</td><td>$50+ per $1</td></tr>
+    </tbody>
+  </table></div>
+
+  <hr>
+
+  <h2>Tech Stack for Launch</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Tool</th><th>Purpose</th><th>Cost</th></tr></thead>
+    <tbody>
+      <tr><td>Stan Store or Shopify</td><td>Course hosting + checkout</td><td>$29&ndash;39/mo</td></tr>
+      <tr><td>ConvertKit or Flodesk</td><td>Email marketing + sequences</td><td>$29/mo</td></tr>
+      <tr><td>Canva Pro</td><td>Graphics, course materials</td><td>$13/mo</td></tr>
+      <tr><td>Notion</td><td>Student hub + community</td><td>Free</td></tr>
+      <tr><td>Stripe</td><td>Payment processing</td><td>2.9% + $0.30/txn</td></tr>
+      <tr><td>TikTok</td><td>Primary traffic source</td><td>Free</td></tr>
+      <tr><td>Loom</td><td>Course video recording</td><td>Free tier</td></tr>
+      <tr><td>Zoom</td><td>Live coaching calls</td><td>Free tier</td></tr>
+    </tbody>
+  </table></div>
+  <p><strong>Total monthly overhead: ~$70&ndash;80/month</strong></p>
+</div>
+
+<!-- ============ SECTION 05: CONTENT CALENDAR & DAILY OPS ============ -->
+<div class="section" id="section-05">
+  <span class="section-number">Section 05</span>
+  <h1>30-Day Content Calendar &amp; Daily Operations Playbook</h1>
+  <p><strong>The Sovereign Execution System</strong></p>
+  <div class="section-divider"></div>
+
+  <h2>Content Pillars (Rotate Daily)</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Pillar</th><th>Purpose</th><th>Content Type</th><th>% of Content</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Authority</strong></td><td>Establish expertise</td><td>Tips, frameworks, &ldquo;how I did X&rdquo;</td><td>30%</td></tr>
+      <tr><td><strong>Lifestyle</strong></td><td>Aspirational connection</td><td>GRWM, day-in-my-life, aesthetic</td><td>20%</td></tr>
+      <tr><td><strong>Product</strong></td><td>Drive revenue</td><td>Boutique showcases, product demos</td><td>25%</td></tr>
+      <tr><td><strong>Community</strong></td><td>Build loyalty</td><td>Q&amp;A, duets, responding to comments</td><td>15%</td></tr>
+      <tr><td><strong>Vulnerability</strong></td><td>Build trust</td><td>Real struggles, behind-the-scenes</td><td>10%</td></tr>
+    </tbody>
+  </table></div>
+
+  <hr>
+
+  <h2>30-Day Content Calendar</h2>
+
+  <h3>Week 1: &ldquo;Light the Match&rdquo;</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Day</th><th>AM Video (9am)</th><th>Midday Video (12pm)</th><th>PM Video (5pm)</th><th>Live 1 (11am)</th><th>Live 2 (7pm)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1</strong></td><td>&ldquo;I&rsquo;m building a $50K month. Follow along.&rdquo;</td><td>Boutique launch teaser &mdash; product flat lay</td><td>&ldquo;The 3 businesses I&rsquo;m running from my phone&rdquo;</td><td>GRWM + intro to the journey</td><td>Build With Me: setting up shop</td></tr>
+      <tr><td><strong>2</strong></td><td>&ldquo;Stop saving posts. Start doing this instead.&rdquo;</td><td>Adelaide&rsquo;s first product showcase</td><td>&ldquo;How I choose what to sell (my framework)&rdquo;</td><td>New arrivals showcase</td><td>Digital product walkthrough</td></tr>
+      <tr><td><strong>3</strong></td><td>&ldquo;The $47 guide that&rsquo;s outselling $997 courses&rdquo;</td><td>GRWM aesthetic content</td><td>Day-in-the-life: entrepreneur edition</td><td>Flash Sale Friday preview</td><td>Real Talk: fears about going public</td></tr>
+      <tr><td><strong>4</strong></td><td>Trending sound + business tip overlay</td><td>Boutique bundle showcase</td><td>&ldquo;Founding Collection drops NOW&rdquo; (urgency)</td><td>LIVE LAUNCH: Founding Collection</td><td>Q&amp;A: how to start an online business</td></tr>
+      <tr><td><strong>5</strong></td><td>&ldquo;I made $[X] in 5 days. Here&rsquo;s the breakdown.&rdquo;</td><td>Customer DM screenshot reaction</td><td>Digital product bundle promo</td><td>Boutique styling session</td><td>Community Night: celebrate first sales</td></tr>
+      <tr><td><strong>6</strong></td><td>Duet a business creator + add your take</td><td>Aesthetic product photography showcase</td><td>&ldquo;Free guide in my bio &mdash; 5 steps to $1K&rdquo;</td><td>Partner/collab outreach live</td><td>Mindset: identity vs. goals</td></tr>
+      <tr><td><strong>7</strong></td><td>Week 1 revenue reveal (transparent)</td><td>&ldquo;Your most asked questions, answered&rdquo;</td><td>Rest content: Sunday reset aesthetic</td><td>Week review + planning</td><td>OFF or soft reset live</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Week 2: &ldquo;Now They&rsquo;re Watching&rdquo;</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Day</th><th>AM Video</th><th>Midday Video</th><th>PM Video</th><th>Live 1</th><th>Live 2</th></tr></thead>
+    <tbody>
+      <tr><td><strong>8</strong></td><td>&ldquo;The mini-course that&rsquo;s changing the game&rdquo;</td><td>Boutique customer unboxing reaction</td><td>&ldquo;Mini-course drops TODAY &mdash; $47&rdquo;</td><td>GRWM + week 2 goals</td><td>LAUNCH: The Sovereign Self mini-course</td></tr>
+      <tr><td><strong>9</strong></td><td>Stitch a comment: &ldquo;How do you make money?&rdquo;</td><td>Adelaide&rsquo;s best sellers this week</td><td>&ldquo;Email marketing is not dead. Here&rsquo;s why.&rdquo;</td><td>Best sellers showcase</td><td>Deep dive: email funnel basics</td></tr>
+      <tr><td><strong>10</strong></td><td>&ldquo;How I made $[X] in 10 days (full transparency)&rdquo;</td><td>Trending aesthetic + boutique product</td><td>Social proof compilation: customer wins</td><td>Revenue reveal LIVE</td><td>Build With Me: content batching</td></tr>
+      <tr><td><strong>11</strong></td><td>&ldquo;New arrivals just dropped&rdquo; (quick showcase)</td><td>Digital product demo (screen record)</td><td>&ldquo;3 mistakes killing your sales&rdquo;</td><td>NEW ARRIVALS LIVE SHOPPING</td><td>Q&amp;A: dropshipping questions</td></tr>
+      <tr><td><strong>12</strong></td><td>Collab content with another creator</td><td>Behind-the-scenes: packaging orders</td><td>&ldquo;Repost this to someone who needs to hear it&rdquo;</td><td>Collab live with partner creator</td><td>Real Talk: imposter syndrome</td></tr>
+      <tr><td><strong>13</strong></td><td>&ldquo;Join the waitlist. Something big is coming.&rdquo;</td><td>Boutique bundle deal showcase</td><td>Email list CTA: &ldquo;Your inbox is about to get valuable&rdquo;</td><td>Styling session + waitlist hype</td><td>Mindset: the $50K identity</td></tr>
+      <tr><td><strong>14</strong></td><td>Week 2 revenue update</td><td>Customer transformation story</td><td>&ldquo;Week 2 done. Here&rsquo;s what I&rsquo;d change.&rdquo;</td><td>Week review live</td><td>Planning session: week 3 launch prep</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Week 3: &ldquo;Everything Changes&rdquo;</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Day</th><th>AM Video</th><th>Midday Video</th><th>PM Video</th><th>Live 1</th><th>Live 2</th></tr></thead>
+    <tbody>
+      <tr><td><strong>15</strong></td><td>&ldquo;Build Your Empire drops in 48 hours.&rdquo;</td><td>Course module sneak peek #1</td><td>Countdown content: hype reel</td><td>GRWM + launch energy</td><td>Pre-launch Q&amp;A</td></tr>
+      <tr><td><strong>16</strong></td><td>Module sneak peek #2</td><td>Boutique &ldquo;wear it while you build&rdquo; collection</td><td>&ldquo;This is for the woman who&hellip;&rdquo; (emotional hook)</td><td>Boutique showcase</td><td>Final pre-launch live: bonus stack reveal</td></tr>
+      <tr><td><strong>17</strong></td><td>&ldquo;DOORS ARE OPEN.&rdquo; (Launch day)</td><td>Behind the scenes: launch day chaos</td><td>Live enrollment count update</td><td>2-HOUR LAUNCH PARTY LIVE</td><td>Celebration live: first students</td></tr>
+      <tr><td><strong>18</strong></td><td>&ldquo;47 women enrolled in 24 hours&rdquo;</td><td>Boutique best sellers restock</td><td>Student reaction compilation</td><td>Boutique restock shopping event</td><td>Student welcome + onboarding live</td></tr>
+      <tr><td><strong>19</strong></td><td>&ldquo;The bonuses expire in 48 hours&rdquo;</td><td>Course walkthrough video (module 1 preview)</td><td>Objection-crushing content</td><td>Mid-launch Q&amp;A live</td><td>Real Talk: launch emotions</td></tr>
+      <tr><td><strong>20</strong></td><td>&ldquo;Last day. Cart closes at midnight.&rdquo;</td><td>Final testimonial push</td><td>Countdown: &ldquo;12 hours left&rdquo;</td><td>FINAL PUSH LIVE: last-chance bonuses</td><td>Cart close countdown live</td></tr>
+      <tr><td><strong>21</strong></td><td>&ldquo;Cart is CLOSED. Here&rsquo;s what happened.&rdquo;</td><td>Boutique weekend sale teaser</td><td>&ldquo;Waitlist open for round 2&rdquo;</td><td>Week review + results</td><td>Rest / soft community live</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Week 4: &ldquo;Finish &amp; Fortify&rdquo;</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Day</th><th>AM Video</th><th>Midday Video</th><th>PM Video</th><th>Live 1</th><th>Live 2</th></tr></thead>
+    <tbody>
+      <tr><td><strong>22</strong></td><td>&ldquo;Post-launch lessons: what I&rsquo;d do differently&rdquo;</td><td>Boutique end-of-month sale</td><td>Student win spotlight</td><td>Post-launch debrief live</td><td>Student Q&amp;A coaching live</td></tr>
+      <tr><td><strong>23</strong></td><td>&ldquo;End of month SALE &mdash; 48 hours only&rdquo;</td><td>Flash deal showcase</td><td>Digital product bundle deal</td><td>FLASH SALE SHOPPING EVENT</td><td>Build With Me: systems setup</td></tr>
+      <tr><td><strong>24</strong></td><td>Evergreen funnel behind-the-scenes</td><td>Boutique top 10 products compilation</td><td>&ldquo;This month changed my life&rdquo; (reflection)</td><td>Boutique styling session</td><td>Mindset: what happens after the sprint</td></tr>
+      <tr><td><strong>25</strong></td><td>&ldquo;Subscription/membership waitlist is OPEN&rdquo;</td><td>Boutique new collection teaser</td><td>&ldquo;What&rsquo;s next: recurring revenue&rdquo;</td><td>Membership teaser live</td><td>Community celebration</td></tr>
+      <tr><td><strong>26</strong></td><td>Affiliate recruitment content</td><td>Student transformation story</td><td>&ldquo;Want to earn commissions promoting my stuff?&rdquo;</td><td>Affiliate info live</td><td>Real Talk: money mindset</td></tr>
+      <tr><td><strong>27</strong></td><td>&ldquo;Automated income: here&rsquo;s my funnel&rdquo;</td><td>Boutique restocks</td><td>&ldquo;The system that sells while I sleep&rdquo;</td><td>GRWM + month reflection</td><td>Evergreen funnel walkthrough live</td></tr>
+      <tr><td><strong>28</strong></td><td>&ldquo;My $50K month breakdown (every dollar)&rdquo;</td><td>Boutique appreciation sale</td><td>&ldquo;Month 2 is going to be even bigger&rdquo;</td><td>Revenue breakdown live</td><td>Planning: month 2 strategy</td></tr>
+      <tr><td><strong>29</strong></td><td>&ldquo;The full recap &mdash; from $0 to $50K&rdquo;</td><td>Highlight reel: best moments</td><td>&ldquo;Follow for month 2. It gets crazier.&rdquo;</td><td>FINALE LIVE: full story</td><td>Celebration + thank you live</td></tr>
+      <tr><td><strong>30</strong></td><td>&ldquo;Day 30. We did it.&rdquo;</td><td>Next chapter teaser</td><td>Reflection + gratitude post</td><td>Month review live</td><td>OFF &mdash; rest &amp; recharge</td></tr>
+    </tbody>
+  </table></div>
+
+  <hr>
+
+  <h2>Daily Operations Schedule</h2>
+
+  <h3>7:00 AM &mdash; Morning Ritual (Non-Negotiable)</h3>
+  <ul class="checklist">
+    <li>Review revenue dashboard (Shopify + Stan Store + email metrics)</li>
+    <li>Check overnight orders &mdash; any issues to resolve?</li>
+    <li>10-min mindset practice (affirmations, journaling, or visualization)</li>
+    <li>Review today&rsquo;s content calendar &mdash; what&rsquo;s posting, when, where</li>
+  </ul>
+
+  <h3>8:00&ndash;10:00 AM &mdash; Content Production Block</h3>
+  <ul class="checklist">
+    <li>Film 3&ndash;5 short-form videos (batch for the day)</li>
+    <li>Edit using CapCut (keep it under 15 min per video)</li>
+    <li>Write captions with hooks + CTAs</li>
+    <li>Schedule posts (TikTok, IG Reels, YouTube Shorts)</li>
+  </ul>
+
+  <h3>10:30&ndash;11:00 AM &mdash; Pre-Live Prep</h3>
+  <ul class="checklist">
+    <li>Review live structure from playbook</li>
+    <li>Stage products for showcase</li>
+    <li>Test lighting and audio</li>
+    <li>Post &ldquo;Going live in 30 min&rdquo; teaser</li>
+  </ul>
+
+  <h3>11:00 AM&ndash;12:15 PM &mdash; TikTok Live #1</h3>
+
+  <h3>12:30&ndash;1:30 PM &mdash; Break + Lunch (Protect this time)</h3>
+
+  <h3>1:30&ndash;3:30 PM &mdash; Business Operations Block</h3>
+  <ul class="checklist">
+    <li>Process and fulfill orders</li>
+    <li>Respond to customer DMs and emails (2-hour max response time)</li>
+    <li>Review email automation metrics &mdash; tweak if needed</li>
+    <li>Update inventory / reorder products if needed</li>
+    <li>Respond to TikTok comments (top 20 at minimum)</li>
+    <li>Engage on 10 other creators&rsquo; content (algorithm strategy)</li>
+  </ul>
+
+  <h3>4:00&ndash;5:30 PM &mdash; Strategic Block</h3>
+  <ul class="checklist">
+    <li>Review analytics: what&rsquo;s performing, what&rsquo;s not</li>
+    <li>Plan tomorrow&rsquo;s content hooks</li>
+    <li>Work on digital product development (if applicable)</li>
+    <li>Outreach: affiliates, collaborators, press</li>
+  </ul>
+
+  <h3>6:00&ndash;6:45 PM &mdash; Pre-Live Prep + Dinner</h3>
+
+  <h3>7:00&ndash;8:30 PM &mdash; TikTok Live #2</h3>
+
+  <h3>9:00&ndash;9:30 PM &mdash; Evening Closeout</h3>
+  <ul class="checklist">
+    <li>Final revenue check</li>
+    <li>Screenshot any notable metrics (for content tomorrow)</li>
+    <li>Update revenue tracker spreadsheet</li>
+    <li>Journal: 1 win, 1 lesson, 1 thing to try tomorrow</li>
+    <li>Set alarm, prep for tomorrow, decompress</li>
+  </ul>
+
+  <hr>
+
+  <h2>Weekly Operations</h2>
+
+  <h3>Monday: Planning Day</h3>
+  <ul>
+    <li>Review previous week&rsquo;s metrics</li>
+    <li>Set weekly revenue target</li>
+    <li>Plan content themes for the week</li>
+    <li>Batch-prep graphics in Canva</li>
+  </ul>
+
+  <h3>Wednesday: Optimization Day</h3>
+  <ul>
+    <li>A/B test email subject lines</li>
+    <li>Analyze TikTok analytics &mdash; best posting times, top hooks</li>
+    <li>Adjust product pricing or offers based on data</li>
+  </ul>
+
+  <h3>Friday: Community Day</h3>
+  <ul>
+    <li>Feature customer/student of the week</li>
+    <li>Respond to all pending DMs</li>
+    <li>Post community-focused content</li>
+  </ul>
+
+  <h3>Sunday: Rest + Prep</h3>
+  <ul>
+    <li>Light batch filming only</li>
+    <li>Prep next week&rsquo;s calendar</li>
+    <li>Mindset reset + self-care</li>
+  </ul>
+
+  <hr>
+
+  <h2>Content Production Shortcuts</h2>
+
+  <h3>Batch Filming Hack:</h3>
+  <p>Film all 3 daily videos in ONE session (under 1 hour):</p>
+  <ol>
+    <li>Change top/accessories between videos for variety</li>
+    <li>Use trending sounds (save 10 each week)</li>
+    <li>Keep a &ldquo;hook bank&rdquo; &mdash; never start from scratch</li>
+  </ol>
+
+  <h3>The 3-Second Rule:</h3>
+  <p>Every video must hook in the first 3 seconds:</p>
+  <ul>
+    <li>Start mid-sentence</li>
+    <li>Open with a bold claim</li>
+    <li>Use pattern interrupts (unexpected visuals or sounds)</li>
+  </ul>
+
+  <h3>Repurposing Engine:</h3>
+  <pre><code>1 TikTok Live → 5 short-form clips → 3 IG stories
+→ 1 email newsletter → 2 tweet threads</code></pre>
+  <p>One live session = 10+ pieces of content.</p>
+</div>
+
+<!-- ============ SECTION 06: AFFILIATE & PARTNERSHIP STRATEGY ============ -->
+<div class="section" id="section-06">
+  <span class="section-number">Section 06</span>
+  <h1>Affiliate &amp; Partnership Outreach Strategy</h1>
+  <p><strong>The Sovereign Network Effect</strong></p>
+  <p><em>Data-backed: TikTok Shop affiliate commissions average 13% across categories. Fashion/beauty creators command 15&ndash;30%. Hybrid compensation (flat fee + commission) is the 2026 trend.</em></p>
+  <div class="section-divider"></div>
+
+  <h2>Affiliate Program Structure</h2>
+
+  <h3>For Adelaide&rsquo;s Boutique:</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Tier</th><th>Requirement</th><th>Commission</th><th>Perks</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Ambassador</strong></td><td>Apply + approved</td><td>15% per sale</td><td>Unique code, monthly product gifting</td></tr>
+      <tr><td><strong>VIP Partner</strong></td><td>$500+ in sales/month</td><td>20% per sale</td><td>Free products, early access, featured on page</td></tr>
+      <tr><td><strong>Elite</strong></td><td>$2,000+ in sales/month</td><td>25% per sale + $100 flat/month</td><td>All above + paid collab opportunities</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>For Digital Products:</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Product</th><th>Commission</th><th>Cookie Duration</th></tr></thead>
+    <tbody>
+      <tr><td>Mini guides ($9&ndash;$27)</td><td>30%</td><td>30 days</td></tr>
+      <tr><td>Mid-tier ($47&ndash;$97)</td><td>35%</td><td>30 days</td></tr>
+      <tr><td>Build Your Empire ($297+)</td><td>40%</td><td>60 days</td></tr>
+    </tbody>
+  </table></div>
+  <p><strong>Why 30&ndash;40% on digital?</strong> Zero fulfillment cost. Every affiliate sale is nearly pure profit. High commissions attract top-tier promoters.</p>
+
+  <hr>
+
+  <h2>Ideal Affiliate Profiles</h2>
+
+  <h3>Tier 1: Micro-Creators (1K&ndash;10K followers)</h3>
+  <ul>
+    <li><strong>Why</strong>: Highest engagement rates (5&ndash;15%), loyal audiences, affordable</li>
+    <li><strong>Target</strong>: 20&ndash;30 micro-creators in first 30 days</li>
+    <li><strong>Outreach method</strong>: Direct DM + gifted product</li>
+    <li><strong>Expected output</strong>: 3&ndash;5 sales each = 60&ndash;150 total sales</li>
+  </ul>
+
+  <h3>Tier 2: Mid-Tier Creators (10K&ndash;100K followers)</h3>
+  <ul>
+    <li><strong>Why</strong>: Meaningful reach with decent engagement (3&ndash;8%)</li>
+    <li><strong>Target</strong>: 5&ndash;10 mid-tier creators in first 30 days</li>
+    <li><strong>Outreach method</strong>: Email + product gift + paid post offer</li>
+    <li><strong>Expected output</strong>: 20&ndash;50 sales each = 100&ndash;500 total sales</li>
+  </ul>
+
+  <h3>Tier 3: Niche Authorities</h3>
+  <ul>
+    <li><strong>Who</strong>: Business coaches, fashion bloggers, lifestyle creators</li>
+    <li><strong>Why</strong>: Their recommendation = instant credibility</li>
+    <li><strong>Target</strong>: 2&ndash;3 strategic partnerships</li>
+    <li><strong>Outreach method</strong>: Personalized proposal + revenue share</li>
+    <li><strong>Expected output</strong>: 50&ndash;200 sales each</li>
+  </ul>
+
+  <hr>
+
+  <h2>Outreach Templates</h2>
+
+  <h3>DM Template &mdash; Micro-Creator:</h3>
+  <pre><code>Hey [Name]! I've been loving your content — especially [specific post].
+
+I just launched Adelaide's, a curated luxury boutique, and I think your
+audience would genuinely love our pieces.
+
+I'd love to send you a few items to try (no strings attached). If you
+love them, I have an affiliate program that pays 15-25% commission.
+
+Interested? I can send details!</code></pre>
+
+  <h3>Email Template &mdash; Mid-Tier Creator:</h3>
+  <pre><code>Subject: Collab opportunity — [their brand] x Adelaide's
+
+Hi [Name],
+
+I'm Addie Taylor, founder of Adelaide's — a curated luxury boutique
+and digital product brand. I've been following your work and love
+how you [specific compliment].
+
+I'm reaching out because I think there's a natural fit between our
+brands. Here's what I'm thinking:
+
+Option A: Gifted product + 20% affiliate commission on all sales
+through your unique link
+
+Option B: Paid collaboration ($[amount]) + 15% commission +
+featured on our page
+
+I'd love to chat more. Would you be open to a quick call this week?
+
+Best,
+Addie Taylor
+Founder, Adelaide's &amp; The Sovereign Self
+[website] | [TikTok handle]</code></pre>
+
+  <h3>Partnership Proposal &mdash; Niche Authority:</h3>
+  <pre><code>Subject: Strategic partnership proposal — revenue share opportunity
+
+Hi [Name],
+
+I'll keep this short because I know you're busy building.
+
+I'm Addie Taylor. I run three businesses — a curated boutique
+(Adelaide's), a digital product line (The Sovereign Self), and
+a TikTok Live revenue engine. Combined, we're on track for
+$50K this month.
+
+I'm looking for 2-3 strategic partners who want to:
+- Earn 40% commission on a high-converting $297 course
+- Get featured to my growing audience (currently [X] followers)
+- Build a long-term revenue partnership (not a one-off post)
+
+My course converts at [X]% from warm traffic and has a refund
+rate under 3%. Your audience would eat this up.
+
+Want me to send you a full media kit?
+
+— Addie</code></pre>
+
+  <hr>
+
+  <h2>TikTok Shop Affiliate Strategy</h2>
+
+  <h3>Setting Up Open Collaboration:</h3>
+  <ol>
+    <li>List all boutique products on TikTok Shop</li>
+    <li>Set Open Collaboration rate at <strong>18%</strong> (competitive for fashion)</li>
+    <li>Enable Targeted Collaboration for top creators at <strong>25%</strong></li>
+    <li>Send free samples to 10 creators/week through Shop&rsquo;s affiliate hub</li>
+  </ol>
+
+  <h3>Optimizing for Affiliate Discovery:</h3>
+  <ul>
+    <li>Use high-quality product images (white background + lifestyle)</li>
+    <li>Write detailed product descriptions with keywords</li>
+    <li>Set competitive commission (below 8% = invisible in marketplace)</li>
+    <li>Respond to affiliate inquiries within 24 hours</li>
+  </ul>
+
+  <h3>Affiliate Content Guidelines:</h3>
+  <p>Provide affiliates with:</p>
+  <ul class="checklist">
+    <li>Brand style guide (colors, fonts, do&rsquo;s and don&rsquo;ts)</li>
+    <li>5&ndash;10 pre-written captions they can customize</li>
+    <li>Product photography they can use</li>
+    <li>Talking points for each product</li>
+    <li>Example content that performed well</li>
+  </ul>
+
+  <hr>
+
+  <h2>Collaboration Types Beyond Affiliates</h2>
+
+  <h3>1. Live Takeovers</h3>
+  <p>Invite a creator to co-host your TikTok Live. Split the audience exposure. Both promote it to their followers.</p>
+
+  <h3>2. Product Collabs</h3>
+  <p>Co-create a limited-edition boutique item or digital product with a creator. Split revenue 50/50. Both audiences buy.</p>
+
+  <h3>3. Bundle Partnerships</h3>
+  <p>&ldquo;My boutique piece + their product = exclusive bundle.&rdquo; Cross-sell to both audiences.</p>
+
+  <h3>4. Podcast/Interview Circuit</h3>
+  <p>Get on 2&ndash;3 podcasts in the business/entrepreneur space. Free exposure. Immediate authority boost.</p>
+
+  <h3>5. Email List Swaps</h3>
+  <p>Find a creator with a similar-sized list. Each promote the other&rsquo;s lead magnet to their list. Both lists grow.</p>
+
+  <hr>
+
+  <h2>Affiliate Tracking &amp; Management</h2>
+
+  <h3>Tools:</h3>
+  <ul>
+    <li><strong>TikTok Shop</strong>: Built-in affiliate tracking</li>
+    <li><strong>Shopify Collabs</strong> or <strong>Refersion</strong>: For boutique affiliate tracking</li>
+    <li><strong>Stan Store</strong>: Built-in affiliate link generation for digital products</li>
+  </ul>
+
+  <h3>Monthly Affiliate Operations:</h3>
+  <ul>
+    <li><strong>Week 1</strong>: Recruit 5&ndash;10 new affiliates</li>
+    <li><strong>Week 2</strong>: Check in with existing affiliates &mdash; share new products, offers</li>
+    <li><strong>Week 3</strong>: Analyze top performers &mdash; offer tier upgrades</li>
+    <li><strong>Week 4</strong>: Pay commissions, send thank-you notes, plan next month</li>
+  </ul>
+
+  <h3>KPIs:</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Metric</th><th>Month 1 Target</th><th>Month 3 Target</th></tr></thead>
+    <tbody>
+      <tr><td>Active affiliates</td><td>15&ndash;25</td><td>50&ndash;100</td></tr>
+      <tr><td>Revenue from affiliates</td><td>$1,000&ndash;3,000</td><td>$5,000&ndash;10,000</td></tr>
+      <tr><td>Top affiliate earnings</td><td>$200&ndash;500</td><td>$1,000&ndash;2,000</td></tr>
+      <tr><td>Affiliate conversion rate</td><td>3&ndash;5%</td><td>5&ndash;8%</td></tr>
+    </tbody>
+  </table></div>
+
+  <hr>
+
+  <h2>Partnership Outreach Calendar (30 Days)</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Days</th><th>Action</th><th>Volume</th></tr></thead>
+    <tbody>
+      <tr><td>1&ndash;3</td><td>Send 20 DMs to micro-creators</td><td>20 DMs</td></tr>
+      <tr><td>4&ndash;5</td><td>Send 5 emails to mid-tier creators</td><td>5 emails</td></tr>
+      <tr><td>6&ndash;7</td><td>Follow up on all outreach</td><td>Follow-ups</td></tr>
+      <tr><td>8&ndash;10</td><td>Ship gifted products to interested creators</td><td>5&ndash;10 packages</td></tr>
+      <tr><td>11&ndash;14</td><td>Onboard confirmed affiliates, set up tracking</td><td>System setup</td></tr>
+      <tr><td>15&ndash;17</td><td>Coordinate launch week affiliate push</td><td>10+ affiliates posting</td></tr>
+      <tr><td>18&ndash;21</td><td>Identify top performers, offer tier upgrades</td><td>Optimization</td></tr>
+      <tr><td>22&ndash;25</td><td>Send partnership proposals to 2&ndash;3 authorities</td><td>2&ndash;3 proposals</td></tr>
+      <tr><td>26&ndash;28</td><td>Email list swap with 1&ndash;2 complementary creators</td><td>List growth</td></tr>
+      <tr><td>29&ndash;30</td><td>Month-end review, pay commissions, plan month 2</td><td>Operations</td></tr>
+    </tbody>
+  </table></div>
+</div>
+
+<!-- ============ SECTION 07: MARKET RESEARCH 2026 ============ -->
+<div class="section" id="section-07">
+  <span class="section-number">Section 07</span>
+  <h1>2026 Market Research &amp; Competitive Intelligence</h1>
+  <p><strong>Data That Drives The Strategy</strong></p>
+  <p><em>All data sourced via live web research &mdash; April 2026</em></p>
+  <div class="section-divider"></div>
+
+  <h2>TikTok Monetization Landscape (2026)</h2>
+
+  <h3>Revenue Streams &amp; Benchmarks:</h3>
+  <ul>
+    <li><strong>Live Gifts</strong>: Average $5,000 per stream for established creators; virtual gifts = ~50% of live streamers&rsquo; income</li>
+    <li><strong>Minimum requirement</strong>: 1,000+ followers to go live and receive gifts</li>
+    <li><strong>Creator Reward Program</strong>: 10,000+ followers required</li>
+    <li><strong>Diversification multiplier</strong>: Creators using 3+ income streams earn 5&ndash;6x more than single-stream creators</li>
+    <li><strong>TikTok Shop</strong>: Direct e-commerce integration &mdash; product tags during lives, yellow basket feature</li>
+  </ul>
+
+  <h3>Key Insight:</h3>
+  <blockquote><p>&ldquo;Real money comes from diversifying across brand deals, affiliate marketing, live gifting, and other platforms.&rdquo; &mdash; Industry consensus 2026</p></blockquote>
+
+  <hr>
+
+  <h2>Dropshipping &amp; E-Commerce (2026)</h2>
+
+  <h3>Market Conditions:</h3>
+  <ul>
+    <li>Global apparel market: $1.7 trillion, on track for $2T by 2028</li>
+    <li>Customer acquisition cost: <strong>$78 average</strong> (up 40% in 2 years)</li>
+    <li>Success requires: Margins above 50%, low operational complexity, repeat purchase potential</li>
+  </ul>
+
+  <h3>Top Niches by Profit Score:</h3>
+  <ol>
+    <li><strong>Jewelry</strong>: 61/70 profitability score (highest)</li>
+    <li><strong>Beauty devices</strong>: 49/70</li>
+    <li><strong>Luxury fashion accessories</strong>: 48/70</li>
+    <li><strong>Outdoor gear</strong>: 44/70</li>
+  </ol>
+
+  <h3>Adelaide&rsquo;s Positioning Advantage:</h3>
+  <ul>
+    <li>Jewelry + fashion accessories = top 2 most profitable niches</li>
+    <li>Curated boutique model commands premium pricing (50&ndash;70% margins)</li>
+    <li>TikTok Live showcase = zero ad spend customer acquisition</li>
+    <li>Repeat purchase potential: accessories are impulse/repeat buys</li>
+  </ul>
+
+  <h3>Recommended Suppliers:</h3>
+  <ul>
+    <li><strong>Trendsi</strong>: Best for US-market women&rsquo;s fashion (fast shipping, fashion-forward catalog)</li>
+    <li><strong>CJ Dropshipping</strong>: Good for accessories and jewelry</li>
+    <li>Key differentiator: Brand experience &gt; product itself</li>
+  </ul>
+
+  <hr>
+
+  <h2>Digital Product &amp; Course Market (2026)</h2>
+
+  <h3>Revenue Potential:</h3>
+  <ul>
+    <li>Online course delivery: near-zero marginal cost (sell 1 time or 1,000 times)</li>
+    <li>500 users x $10/month = $5K MRR</li>
+    <li>A few thousand subscribers = $50K&ndash;$100K MRR potential</li>
+    <li>Live masterclass/webinar launches remain one of the most powerful sales mechanisms</li>
+  </ul>
+
+  <h3>Email Marketing Benchmarks:</h3>
+  <ul>
+    <li><strong>ROI</strong>: $40&ndash;$50 per $1 spent on email marketing</li>
+    <li><strong>Automated sequences</strong>: 15% higher open rates, 152% higher click rates vs. regular campaigns</li>
+    <li><strong>Segmented lists</strong>: 2&ndash;3x higher conversions</li>
+    <li><strong>Pre-launch email open rates</strong>: Up to 45% for warm lists</li>
+    <li><strong>Average open rates</strong>: 21&ndash;31% across sectors</li>
+  </ul>
+
+  <h3>Launch Sequence Best Practice:</h3>
+  <ul>
+    <li>7&ndash;12 emails over launch period</li>
+    <li>Structure: Announcement &rarr; Story &rarr; Value &rarr; Social Proof &rarr; Offer &rarr; Urgency &rarr; Close</li>
+    <li>Bonuses can double conversions by increasing urgency and perceived value</li>
+  </ul>
+
+  <hr>
+
+  <h2>TikTok Shop Affiliate Data (2026)</h2>
+
+  <h3>Commission Rates:</h3>
+  <ul>
+    <li><strong>Average US commission rate</strong>: 13.02% across all categories</li>
+    <li><strong>Fashion/beauty organic</strong>: 10&ndash;15%</li>
+    <li><strong>High-performing partners</strong>: 20&ndash;30%</li>
+    <li><strong>Below 8%</strong>: Invisible in the TikTok marketplace</li>
+    <li><strong>2026 trend</strong>: Hybrid compensation &mdash; flat fee per video + 15&ndash;20% commission</li>
+    <li><strong>Average commission per sale</strong>: $12&ndash;$45 depending on category</li>
+  </ul>
+
+  <h3>Strategy Implications for Adelaide&rsquo;s:</h3>
+  <ul>
+    <li>Set Open Collaboration at 18% (above average, attracts quality affiliates)</li>
+    <li>Offer Targeted Collaboration at 25% for top performers</li>
+    <li>Digital products at 30&ndash;40% (zero fulfillment cost = pure margin)</li>
+  </ul>
+
+  <hr>
+
+  <h2>Competitive Landscape</h2>
+
+  <h3>What Most Creators Get Wrong:</h3>
+  <ol>
+    <li>Selling products without a personal brand (no trust = no sales)</li>
+    <li>Relying on a single revenue stream (algorithmic risk)</li>
+    <li>Under-pricing digital products (race to the bottom)</li>
+    <li>Ignoring email lists (rented vs. owned audience)</li>
+    <li>Inconsistent content output (algorithm penalizes gaps)</li>
+  </ol>
+
+  <h3>Adelaide&rsquo;s Sovereign Advantages:</h3>
+  <ol>
+    <li><strong>Three-pillar model</strong>: Physical products + digital products + live revenue = anti-fragile</li>
+    <li><strong>Personal brand first</strong>: Addie IS the brand &mdash; products are vehicles</li>
+    <li><strong>Premium positioning</strong>: In a market racing to the bottom, luxury stands out</li>
+    <li><strong>Live-first strategy</strong>: 2 lives/day = direct audience relationship + real-time revenue</li>
+    <li><strong>Email ownership</strong>: Building an owned asset that no algorithm can take away</li>
+  </ol>
+
+  <hr>
+
+  <h2>Key Numbers to Remember</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Data Point</th><th>Number</th><th>Why It Matters</th></tr></thead>
+    <tbody>
+      <tr><td>Email ROI</td><td>$40&ndash;50 per $1</td><td>Email is the #1 revenue channel per dollar</td></tr>
+      <tr><td>CAC industry average</td><td>$78</td><td>Organic TikTok bypasses this entirely</td></tr>
+      <tr><td>Jewelry profitability score</td><td>61/70</td><td>Confirms Adelaide&rsquo;s product focus</td></tr>
+      <tr><td>TikTok multi-stream multiplier</td><td>5&ndash;6x</td><td>Validates the three-pillar model</td></tr>
+      <tr><td>Automated email click rate lift</td><td>+152%</td><td>Justifies investing in email sequences</td></tr>
+      <tr><td>Affiliate avg commission (fashion)</td><td>13&ndash;15%</td><td>Our 18% rate will attract top affiliates</td></tr>
+      <tr><td>Course delivery marginal cost</td><td>~$0</td><td>Every sale after the first is nearly pure profit</td></tr>
+    </tbody>
+  </table></div>
+
+  <hr>
+
+  <h2>TikTok Shop Fee Structure (2026)</h2>
+
+  <h3>Seller Fees:</h3>
+  <ul>
+    <li><strong>Standard referral fee</strong>: 6% on most products (range: 5&ndash;9% by category)</li>
+    <li><strong>New seller discount</strong>: 3% rate for 30 days (if first sale within 60 days of onboarding)</li>
+    <li><strong>Payment processing</strong>: 1.02%&ndash;3.78%</li>
+    <li><strong>Fulfilled by TikTok (FBT)</strong>: Starts at $3.58/item, 30 days free storage</li>
+    <li><strong>Refund admin fee</strong>: 20% of original referral fee, capped at $5/SKU</li>
+    <li><strong>Seller approval</strong>: U.S. residency required, 24&ndash;48 hour approval</li>
+  </ul>
+
+  <h3>Implication for Adelaide&rsquo;s:</h3>
+  <p>At 6% referral + ~2.5% processing = ~8.5% total TikTok Shop fees. With 50&ndash;70% margins on jewelry/accessories, this leaves 40&ndash;60% gross profit per sale &mdash; highly profitable.</p>
+
+  <hr>
+
+  <h2>Platform Comparison: Digital Product Sales</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Platform</th><th>Monthly Cost</th><th>Transaction Fee</th><th>Best For</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Stan Store</strong></td><td>$29/mo</td><td>0% platform cut</td><td>Social-first creators, TikTok/IG traffic, all-in-one storefront</td></tr>
+      <tr><td><strong>Gumroad</strong></td><td>$0/mo</td><td>10% per sale</td><td>Indie creators, zero upfront cost, simplicity</td></tr>
+      <tr><td><strong>Shopify</strong></td><td>~$39/mo</td><td>Varies by plan</td><td>Long-term brand building, full control, scalability</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Recommendation for Addie:</h3>
+  <p><strong>Start with Stan Store</strong> ($29/mo, no platform cut) for digital products &mdash; it&rsquo;s built for social-media-driven sales with funnels, upsells, and email capture built in. Migrate to Shopify when ready to unify boutique + digital under one branded storefront.</p>
+
+  <hr>
+
+  <h2>Email List Size &rarr; Launch Revenue Math</h2>
+
+  <h3>Conversion Benchmark:</h3>
+  <ul>
+    <li>Industry average: <strong>1&ndash;2% of email list converts</strong> to course buyers</li>
+    <li>With warm, topic-relevant list: up to <strong>3&ndash;5%</strong> conversion</li>
+    <li><strong>Critical</strong>: List quality &gt; list size. Untargeted subscribers = sub-1% conversion</li>
+  </ul>
+
+  <h3>Revenue Projections by List Size:</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Email List Size</th><th>1.5% Conv. Rate</th><th>3% Conv. Rate (warm)</th><th>Revenue @ $297</th></tr></thead>
+    <tbody>
+      <tr><td>500</td><td>7&ndash;8 sales</td><td>15 sales</td><td>$2,079&ndash;$4,455</td></tr>
+      <tr><td>1,000</td><td>15 sales</td><td>30 sales</td><td>$4,455&ndash;$8,910</td></tr>
+      <tr><td>2,000</td><td>30 sales</td><td>60 sales</td><td>$8,910&ndash;$17,820</td></tr>
+      <tr><td>3,000</td><td>45 sales</td><td>90 sales</td><td>$13,365&ndash;$26,730</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>What This Means for the $50K Sprint:</h3>
+  <p>To hit the $18K digital product target, Addie needs ~2,000 warm subscribers by Week 3 launch. Combined with live sales (bypassing email entirely), the target is achievable with 1,500+ subscribers + aggressive live selling.</p>
+</div>
+
+</div><!-- /content-wrapper -->
+
+<!-- ============ FOOTER ============ -->
+<footer style="background: var(--navy); color: var(--text-muted); text-align: center; padding: 2.5rem 1.5rem; margin-top: 3rem; font-size: 0.8rem; letter-spacing: 0.1em;">
+  <div style="color: var(--gold); font-family: Georgia, serif; font-size: 0.9rem; margin-bottom: 0.5rem;">THE SOVEREIGN STRATEGY</div>
+  <div>Addie Taylor &mdash; Confidential Strategy Document &mdash; April 2026</div>
+  <div style="margin-top: 0.75rem; opacity: 0.5;">This document and its contents are proprietary. Do not distribute.</div>
+</footer>
+
+</body>
+</html>
