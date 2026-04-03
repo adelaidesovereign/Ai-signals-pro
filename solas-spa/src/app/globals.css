@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-cream: #f5f0e8;
+  --color-cream-light: #faf7f2;
+  --color-forest: #1a1f16;
+  --color-forest-mid: #2d3a2e;
+  --color-gold: #b8860b;
+  --color-gold-light: #d4a843;
+  --color-sand: #c4a882;
+  --color-sand-light: #ddd0bc;
+  --color-stone: #8a8070;
+  --color-sage: #7a8b6f;
+  --font-display: "Georgia", "Times New Roman", "Palatino Linotype", serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", "Helvetica Neue", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-forest);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-cream);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-sand);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-stone);
+}
+
+/* Smooth image loading */
+img {
+  opacity: 1;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Typography refinements */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display), Georgia, serif;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* Custom easing */
+@property --expo-out {
+  syntax: "*";
+  inherits: false;
+}
+
+/* Utility animations */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes line-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Placeholder image styling */
+.img-placeholder {
+  background: linear-gradient(135deg, var(--color-forest-mid) 0%, var(--color-forest) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.img-placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(122, 139, 111, 0.3) 0%,
+    rgba(45, 58, 46, 0.1) 50%,
+    rgba(184, 134, 11, 0.15) 100%
+  );
+}
+
+/* Spa atmosphere overlays */
+.atmosphere-mist {
+  background: radial-gradient(ellipse at 50% 0%, rgba(245, 240, 232, 0.15) 0%, transparent 70%);
+}
+
+.atmosphere-warm {
+  background: radial-gradient(ellipse at 80% 80%, rgba(184, 134, 11, 0.08) 0%, transparent 60%);
+}
