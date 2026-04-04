@@ -246,7 +246,7 @@ export default function Home() {
               <StaggerChildren stagger={0.15}>
                 {spaHighlights.map((item) => (
                   <StaggerItem key={item.title}>
-                    <div className="group">
+                    <Link href="/spa" className="group block">
                       <div className="relative aspect-[16/9] md:aspect-[21/9] mb-6 img-zoom overflow-hidden">
                         <Image
                           src={item.image}
@@ -265,7 +265,7 @@ export default function Home() {
                       <p className="text-stone text-sm md:text-base leading-relaxed max-w-xl">
                         {item.description}
                       </p>
-                    </div>
+                    </Link>
                   </StaggerItem>
                 ))}
               </StaggerChildren>
@@ -464,7 +464,7 @@ export default function Home() {
               { title: "Stargazing", desc: "Evening astronomy sessions from our mountaintop observatory deck", image: images.stargazing },
             ].map((exp, i) => (
               <AnimatedSection key={exp.title} delay={i * 0.1}>
-                <div className="group card-lift overflow-hidden bg-cream-light">
+                <Link href="/experiences" className="group block card-lift overflow-hidden bg-cream-light">
                   <div className="relative aspect-[4/3] img-zoom overflow-hidden">
                     <Image src={exp.image} alt={exp.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 25vw" />
                     <div className="absolute inset-0 bg-forest/20 group-hover:bg-forest/10 transition-colors duration-500" />
@@ -476,7 +476,7 @@ export default function Home() {
                     </h3>
                     <p className="text-stone text-sm leading-relaxed">{exp.desc}</p>
                   </div>
-                </div>
+                </Link>
               </AnimatedSection>
             ))}
           </div>

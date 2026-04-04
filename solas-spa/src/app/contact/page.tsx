@@ -329,7 +329,7 @@ export default function ContactPage() {
 
       {/* Map placeholder */}
       <section className="relative h-[400px] overflow-hidden">
-        <Image src={images.blueRidge} alt="Blue Ridge Mountains panorama" fill className="object-cover" sizes="100vw" />
+        <Image src={images.mountainSunrise} alt="Blue Ridge Mountains panorama" fill className="object-cover" sizes="100vw" />
         <div className="absolute inset-0 bg-forest/60" />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center">
