@@ -8,51 +8,7 @@ import {
   StaggerItem,
 } from "@/components/AnimatedSection";
 import { images } from "@/lib/images";
-
-const rooms = [
-  {
-    name: "Mountain View Room",
-    size: "450 sq ft",
-    price: "From $495 / night",
-    features: ["King bed with organic linens", "Private balcony with valley views", "Rainfall shower, heated floors", "Nespresso machine & curated minibar"],
-    image: images.hotelSuite,
-  },
-  {
-    name: "Forest Suite",
-    size: "700 sq ft",
-    price: "From $725 / night",
-    features: ["King bed & separate living area", "Deep soaking tub with forest views", "Wood-burning fireplace", "Private garden terrace"],
-    image: images.hotelBed,
-  },
-  {
-    name: "Mountain Suite",
-    size: "850 sq ft",
-    price: "From $950 / night",
-    features: ["Panoramic 180-degree valley views", "Oversized soaking tub & walk-in shower", "Living area with fireplace", "Private wraparound terrace"],
-    image: images.luxuryBath,
-  },
-  {
-    name: "Canopy Treehouse",
-    size: "620 sq ft",
-    price: "From $1,200 / night",
-    features: ["Suspended 35 feet among ancient oaks", "Glass floor panels & retractable roof", "Outdoor rain shower", "Private rope bridge entrance"],
-    image: images.treehouse,
-  },
-  {
-    name: "Creekside Cottage",
-    size: "1,100 sq ft",
-    price: "From $1,450 / night",
-    features: ["Private hot spring-fed soaking pool", "Two bedrooms, full kitchen", "Outdoor rain shower & firepit", "30 feet from mountain creek"],
-    image: images.cabin,
-  },
-  {
-    name: "The Summit Residence",
-    size: "2,400 sq ft",
-    price: "From $3,200 / night",
-    features: ["Three bedrooms, each with en-suite bath", "Full gourmet kitchen & dining for 8", "Private infinity pool overlooking valley", "Dedicated butler service"],
-    image: images.cottageInterior,
-  },
-];
+import { rooms } from "@/lib/rooms";
 
 const amenities = [
   "Organic bath products by Solas Apothecary",
@@ -125,10 +81,10 @@ export default function AccommodationsPage() {
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
           <StaggerChildren stagger={0.1} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {rooms.map((room) => (
-              <StaggerItem key={room.name + room.size}>
-                <div className="group card-lift">
+              <StaggerItem key={room.slug}>
+                <Link href={`/accommodations/${room.slug}`} className="group block card-lift">
                   <div className="relative aspect-[3/4] mb-6 img-zoom overflow-hidden">
-                    <Image src={room.image} alt={room.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+                    <Image src={room.images[0]} alt={room.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
                     <div className="absolute inset-0 flex flex-col justify-between p-8 z-20">
                       <span className="text-cream/30 text-[11px] tracking-[0.2em] uppercase">
@@ -150,7 +106,7 @@ export default function AccommodationsPage() {
                       </li>
                     ))}
                   </ul>
-                </div>
+                </Link>
               </StaggerItem>
             ))}
           </StaggerChildren>
