@@ -1,0 +1,212 @@
+// The Quantum Engineer — database schema
+// Runs on PostgreSQL. See /.env.example for connection strings.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ---------- Auth ----------
+
+model User {
+  id              String    @id @default(cuid())
+  email           String    @unique
+  emailVerified   DateTime?
+  username        String    @unique
+  firstName       String?
+  lastName        String?
+  passwordHash    String
+  image           String?
+  stripeCustomerId String?  @unique
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Password reset
+  resetToken      String?   @unique
+  resetExpires    DateTime?
+
+  accounts        Account[]
+  sessions        Session[]
+  purchases       Purchase[]
+  subscriptions   Subscription[]
+  progress        LessonProgress[]
+  notes           LessonNote[]
+  journalEntries  JournalEntry[]
+  quizResults     QuizResult[]
+  posts           CommunityPost[]
+  comments        CommunityComment[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ---------- Commerce ----------
+
+enum ProductKey {
+  FIELD_GUIDE
+  CERTIFICATION
+  INNER_CIRCLE
+}
+
+enum PurchaseStatus {
+  PENDING
+  PAID
+  REFUNDED
+  FAILED
+}
+
+model Purchase {
+  id                  String         @id @default(cuid())
+  userId              String
+  product             ProductKey
+  status              PurchaseStatus @default(PENDING)
+  amountCents         Int
+  currency            String         @default("usd")
+  stripeSessionId     String?        @unique
+  stripePaymentIntent String?        @unique
+  installmentPlan     Boolean        @default(false)
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  PAST_DUE
+  CANCELED
+  INCOMPLETE
+  TRIALING
+}
+
+model Subscription {
+  id                    String             @id @default(cuid())
+  userId                String
+  product               ProductKey
+  status                SubscriptionStatus @default(INCOMPLETE)
+  stripeSubscriptionId  String             @unique
+  stripePriceId         String
+  currentPeriodEnd      DateTime?
+  cancelAtPeriodEnd     Boolean            @default(false)
+  createdAt             DateTime           @default(now())
+  updatedAt             DateTime           @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ---------- Course content ----------
+// Courses and lessons are declared in code (src/content). The DB stores
+// only the progress, notes, and anything user-specific.
+
+model LessonProgress {
+  id         String   @id @default(cuid())
+  userId     String
+  courseSlug String
+  lessonSlug String
+  completed  Boolean  @default(false)
+  secondsIn  Int      @default(0)
+  updatedAt  DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, courseSlug, lessonSlug])
+}
+
+model LessonNote {
+  id         String   @id @default(cuid())
+  userId     String
+  courseSlug String
+  lessonSlug String
+  body       String   @db.Text
+  updatedAt  DateTime @updatedAt
+  createdAt  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, courseSlug])
+}
+
+model JournalEntry {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String?
+  body      String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+}
+
+// ---------- Quiz ----------
+
+model QuizResult {
+  id        String   @id @default(cuid())
+  userId    String?
+  email     String
+  firstName String?
+  layer     Int
+  answers   Json
+  createdAt DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+// ---------- Inner Circle community ----------
+
+model CommunityPost {
+  id        String            @id @default(cuid())
+  userId    String
+  body      String            @db.Text
+  createdAt DateTime          @default(now())
+  user      User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comments  CommunityComment[]
+}
+
+model CommunityComment {
+  id        String        @id @default(cuid())
+  userId    String
+  postId    String
+  body      String        @db.Text
+  createdAt DateTime      @default(now())
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post      CommunityPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
