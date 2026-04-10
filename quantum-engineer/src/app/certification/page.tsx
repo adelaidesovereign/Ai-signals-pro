@@ -58,7 +58,7 @@ export default async function CertificationIndex() {
             >
               Open the door to the full program
             </Link>{" "}
-            and every lesson unlocks the same day.
+            and every lesson is available to you the same day.
           </div>
         )}
 
