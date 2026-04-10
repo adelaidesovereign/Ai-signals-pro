@@ -1,21 +1,6 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
 import { SessionProviders } from "@/components/providers/SessionProviders";
 import "./globals.css";
-
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-cormorant",
-  display: "swap",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-inter",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://shesadelaide.com"),
@@ -28,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Adelaide Taylor — The Quantum Engineer",
     description:
-      "The science of becoming who you actually are. Consciousness engineering taught by Adelaide Taylor.",
+      "The science of coming home to who you actually are. Consciousness engineering taught by Adelaide Taylor.",
     url: "https://shesadelaide.com",
     siteName: "Adelaide Taylor",
     type: "website",
@@ -42,7 +27,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${inter.variable}`}>
+    <html lang="en">
+      <head>
+        {/* Fonts are pulled directly from Google Fonts CSS in production. In
+            restricted dev sandboxes with no outbound network, the CSS font
+            stack in globals.css takes over with Georgia / system-ui, which
+            already carries the design system. */}
+        <link
+          rel="preconnect"
+          href="https://fonts.googleapis.com"
+          crossOrigin=""
+        />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin=""
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className="min-h-screen bg-cream text-sage-deep antialiased">
         <SessionProviders>{children}</SessionProviders>
       </body>
