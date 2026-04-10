@@ -1,9 +1,14 @@
 export type CourseProduct = "FIELD_GUIDE" | "CERTIFICATION" | "INNER_CIRCLE";
 
 export type CourseParagraph = { type: "p"; text: string };
-export type CoursePullQuote = { type: "quote"; text: string; attribution?: string };
+export type CoursePullQuote = {
+  type: "quote";
+  text: string;
+  attribution?: string;
+};
 export type CourseList = { type: "list"; items: string[] };
 export type CourseHeading = { type: "h"; text: string };
+export type CourseNote = { type: "note"; text: string };
 export type CourseVideo = {
   type: "video";
   title: string;
@@ -19,6 +24,7 @@ export type CourseBlock =
   | CoursePullQuote
   | CourseList
   | CourseHeading
+  | CourseNote
   | CourseVideo
   | CourseScript;
 
