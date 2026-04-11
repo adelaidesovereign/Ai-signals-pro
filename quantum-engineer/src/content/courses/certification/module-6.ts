@@ -30,6 +30,16 @@ export const module6: CourseModule = {
           type: "p",
           text: "Notice the small reorganizations first. A conversation that went easier than the old version would have. A door that opened without your having to push. A person who met you the way the new version of you expected to be met. These are not flukes. They are the early reports on the field rearranging. Keep a running list in your notes below.",
         },
+        {
+          type: "tool",
+          tool: "writing-prompt",
+          title: "The field-rearranging log",
+          prompt:
+            "Each time you notice a small reorganization — a door that opened, a conversation that went easier, a moment of ease you did not expect — write the date and the moment. Do not wait for a big one. The small ones are the signal.",
+          placeholder: "— Date —\nWhat happened:\nWhat the old version would have expected instead:\n\n",
+          minRows: 10,
+          storageKey: "cert-6-1-field-log",
+        },
       ],
     },
     {
@@ -54,6 +64,16 @@ export const module6: CourseModule = {
         {
           type: "p",
           text: "Teach only from what you have lived. Teach only at the depth you have walked yourself. Do not teach ahead of your own practice and do not turn this work into a performance. The people who need this do not need another charismatic voice. They need the quiet person in the room who has clearly done the work and is not pretending otherwise. That is a rarer thing, and it is the thing the world is actually thirsty for.",
+        },
+        {
+          type: "tool",
+          tool: "writing-prompt",
+          title: "What you are already living proof of",
+          prompt:
+            "Not what you hope to be. What you are already living proof of, today. The change you have actually made. Write it in one paragraph. This is the only thing you can honestly teach others, and it is more than enough.",
+          placeholder: "I am living proof that…",
+          minRows: 6,
+          storageKey: "cert-6-2-living-proof",
         },
       ],
     },
@@ -83,6 +103,16 @@ export const module6: CourseModule = {
         {
           type: "note",
           text: "If the Inner Circle is where you want to keep the practice going in the company of others, that door is open. If you want to stop here and walk the work on your own, that is also a complete choice. There is no right next step. There is only the next one that is actually yours.",
+        },
+        {
+          type: "tool",
+          tool: "writing-prompt",
+          title: "Who am I collapsing into today?",
+          prompt:
+            "The closing sentence of the whole course. Write it now. Write it tomorrow morning. Write it every morning for the rest of your life. Present tense. In her body. This is the whole practice, distilled into one line.",
+          placeholder: "Today I am collapsing into the one who…",
+          minRows: 5,
+          storageKey: "cert-6-3-today",
         },
       ],
     },

@@ -80,5 +80,21 @@ export const chapter10: CourseLesson = {
       type: "note",
       text: "Build your practice from the smallest possible combination that you can do every single day. Start with Tool 1, Tool 2, and Tool 3. That is ten minutes in the morning. That is enough. The rest come in as the practice matures.",
     },
+    {
+      type: "tool",
+      tool: "somatic-find",
+      title: "The somatic root find, right now",
+      description:
+        "Four guided steps, one ninety-second body hold, and a capture at the end. Come back as often as you need. Patterns usually take several passes before they reveal themselves.",
+      storageKey: "fg-10-somatic-find",
+    },
+    {
+      type: "tool",
+      tool: "parts-work",
+      title: "A part conversation",
+      description:
+        "Five gentle questions, asked of whichever part of you is currently in the way. Write what it gives you, exactly as it comes. Come back as often as the part needs.",
+      storageKey: "fg-10-parts-work",
+    },
   ],
 };

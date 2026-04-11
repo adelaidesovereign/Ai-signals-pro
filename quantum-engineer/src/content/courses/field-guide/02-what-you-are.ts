@@ -78,5 +78,55 @@ export const chapter02: CourseLesson = {
       type: "note",
       text: "You will come back to this page. In Chapter 11, the daily protocol will ask you to hold this exact image in your body at a very specific time of day, and the work of the rest of your life will be collapsing the distance between where you are now and what is written there.",
     },
+    {
+      type: "tool",
+      tool: "writing-prompt",
+      title: "The unedited answer",
+      prompt:
+        "Who are you when no one is watching? What do you love when no one is judging? Write the first thing that comes, before the editor starts cutting.",
+      placeholder: "I am the one who…",
+      minRows: 8,
+      storageKey: "fg-02-unedited-answer",
+    },
+    {
+      type: "tool",
+      tool: "identity-builder",
+      title: "Who you are without fear",
+      description:
+        "Specific, sensory, present tense. She already exists — you are describing her, not inventing her. Come back tomorrow and add more.",
+      fields: [
+        {
+          key: "walk",
+          label: "How she walks into a room",
+          placeholder: "She walks in like…",
+        },
+        {
+          key: "voice",
+          label: "What her voice sounds like",
+          placeholder: "Her voice is…",
+        },
+        {
+          key: "home",
+          label: "What her home looks like",
+          placeholder: "Her home is…",
+        },
+        {
+          key: "tolerate",
+          label: "What she will not tolerate",
+          placeholder: "She does not tolerate…",
+        },
+        {
+          key: "peace",
+          label: "What brings her peace that cannot be disturbed",
+          placeholder: "She is peaceful when…",
+        },
+        {
+          key: "morning",
+          label: "What her morning looks like",
+          placeholder: "Her morning is…",
+        },
+      ],
+      storageKey: "fg-02-identity",
+    },
   ],
 };

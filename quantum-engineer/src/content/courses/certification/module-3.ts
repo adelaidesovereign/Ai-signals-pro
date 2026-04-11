@@ -34,6 +34,14 @@ export const module3: CourseModule = {
           type: "note",
           text: "If nothing comes the first time, that is not a failure. That is a part of you testing whether this is safe enough to reveal itself. Come back the next day and do it again. The body answers once the body trusts you are listening.",
         },
+        {
+          type: "tool",
+          tool: "somatic-find",
+          title: "The guided somatic root find",
+          description:
+            "Four steps, one ninety-second body hold, and a capture. Do not skip the waiting. That is where the work actually happens.",
+          storageKey: "cert-3-1-somatic-find",
+        },
       ],
     },
     {
@@ -58,6 +66,17 @@ export const module3: CourseModule = {
         {
           type: "p",
           text: "Write the pattern at the top of a clean page. Under it, write the question exactly as Adelaide says it. Then let your hand write whatever comes next, without editing. The first answer that lands with a small body shift is the real one. The ones that land with a mental shrug are not. Trust the body shift, not the logic.",
+        },
+        {
+          type: "tool",
+          tool: "writing-prompt",
+          title: "The question that reveals everything",
+          prompt:
+            "Pattern at the top. Then the question. Then your honest answer. Write until your body gives you the one that lands, not the one that sounds smart.",
+          placeholder:
+            "The pattern:\n\nWhat would have to be true for this pattern to make complete sense?\n\nThe answer my body gave:",
+          minRows: 10,
+          storageKey: "cert-3-2-question",
         },
       ],
     },
@@ -87,6 +106,14 @@ export const module3: CourseModule = {
         {
           type: "note",
           text: "The relationship you build with your protective parts is the foundation of every future change. The parts do not step aside because you push them. They step aside because they feel understood. This is the difference between fighting yourself and coming home to yourself.",
+        },
+        {
+          type: "tool",
+          tool: "parts-work",
+          title: "A part conversation",
+          description:
+            "Five gentle questions, asked slowly, one at a time. Write what each answer gives you exactly as it comes. You are building a relationship, not solving a problem.",
+          storageKey: "cert-3-3-parts",
         },
       ],
     },

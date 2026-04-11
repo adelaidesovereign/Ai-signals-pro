@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
+import { grantsFullCourseAccess } from "@/lib/access";
 import { certification, flatLessons } from "@/content/courses/certification";
 import { CourseNav } from "@/components/courses/CourseNav";
 import { Container } from "@/components/ui/Container";
@@ -28,7 +29,9 @@ export default async function CertificationIndex() {
   const userId = session?.user?.id;
 
   // Anyone can browse the module map. Signed-in users see their progress.
-  const hasAccess = userId ? await userHasAccess(userId) : false;
+  // Dev mode unlocks everything.
+  const hasPaidRecord = userId ? await userHasAccess(userId) : false;
+  const hasAccess = grantsFullCourseAccess({ hasPaidRecord });
   const progress = userId
     ? await prisma.lessonProgress.findMany({
         where: { userId, courseSlug: "certification" },

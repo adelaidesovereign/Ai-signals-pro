@@ -30,6 +30,16 @@ export const module2: CourseModule = {
           type: "p",
           text: "For the next twenty-four hours, notice how many times your attention lands on something that confirms what you already believe about yourself, your relationships, or your capacity. Notice how many times it lands on something that contradicts those beliefs. The ratio is the filter. Write the ratio in your notes below.",
         },
+        {
+          type: "tool",
+          tool: "writing-prompt",
+          title: "The filter audit",
+          prompt:
+            "Over the next twenty-four hours, notice the ratio. How often does your attention find evidence that confirms the old belief? How often does it find evidence that contradicts it? Write the ratio here when you check back in.",
+          placeholder: "Confirming moments: \nContradicting moments: \n\nWhat I noticed:",
+          minRows: 6,
+          storageKey: "cert-2-1-filter-audit",
+        },
       ],
     },
     {
@@ -55,6 +65,16 @@ export const module2: CourseModule = {
           type: "p",
           text: "If you are carrying blame for who you became, lay it down in this lesson. Blame is an intervention by the part of you that thinks if it can find who is at fault, it can undo the damage. The damage was not done by fault. The damage was done by the machine working exactly the way the machine works. The repair works the same way, in reverse. That is what the rest of this course will teach you.",
         },
+        {
+          type: "tool",
+          tool: "writing-prompt",
+          title: "Lay down the blame",
+          prompt:
+            "Write one sentence about the blame you have been carrying — about yourself, about the person who installed the old code, or about both. Then write the sentence that replaces the blame: what is true about the machine and how it actually works. Put them next to each other.",
+          placeholder: "The blame I have been carrying is…\n\nWhat is actually true is…",
+          minRows: 6,
+          storageKey: "cert-2-2-lay-down-blame",
+        },
       ],
     },
     {
@@ -79,6 +99,16 @@ export const module2: CourseModule = {
         {
           type: "p",
           text: "Make a list of every coping tool you have leaned on. Therapy. Meditation. Exercise. Journaling. A specific relationship. A specific job. Mark which ones have been helpful at the level of symptom. Mark which ones have been helpful at the level of root. Most people find that almost everything on the list has been a symptom tool. This is not a judgment of those tools. It is a clarification of what work is still ahead.",
+        },
+        {
+          type: "tool",
+          tool: "writing-prompt",
+          title: "Symptom tools versus root tools",
+          prompt:
+            "Make two columns in your head. On the left, every tool that has helped manage the symptom. On the right, every tool that has actually changed the root. Be honest. Most lists look lopsided toward the left, and that is the point.",
+          placeholder: "Symptom tools:\n- \n- \n- \n\nRoot tools:\n- \n- ",
+          minRows: 8,
+          storageKey: "cert-2-3-symptom-vs-root",
         },
       ],
     },

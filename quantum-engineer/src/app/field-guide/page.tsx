@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
+import { grantsFullCourseAccess } from "@/lib/access";
 import { fieldGuide, FIELD_GUIDE_CHAPTERS } from "@/content/courses/field-guide";
 import { CourseNav } from "@/components/courses/CourseNav";
 import { Container } from "@/components/ui/Container";
@@ -32,9 +33,11 @@ export default async function FieldGuideIndex() {
 
   // Anyone can browse the table of contents and the first chapter. Only
   // signed-in users with a paid purchase get chapters 2+ and saved progress.
-  const hasAccess = session?.user?.id
+  // In dev mode (no Stripe keys), everyone gets full access.
+  const hasPaidRecord = session?.user?.id
     ? await userHasAccess(session.user.id)
     : false;
+  const hasAccess = grantsFullCourseAccess({ hasPaidRecord });
   const progress = session?.user?.id
     ? await prisma.lessonProgress.findMany({
         where: { userId: session.user.id, courseSlug: "field-guide" },

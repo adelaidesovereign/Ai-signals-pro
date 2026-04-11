@@ -30,6 +30,17 @@ export const module5: CourseModule = {
           type: "p",
           text: "The sentence you wrote in Lesson 1.3 is the seed. This lesson is the expansion of that seed into a full felt reality. Open your notes and write at least thirty specific, present-tense sentences. What she eats for breakfast. How she greets her morning. What her voice sounds like on the phone. What her shoulders do when she walks into a room. What she notices first when she enters a space. Specificity is the fuel of installation.",
         },
+        {
+          type: "tool",
+          tool: "writing-prompt",
+          title: "Thirty present-tense sentences",
+          prompt:
+            "Write at least thirty present-tense sentences about who she is in the specific sensory details of her day. Every sentence must be something the body could actually feel. Start each one with 'I' or 'She' and let them pile up.",
+          placeholder:
+            "1. She wakes up and…\n2. Her body is…\n3. The first thing she does is…\n…",
+          minRows: 15,
+          storageKey: "cert-5-1-thirty-sentences",
+        },
       ],
     },
     {
@@ -60,6 +71,23 @@ export const module5: CourseModule = {
             "Weekly — one thirty-to-forty-five-minute full reconsolidation session. Choose a time and protect it.",
           ],
         },
+        {
+          type: "tool",
+          tool: "daily-checklist",
+          title: "The daily protocol, tracked",
+          description:
+            "Tap each box as you complete it through the day. Your streak builds automatically. Not willpower — physics. Consistency is the entire game.",
+          items: [
+            { key: "settle", label: "Morning settle", detail: "Two-minute orient and safety truth" },
+            { key: "coherence", label: "Heart coherence", detail: "Five minutes, breath through the heart" },
+            { key: "install", label: "Embodied installation", detail: "Five minutes inside her body" },
+            { key: "sentence", label: "One identity sentence", detail: "Present tense, out loud or in the body" },
+            { key: "midday", label: "Midday anchor", detail: "Sixty seconds, hand on heart, return" },
+            { key: "review", label: "Evening review", detail: "Three questions in the journal" },
+            { key: "hypnagogic", label: "Hypnagogic install", detail: "One sentence held as you drift to sleep" },
+          ],
+          storageKey: "cert-5-2-daily-protocol",
+        },
       ],
     },
     {
@@ -84,6 +112,17 @@ export const module5: CourseModule = {
         {
           type: "p",
           text: "Stop measuring your progress by whether the old pattern shows up. It will. Measure your progress by how quickly you recognize the drift and how quickly you come back. Three days down used to be three weeks. Three weeks used to be three months. Three months used to be a whole life. That compression — that is the real metric. Track it in the notes below for the next thirty days.",
+        },
+        {
+          type: "tool",
+          tool: "writing-prompt",
+          title: "Your return time, tracked",
+          prompt:
+            "Each time you notice you have drifted back into the old state, write the date and how long it took you to notice. Over the weeks, watch the numbers get smaller. That is the real metric.",
+          placeholder:
+            "— Date / hours it took to notice / what brought me back —\n\n",
+          minRows: 8,
+          storageKey: "cert-5-3-return-time",
         },
       ],
     },

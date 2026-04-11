@@ -87,5 +87,15 @@ export const chapter09: CourseLesson = {
       type: "quote",
       text: "The twelve laws are the floor the practice stands on. Forget the floor and the practice wobbles. Remember the floor and the practice holds.",
     },
+    {
+      type: "tool",
+      tool: "writing-prompt",
+      title: "Which law is your current edge?",
+      prompt:
+        "Pick the one law from the list above that landed hardest for you. Write it out, then write the one thing about your life right now that would change if you lived by it for a week. No promises, no goals. Just the honest answer.",
+      placeholder: "The law that landed is…\n\nIf I lived by it for a week, what would change is…",
+      minRows: 6,
+      storageKey: "fg-09-current-edge",
+    },
   ],
 };

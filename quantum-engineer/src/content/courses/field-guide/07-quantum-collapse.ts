@@ -70,5 +70,15 @@ export const chapter07: CourseLesson = {
       type: "note",
       text: "The work is not to force the field. The work is to become a clean instrument, held in a specific state, long enough for a different outcome to be the one that resolves. Everything else in this guide is teaching you how to be that instrument.",
     },
+    {
+      type: "tool",
+      tool: "writing-prompt",
+      title: "The state upstream of the outcome",
+      prompt:
+        "Pick one outcome you want that has not come. Not the action. The state. Describe, in present tense, what it would feel like in your body to already be someone for whom that outcome is ordinary. Not excited. Ordinary. Write until it feels true in your chest, not your head.",
+      placeholder: "When that is ordinary, my body feels…",
+      minRows: 6,
+      storageKey: "fg-07-upstream-state",
+    },
   ],
 };

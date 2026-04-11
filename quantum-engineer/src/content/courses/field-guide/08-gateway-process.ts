@@ -67,5 +67,17 @@ export const chapter08: CourseLesson = {
       type: "note",
       text: "If you want to read the report for yourself, it is on the CIA public records website under the title Analysis and Assessment of Gateway Process. Twenty-nine pages. Bring a cup of tea. It is a strange document — dry, specific, and quietly astonishing.",
     },
+    {
+      type: "tool",
+      tool: "breathwork",
+      title: "A first theta doorway",
+      description:
+        "Six seconds in, two seconds hold, eight seconds out. Six cycles. This is one of the slower rhythms the nervous system uses to drift toward low-alpha and low-theta. It is the same doorway the Gateway Process uses.",
+      inhale: 6,
+      hold: 2,
+      exhale: 8,
+      cycles: 6,
+      storageKey: "fg-08-theta-doorway",
+    },
   ],
 };

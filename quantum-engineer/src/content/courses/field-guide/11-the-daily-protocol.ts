@@ -102,5 +102,55 @@ export const chapter11: CourseLesson = {
       type: "note",
       text: "Write the morning sequence on a card and put it on the table next to your bed. Do not try to remember it from your phone. The phone is the mouth of the old default, and the morning window is for the new one.",
     },
+    {
+      type: "tool",
+      tool: "daily-checklist",
+      title: "Your daily protocol",
+      description:
+        "The exact sequence, in order, every day. Tap each box as you complete it. Your streak builds automatically. Not grit — physics.",
+      items: [
+        {
+          key: "morning-exhale",
+          label: "Morning — one minute of long exhale",
+          detail: "Before your feet touch the floor. Four in, eight out. Three cycles.",
+        },
+        {
+          key: "morning-settle",
+          label: "Morning — two-minute settle",
+          detail: "Orient the room. One present-moment safety truth.",
+        },
+        {
+          key: "morning-coherence",
+          label: "Morning — five-minute heart coherence",
+          detail: "Hand on chest. Breath through the heart. One real felt memory of appreciation.",
+        },
+        {
+          key: "morning-install",
+          label: "Morning — five-minute embodied installation",
+          detail: "Sit inside her body. Feel her back, her jaw, her room.",
+        },
+        {
+          key: "morning-sentence",
+          label: "Morning — one present-tense identity sentence",
+          detail: "Out loud or in your body, before you stand up.",
+        },
+        {
+          key: "midday-anchor",
+          label: "Midday — sixty-second anchor",
+          detail: "Hand on heart. Three breaths. Return to her state for one long exhale.",
+        },
+        {
+          key: "evening-review",
+          label: "Evening — three-question review",
+          detail: "Where did the old show up? Where did the new? What does she need tomorrow?",
+        },
+        {
+          key: "hypnagogic",
+          label: "Sleep — hypnagogic install",
+          detail: "One specific identity sentence held in the body as you drift.",
+        },
+      ],
+      storageKey: "fg-11-daily-protocol",
+    },
   ],
 };

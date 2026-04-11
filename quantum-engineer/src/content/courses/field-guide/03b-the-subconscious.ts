@@ -70,5 +70,15 @@ export const chapter03b: CourseLesson = {
       type: "note",
       text: "Notice the feeling of relief that comes when you register that the problem is not that you have not tried hard enough at the wrong thing. The problem is that you have been speaking the wrong language to the layer of yourself that was never going to understand English. That relief is your nervous system letting go of a very old blame.",
     },
+    {
+      type: "tool",
+      tool: "writing-prompt",
+      title: "What was the room telling you?",
+      prompt:
+        "Before the age of seven, your nervous system was reading the room and writing code. Name three things the room you grew up in was implicitly teaching you about love, safety, or being a person. Not accusations. Observations.",
+      placeholder: "The room was teaching me that…",
+      minRows: 6,
+      storageKey: "fg-03b-room-teaching",
+    },
   ],
 };

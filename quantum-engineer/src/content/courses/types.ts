@@ -19,6 +19,93 @@ export type CourseScript = {
   text: string;
 };
 
+// ---------- Interactive tools ----------
+// Each interactive block is rendered as a client component with a stable
+// storage key so state persists per user, per lesson, across sessions.
+
+export type CourseWritingPrompt = {
+  type: "tool";
+  tool: "writing-prompt";
+  title: string;
+  prompt: string;
+  placeholder?: string;
+  minRows?: number;
+  storageKey: string;
+};
+
+export type CourseBreathwork = {
+  type: "tool";
+  tool: "breathwork";
+  title: string;
+  description: string;
+  inhale: number; // seconds
+  hold?: number;
+  exhale: number;
+  cycles: number;
+  storageKey: string;
+};
+
+export type CourseIdentityBuilder = {
+  type: "tool";
+  tool: "identity-builder";
+  title: string;
+  description: string;
+  fields: { key: string; label: string; placeholder: string }[];
+  storageKey: string;
+};
+
+export type CourseDailyChecklist = {
+  type: "tool";
+  tool: "daily-checklist";
+  title: string;
+  description: string;
+  items: { key: string; label: string; detail?: string }[];
+  storageKey: string;
+};
+
+export type CourseSomaticFind = {
+  type: "tool";
+  tool: "somatic-find";
+  title: string;
+  description: string;
+  storageKey: string;
+};
+
+export type CourseHeartCoherence = {
+  type: "tool";
+  tool: "heart-coherence";
+  title: string;
+  description: string;
+  durationSeconds: number;
+  storageKey: string;
+};
+
+export type CoursePartsWork = {
+  type: "tool";
+  tool: "parts-work";
+  title: string;
+  description: string;
+  storageKey: string;
+};
+
+export type CourseReconsolidation = {
+  type: "tool";
+  tool: "reconsolidation";
+  title: string;
+  description: string;
+  storageKey: string;
+};
+
+export type CourseInteractive =
+  | CourseWritingPrompt
+  | CourseBreathwork
+  | CourseIdentityBuilder
+  | CourseDailyChecklist
+  | CourseSomaticFind
+  | CourseHeartCoherence
+  | CoursePartsWork
+  | CourseReconsolidation;
+
 export type CourseBlock =
   | CourseParagraph
   | CoursePullQuote
@@ -26,7 +113,8 @@ export type CourseBlock =
   | CourseHeading
   | CourseNote
   | CourseVideo
-  | CourseScript;
+  | CourseScript
+  | CourseInteractive;
 
 export type CourseLesson = {
   slug: string;

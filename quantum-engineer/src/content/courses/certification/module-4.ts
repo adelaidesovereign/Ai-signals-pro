@@ -34,6 +34,18 @@ export const module4: CourseModule = {
             "A specific entrainment or meditation practice during the day, held for long enough that the brain downshifts below alpha. Binaural beats in the four-to-seven-hertz range are reliable for this.",
           ],
         },
+        {
+          type: "tool",
+          tool: "breathwork",
+          title: "Six–two–eight theta breath",
+          description:
+            "Six seconds in. Two-second hold. Eight seconds out. Six cycles. A slow physiological doorway toward low-alpha and theta. The same rhythm the Monroe Institute builds their entrainment around.",
+          inhale: 6,
+          hold: 2,
+          exhale: 8,
+          cycles: 6,
+          storageKey: "cert-4-1-theta-breath",
+        },
       ],
     },
     {
@@ -63,6 +75,17 @@ export const module4: CourseModule = {
             "Condition three: both states must be held together long enough for the brain to register the coexistence as not an error.",
           ],
         },
+        {
+          type: "tool",
+          tool: "writing-prompt",
+          title: "Naming the mismatch",
+          prompt:
+            "For the belief you are working on, write a single sentence that captures what the old belief predicts will happen. Then write the specific experience that would violate that prediction — not in theory, an experience that could actually happen in your life this week. The mismatch is what you are building toward.",
+          placeholder:
+            "The old belief predicts:\n\nThe mismatch experience that violates it:",
+          minRows: 6,
+          storageKey: "cert-4-2-mismatch",
+        },
       ],
     },
     {
@@ -87,6 +110,23 @@ export const module4: CourseModule = {
         {
           type: "p",
           text: "Thirty uninterrupted minutes. A quiet room. Phone off. Follow the six steps in the order Adelaide teaches them on the video. Do not rush. Do not skip the nervous system settle just because it feels basic. The settle is the door, and the door will not hold if you force it. When the session ends, write one sentence in the notes about what was present in the room when the old state and the new state were both in your body at the same time. That sentence is a marker. Come back to it next time you do the protocol.",
+        },
+        {
+          type: "tool",
+          tool: "heart-coherence",
+          title: "Settle — five-minute heart coherence",
+          description:
+            "The door into the installation session. Hand on chest. Five in, five out. One real felt memory of appreciation. Five minutes.",
+          durationSeconds: 300,
+          storageKey: "cert-4-3-settle",
+        },
+        {
+          type: "tool",
+          tool: "reconsolidation",
+          title: "The full installation protocol",
+          description:
+            "The guided flow: old state, new state, three-minute hold, integration capture. This is the session. Everything else in the course is preparing you to do this cleanly.",
+          storageKey: "cert-4-3-reconsolidation",
         },
       ],
     },

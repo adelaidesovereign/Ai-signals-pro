@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
+import { grantsFullCourseAccess } from "@/lib/access";
 import { FIELD_GUIDE_CHAPTERS, fieldGuide } from "@/content/courses/field-guide";
 import { CourseNav } from "@/components/courses/CourseNav";
 import { CourseBlocks } from "@/components/courses/CourseBlocks";
@@ -52,7 +53,8 @@ export default async function FieldGuideChapterPage({ params }: Props) {
   const prev = FIELD_GUIDE_CHAPTERS[chapterIndex - 1];
   const next = FIELD_GUIDE_CHAPTERS[chapterIndex + 1];
 
-  const hasAccess = userId ? await userHasAccess(userId) : false;
+  const hasPaidRecord = userId ? await userHasAccess(userId) : false;
+  const hasAccess = grantsFullCourseAccess({ hasPaidRecord });
 
   const [progress, note] = userId
     ? await Promise.all([

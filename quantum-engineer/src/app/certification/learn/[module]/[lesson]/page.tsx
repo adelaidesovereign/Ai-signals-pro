@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
+import { grantsFullCourseAccess } from "@/lib/access";
 import {
   certification,
   findCertificationLesson,
@@ -48,7 +49,8 @@ export default async function CertificationLessonPage({ params }: Props) {
   if (!found) notFound();
   const { module: mod, lesson } = found;
 
-  const hasAccess = userId ? await userHasAccess(userId) : false;
+  const hasPaidRecord = userId ? await userHasAccess(userId) : false;
+  const hasAccess = grantsFullCourseAccess({ hasPaidRecord });
 
   const [progress, note] = userId
     ? await Promise.all([

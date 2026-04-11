@@ -78,5 +78,14 @@ export const chapter05: CourseLesson = {
       type: "note",
       text: "Try it once before moving on. Hand on your heart. Five slow breaths through the center of your chest. Bring up one real moment of appreciation and let it settle in your body. Notice the shift. Notice where in your body the shift lives. This is what coherence feels like. This is the reference point.",
     },
+    {
+      type: "tool",
+      tool: "heart-coherence",
+      title: "Heart coherence, four minutes",
+      description:
+        "Hand on the centre of your chest. Breathe through the heart, not the head. Hold one real, specific felt memory of appreciation. The circle will pace you.",
+      durationSeconds: 240,
+      storageKey: "fg-05-coherence",
+    },
   ],
 };

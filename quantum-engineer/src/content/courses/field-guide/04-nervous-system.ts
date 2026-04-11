@@ -74,5 +74,26 @@ export const chapter04: CourseLesson = {
       type: "note",
       text: "Do the three moves once before you read Chapter 5. Notice what your body does. Notice what the inside of your head does. Notice anything that feels even one percent different. That one percent is the opening. You will build from there.",
     },
+    {
+      type: "tool",
+      tool: "breathwork",
+      title: "The long exhale",
+      description:
+        "The vagus nerve is most activated by exhales longer than inhales. Four seconds in, eight seconds out. Five cycles. The body cannot stay in fight-or-flight while it is doing this.",
+      inhale: 4,
+      exhale: 8,
+      cycles: 5,
+      storageKey: "fg-04-long-exhale",
+    },
+    {
+      type: "tool",
+      tool: "writing-prompt",
+      title: "One specific, present-moment, safe thing",
+      prompt:
+        "The body is literal. It needs a specific present-moment truth to register that the scan can stop. Right now, in this exact second, name one thing that is actually safe.",
+      placeholder: "Right now, I notice that…",
+      minRows: 3,
+      storageKey: "fg-04-safety-anchor",
+    },
   ],
 };

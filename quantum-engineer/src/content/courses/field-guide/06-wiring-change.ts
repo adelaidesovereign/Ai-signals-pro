@@ -70,5 +70,13 @@ export const chapter06: CourseLesson = {
       type: "note",
       text: "If you have ever experienced what felt like a true change — something that shifted and did not snap back — that was reconsolidation. It can be produced on purpose. That is the whole game.",
     },
+    {
+      type: "tool",
+      tool: "reconsolidation",
+      title: "A first reconsolidation hold",
+      description:
+        "A guided three-minute hold. Bring the old state forward, then the new state, and let both exist in your body at the same time. The brain does the rest.",
+      storageKey: "fg-06-reconsolidation",
+    },
   ],
 };

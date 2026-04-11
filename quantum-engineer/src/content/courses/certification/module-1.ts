@@ -34,6 +34,16 @@ export const module1: CourseModule = {
           type: "note",
           text: "After you watch, open your notes below and write the first three words that came to you. Not sentences. Three words. They are a signal, not a summary.",
         },
+        {
+          type: "tool",
+          tool: "writing-prompt",
+          title: "Three words",
+          prompt:
+            "Who are you when no one is watching? Answer in three words. Not sentences. The first three that come before the editor interrupts.",
+          placeholder: "1. \n2. \n3. ",
+          minRows: 4,
+          storageKey: "cert-1-1-three-words",
+        },
       ],
     },
     {
@@ -58,6 +68,16 @@ export const module1: CourseModule = {
         {
           type: "p",
           text: "Pick the pattern in your life that has most reliably returned, no matter what you have tried. Not the most painful one. The most repeating one. That is the one with the deepest root, and it is the one this course will teach you to rewrite. Write its name in your notes below.",
+        },
+        {
+          type: "tool",
+          tool: "writing-prompt",
+          title: "Name the repeating pattern",
+          prompt:
+            "Not the most painful one. The one that keeps returning in a new costume, no matter what you do. Name it. That is your work for the rest of this course.",
+          placeholder: "The pattern that keeps returning is…",
+          minRows: 4,
+          storageKey: "cert-1-2-repeating-pattern",
         },
       ],
     },
@@ -87,6 +107,51 @@ export const module1: CourseModule = {
         {
           type: "note",
           text: "When you feel the editor show up — and you will — do not argue with it. Just write the sentence the editor tried to cut. Put the editor down for ten minutes. It will still be there when you are done.",
+        },
+        {
+          type: "tool",
+          tool: "identity-builder",
+          title: "Her, in concrete sensory detail",
+          description:
+            "The image you will be installing every morning for the rest of this course. Return as often as you want. Add detail the moment anything new lands.",
+          fields: [
+            {
+              key: "room-entry",
+              label: "How she walks into a room",
+              placeholder: "When she enters a room…",
+            },
+            {
+              key: "time",
+              label: "What she spends her day on",
+              placeholder: "Her day is spent…",
+            },
+            {
+              key: "home",
+              label: "What her home looks like",
+              placeholder: "Her home has…",
+            },
+            {
+              key: "voice",
+              label: "What her voice sounds like",
+              placeholder: "Her voice is…",
+            },
+            {
+              key: "around-her",
+              label: "Who is around her",
+              placeholder: "The people around her are…",
+            },
+            {
+              key: "morning",
+              label: "What her morning looks like",
+              placeholder: "Her morning is…",
+            },
+            {
+              key: "not-tolerate",
+              label: "What she does not tolerate",
+              placeholder: "She does not tolerate…",
+            },
+          ],
+          storageKey: "cert-1-3-identity",
         },
       ],
     },

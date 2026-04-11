@@ -1,5 +1,13 @@
-import type { CourseBlock } from "@/content/courses/types";
+import type { CourseBlock, CourseInteractive } from "@/content/courses/types";
 import { cn } from "@/lib/cn";
+import { WritingPrompt } from "./tools/WritingPrompt";
+import { Breathwork } from "./tools/Breathwork";
+import { IdentityBuilder } from "./tools/IdentityBuilder";
+import { DailyChecklist } from "./tools/DailyChecklist";
+import { SomaticFind } from "./tools/SomaticFind";
+import { HeartCoherence } from "./tools/HeartCoherence";
+import { PartsWork } from "./tools/PartsWork";
+import { ReconsolidationHold } from "./tools/ReconsolidationHold";
 
 export function CourseBlocks({ blocks }: { blocks: CourseBlock[] }) {
   return (
@@ -99,6 +107,88 @@ function RenderBlock({ block }: { block: CourseBlock }) {
             {block.text}
           </p>
         </div>
+      );
+    case "tool":
+      return <RenderInteractive block={block} />;
+    default:
+      return null;
+  }
+}
+
+function RenderInteractive({ block }: { block: CourseInteractive }) {
+  switch (block.tool) {
+    case "writing-prompt":
+      return (
+        <WritingPrompt
+          title={block.title}
+          prompt={block.prompt}
+          placeholder={block.placeholder}
+          minRows={block.minRows}
+          storageKey={block.storageKey}
+        />
+      );
+    case "breathwork":
+      return (
+        <Breathwork
+          title={block.title}
+          description={block.description}
+          inhale={block.inhale}
+          hold={block.hold}
+          exhale={block.exhale}
+          cycles={block.cycles}
+          storageKey={block.storageKey}
+        />
+      );
+    case "identity-builder":
+      return (
+        <IdentityBuilder
+          title={block.title}
+          description={block.description}
+          fields={block.fields}
+          storageKey={block.storageKey}
+        />
+      );
+    case "daily-checklist":
+      return (
+        <DailyChecklist
+          title={block.title}
+          description={block.description}
+          items={block.items}
+          storageKey={block.storageKey}
+        />
+      );
+    case "somatic-find":
+      return (
+        <SomaticFind
+          title={block.title}
+          description={block.description}
+          storageKey={block.storageKey}
+        />
+      );
+    case "heart-coherence":
+      return (
+        <HeartCoherence
+          title={block.title}
+          description={block.description}
+          durationSeconds={block.durationSeconds}
+          storageKey={block.storageKey}
+        />
+      );
+    case "parts-work":
+      return (
+        <PartsWork
+          title={block.title}
+          description={block.description}
+          storageKey={block.storageKey}
+        />
+      );
+    case "reconsolidation":
+      return (
+        <ReconsolidationHold
+          title={block.title}
+          description={block.description}
+          storageKey={block.storageKey}
+        />
       );
     default:
       return null;

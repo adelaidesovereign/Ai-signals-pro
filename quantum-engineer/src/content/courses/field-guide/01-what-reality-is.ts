@@ -70,5 +70,15 @@ export const chapter01: CourseLesson = {
       type: "note",
       text: "Before you move to Chapter 2, put the guide down for a minute. Look at something in your room. Notice that the solid thing you are looking at is, at its core, mostly empty space rendering into form through your observation. Let that land for a full breath. Then come back.",
     },
+    {
+      type: "tool",
+      tool: "writing-prompt",
+      title: "Let the frame move",
+      prompt:
+        "Write one sentence about how the world has felt to you up until now. Fixed, soft, hostile, exhausting, distant — whatever is true. Then write one sentence about what it would mean if that frame were only the version your instrument was tuned to see. Do not force either answer. Just put them next to each other.",
+      placeholder: "The world has felt…\n\nIf that is only the tuning, then…",
+      minRows: 6,
+      storageKey: "fg-01-frame-shift",
+    },
   ],
 };

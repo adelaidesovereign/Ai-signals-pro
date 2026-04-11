@@ -64,5 +64,15 @@ export const chapter12: CourseLesson = {
       type: "note",
       text: "This chapter is deliberately short because the full teaching is a whole field in itself. What you need from this guide is permission to stop trying to do this work in a body that was never built for the method you are using. Your design is not an obstacle. It is the exact instrument the work is designed to be played on, if you play it honestly.",
     },
+    {
+      type: "tool",
+      tool: "writing-prompt",
+      title: "The shape of your instrument",
+      prompt:
+        "What is your Human Design type? If you do not know yet, get your chart from a free generator. Then answer: where in your current life are you trying to operate like a type you are not? The specific thing you are forcing. Name it.",
+      placeholder: "My type is…\n\nThe place I am forcing a shape that is not mine…",
+      minRows: 6,
+      storageKey: "fg-12-design",
+    },
   ],
 };

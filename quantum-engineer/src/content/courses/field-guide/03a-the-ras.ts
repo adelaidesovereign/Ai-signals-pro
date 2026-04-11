@@ -58,5 +58,15 @@ export const chapter03a: CourseLesson = {
       type: "note",
       text: "Pay attention for the next twenty-four hours. How many times do you notice evidence that confirms what you already believe about yourself? How many times do you notice evidence that contradicts it? The mismatch is the filter. You are about to learn how to change what it is set to.",
     },
+    {
+      type: "tool",
+      tool: "writing-prompt",
+      title: "The filter audit",
+      prompt:
+        "Name the three sentences your RAS seems to be filtering reality through right now. They usually start with 'I always…' or 'It always…' or 'This is just how…' — the sentences so familiar you stopped noticing them.",
+      placeholder: "1.\n2.\n3.",
+      minRows: 6,
+      storageKey: "fg-03a-filter-audit",
+    },
   ],
 };
