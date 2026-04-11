@@ -72,21 +72,28 @@ export function SubliminalPlayer({
     indexRef.current = 0;
   }
 
-  function schedulePhrases() {
+  async function schedulePhrases() {
     if (!audioRef.current || phrases.length === 0) return;
     const idx = orderRef.current[indexRef.current % orderRef.current.length];
     const phrase = phrases[idx];
     setCurrentPhrase(phrase);
 
-    // Fire and forget — the next phrase is scheduled on a fixed gap
-    // rather than chaining to onEnded, so cadence stays predictable
-    // even if the voice engine is slow.
-    softSpeak(phrase, "subliminal").catch(() => {});
-
     indexRef.current += 1;
     if (indexRef.current >= orderRef.current.length) {
       shuffleOrder();
     }
+
+    // Await the voice finishing before scheduling the next phrase. This
+    // prevents the next phrase from cutting off the current one when the
+    // premium voice takes longer to speak than a fixed gap would allow.
+    try {
+      await softSpeak(phrase, "subliminal");
+    } catch {
+      /* ignore speech errors */
+    }
+
+    // If the player was stopped while the voice was speaking, bail out.
+    if (!audioRef.current) return;
 
     phraseRef.current = setTimeout(() => {
       schedulePhrases();

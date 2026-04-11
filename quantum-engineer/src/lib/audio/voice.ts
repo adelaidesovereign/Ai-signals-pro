@@ -2,31 +2,26 @@
 //
 // Everything that speaks inside The Quantum Engineer — the coach, the
 // subliminal tracks, the guided meditations — routes through this single
-// module. There are two engines:
+// module. There are three engines in priority order:
 //
-//   1. Premium path. Calls /api/tts which wraps OpenAI's TTS-1-HD model
-//      with the "nova" voice (soft, warm, genuinely human-sounding) at a
-//      slow cadence. Returns an MP3 stream that plays through a standard
-//      HTMLAudioElement. Requires OPENAI_API_KEY on the server.
+//   1. ElevenLabs (premium path A). Best TTS on the market. Reached via
+//      /api/tts, which uses the ELEVENLABS_API_KEY on the server. Free
+//      tier 10k characters/month, no credit card required.
 //
-//   2. Browser fallback. Uses the built-in SpeechSynthesis API. We pick
-//      the highest-quality female voice available on the device (premium
-//      Apple voices when present) and speak at a very slow rate, lower
-//      pitch, and softer volume. Works offline, no keys, no cost.
+//   2. OpenAI TTS-1-HD (premium path B). "nova" voice. Fallback if
+//      ElevenLabs is not configured. Requires credit on the OpenAI account.
 //
-// Every caller uses `softSpeak(text)` and the module figures out which
-// engine to use. When the premium path is unavailable the browser
-// fallback kicks in silently. Both paths honour the same soothing
-// presets so the feel is consistent across surfaces.
+//   3. Browser SpeechSynthesis (fallback). Uses the best available
+//      female voice on the device. Premium macOS voices (Ava, Samantha
+//      Enhanced) sound genuinely good. Default voices are robotic.
+//
+// All three engines return the same unified handle and the public
+// `softSpeak` function returns a Promise<void> that resolves when the
+// voice has finished speaking. Callers should await it.
 
 export type SpeakPreset = "coach" | "subliminal" | "meditation";
 
-type UnifiedHandle = {
-  cancel: () => void;
-  onEnded: (fn: () => void) => void;
-};
-
-let lastHandle: UnifiedHandle | null = null;
+let cancelCurrent: (() => void) | null = null;
 
 const PRESETS: Record<
   SpeakPreset,
@@ -50,7 +45,7 @@ const PRESETS: Record<
     premiumSpeed: 0.82,
     rate: 0.75,
     pitch: 0.9,
-    volume: 0.8,
+    volume: 0.85,
   },
 };
 
@@ -112,33 +107,49 @@ function pickBrowserVoice(): SpeechSynthesisVoice | null {
   return voices[0] ?? null;
 }
 
-function browserSpeak(text: string, preset: SpeakPreset): UnifiedHandle | null {
-  if (typeof window === "undefined" || !window.speechSynthesis) return null;
-  const cfg = PRESETS[preset];
-  const utter = new SpeechSynthesisUtterance(text);
-  const voice = pickBrowserVoice();
-  if (voice) utter.voice = voice;
-  utter.rate = cfg.rate;
-  utter.pitch = cfg.pitch;
-  utter.volume = cfg.volume;
+function browserSpeak(
+  text: string,
+  preset: SpeakPreset,
+): Promise<void> {
+  return new Promise((resolve) => {
+    if (typeof window === "undefined" || !window.speechSynthesis) {
+      resolve();
+      return;
+    }
+    const cfg = PRESETS[preset];
+    const utter = new SpeechSynthesisUtterance(text);
+    const voice = pickBrowserVoice();
+    if (voice) utter.voice = voice;
+    utter.rate = cfg.rate;
+    utter.pitch = cfg.pitch;
+    utter.volume = cfg.volume;
 
-  let endedListener: (() => void) | null = null;
-  utter.onend = () => {
-    if (endedListener) endedListener();
-  };
-  window.speechSynthesis.speak(utter);
-  return {
-    cancel: () => {
+    let settled = false;
+    const done = () => {
+      if (settled) return;
+      settled = true;
+      cancelCurrent = null;
+      resolve();
+    };
+
+    utter.onend = done;
+    utter.onerror = done;
+
+    cancelCurrent = () => {
       try {
         window.speechSynthesis.cancel();
       } catch {
         /* ignore */
       }
-    },
-    onEnded: (fn) => {
-      endedListener = fn;
-    },
-  };
+      done();
+    };
+
+    try {
+      window.speechSynthesis.speak(utter);
+    } catch {
+      done();
+    }
+  });
 }
 
 // ---------- Premium path ----------
@@ -148,8 +159,8 @@ const audioCache = new Map<string, string>();
 async function premiumSpeak(
   text: string,
   preset: SpeakPreset,
-): Promise<UnifiedHandle | null> {
-  if (typeof window === "undefined") return null;
+): Promise<boolean> {
+  if (typeof window === "undefined") return false;
   const cfg = PRESETS[preset];
   const cacheKey = `${preset}|${text}`;
 
@@ -165,76 +176,71 @@ async function premiumSpeak(
           speed: cfg.premiumSpeed,
         }),
       });
-      if (!res.ok) return null;
+      if (!res.ok) return false;
       const blob = await res.blob();
       url = URL.createObjectURL(blob);
       audioCache.set(cacheKey, url);
     } catch {
-      return null;
+      return false;
     }
   }
 
-  const audio = new Audio(url);
-  audio.volume = cfg.volume;
+  return new Promise<boolean>((resolve) => {
+    const audio = new Audio(url);
+    audio.volume = cfg.volume;
 
-  let endedListener: (() => void) | null = null;
-  audio.addEventListener("ended", () => {
-    if (endedListener) endedListener();
-  });
+    let settled = false;
+    const done = (ok: boolean) => {
+      if (settled) return;
+      settled = true;
+      cancelCurrent = null;
+      resolve(ok);
+    };
 
-  try {
-    await audio.play();
-  } catch {
-    // Autoplay might be blocked — the caller should only start after a
-    // user gesture.
-    return null;
-  }
+    audio.addEventListener("ended", () => done(true));
+    audio.addEventListener("error", () => done(false));
 
-  return {
-    cancel: () => {
+    cancelCurrent = () => {
       try {
         audio.pause();
         audio.currentTime = 0;
       } catch {
         /* ignore */
       }
-    },
-    onEnded: (fn) => {
-      endedListener = fn;
-    },
-  };
+      done(true);
+    };
+
+    audio.play().catch(() => done(false));
+  });
 }
 
 // ---------- Public API ----------
 
 /**
- * Speak a piece of text with the soft voice. Prefers the premium path
- * when available, falls back to browser speech synthesis. Cancels any
- * currently-playing voice before starting the new one.
+ * Speak a piece of text with the soft voice and wait for it to finish.
+ * Resolves when the audio (premium or fallback) has completed playing.
+ * Callers should `await softSpeak(text, preset)` before starting any
+ * pause or next phrase, so audio never overlaps or cuts off.
  */
 export async function softSpeak(
   text: string,
   preset: SpeakPreset = "coach",
-): Promise<UnifiedHandle | null> {
-  if (!text.trim()) return null;
+): Promise<void> {
+  if (!text.trim()) return;
   cancelSpeech();
-  const premium = await premiumSpeak(text, preset);
-  if (premium) {
-    lastHandle = premium;
-    return premium;
-  }
-  const browser = browserSpeak(text, preset);
-  if (browser) {
-    lastHandle = browser;
-    return browser;
-  }
-  return null;
+  const ok = await premiumSpeak(text, preset);
+  if (ok) return;
+  await browserSpeak(text, preset);
 }
 
 export function cancelSpeech() {
-  if (lastHandle) {
-    lastHandle.cancel();
-    lastHandle = null;
+  if (cancelCurrent) {
+    try {
+      cancelCurrent();
+    } catch {
+      /* ignore */
+    }
+    cancelCurrent = null;
   }
   if (typeof window !== "undefined" && window.speechSynthesis) {
     try {

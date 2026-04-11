@@ -75,22 +75,24 @@ export function GuidedMeditationPlayer({
     setCurrentText(step.text);
     setCurrentStage(step.stageName);
 
-    // Speak the line.
-    const handle = await softSpeak(step.text, "meditation");
+    // Await the voice line fully. softSpeak returns a Promise that only
+    // resolves once the audio (premium or browser) has actually finished
+    // playing. No overlap, no choppy cut-off on long phrases.
+    try {
+      await softSpeak(step.text, "meditation");
+    } catch {
+      /* ignore speech errors */
+    }
 
-    // We don't chain to onEnded directly because long pauses would leave
-    // the audio system idle. Instead we wait (speechDuration + pause).
-    // Rough speech duration = 0.35s per word * rate factor; we use 0.42
-    // to be a bit generous, and the soft-speak rate is already slow.
-    const words = step.text.split(/\s+/).length;
-    const estimatedSpeechSeconds = Math.max(2, words * 0.42);
-    const waitMs = (estimatedSpeechSeconds + step.pause) * 1000;
+    // If the player was paused or ended while the voice was speaking,
+    // the step index will have moved. Bail out cleanly.
+    if (stepRef.current !== index) return;
 
+    // Now hold the configured silence before the next line.
     timerRef.current = setTimeout(() => {
-      // If state changed to paused, don't advance.
       if (stepRef.current !== index) return;
       runStep(index + 1);
-    }, waitMs);
+    }, step.pause * 1000);
   }
 
   async function play() {
