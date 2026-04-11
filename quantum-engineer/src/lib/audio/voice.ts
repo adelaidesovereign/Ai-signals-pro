@@ -28,23 +28,24 @@ const PRESETS: Record<
   { premiumSpeed: number; rate: number; pitch: number; volume: number }
 > = {
   coach: {
-    premiumSpeed: 0.9,
-    rate: 0.85,
-    pitch: 0.92,
+    // Gentle pace, a notch lower than neutral, speaking-to-an-adult volume.
+    premiumSpeed: 0.88,
+    rate: 0.8,
+    pitch: 0.78,
     volume: 0.95,
   },
   subliminal: {
     // Extra soft — like soothing a baby to sleep.
-    premiumSpeed: 0.82,
-    rate: 0.72,
-    pitch: 0.88,
+    premiumSpeed: 0.8,
+    rate: 0.68,
+    pitch: 0.75,
     volume: 0.55,
   },
   meditation: {
-    // Slow, warm, deeply paced.
-    premiumSpeed: 0.82,
-    rate: 0.75,
-    pitch: 0.9,
+    // Slow, warm, deeply paced. Lower register than a normal speaking voice.
+    premiumSpeed: 0.8,
+    rate: 0.72,
+    pitch: 0.78,
     volume: 0.85,
   },
 };

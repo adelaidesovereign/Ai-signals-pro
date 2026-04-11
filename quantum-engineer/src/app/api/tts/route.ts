@@ -26,10 +26,13 @@ type Body = {
   speed?: number;
 };
 
-// ElevenLabs default voice: Rachel — warm, calm, female.
-// You can override by setting ELEVENLABS_VOICE_ID in your env to any
-// voice from https://elevenlabs.io/app/voice-library
-const DEFAULT_ELEVENLABS_VOICE_ID = "21m00Tcm4TlvDq8ikWAM";
+// ElevenLabs default voice: Charlotte — warm, low register, naturally
+// soothing with a slower delivery. Described as a "seductive English
+// female" in the voice library, which in practice means the calmest,
+// most intimate-sounding of the common presets.
+// Override by setting ELEVENLABS_VOICE_ID in your env to any voice from
+// https://elevenlabs.io/app/voice-library
+const DEFAULT_ELEVENLABS_VOICE_ID = "XB0fDUnXU5powFXDhCwa";
 
 async function tryElevenLabs(text: string): Promise<Response | null> {
   const key = process.env.ELEVENLABS_API_KEY;
@@ -51,10 +54,10 @@ async function tryElevenLabs(text: string): Promise<Response | null> {
           text,
           model_id: "eleven_turbo_v2_5",
           voice_settings: {
-            stability: 0.65,
-            similarity_boost: 0.85,
-            style: 0.25,
-            use_speaker_boost: true,
+            stability: 0.78,
+            similarity_boost: 0.88,
+            style: 0.15,
+            use_speaker_boost: false,
           },
         }),
       },

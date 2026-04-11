@@ -88,11 +88,16 @@ export function GuidedMeditationPlayer({
     // the step index will have moved. Bail out cleanly.
     if (stepRef.current !== index) return;
 
-    // Now hold the configured silence before the next line.
+    // Scale the configured silence a little so the practice feels
+    // continuous instead of stilted. Long hold phases (20+ seconds)
+    // are left mostly intact; short in-between pauses tighten up.
+    const scaledPause =
+      step.pause > 18 ? step.pause * 0.9 : step.pause * 0.65;
+
     timerRef.current = setTimeout(() => {
       if (stepRef.current !== index) return;
       runStep(index + 1);
-    }, step.pause * 1000);
+    }, Math.max(1.5, scaledPause) * 1000);
   }
 
   async function play() {

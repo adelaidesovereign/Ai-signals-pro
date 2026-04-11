@@ -12,7 +12,9 @@ type Props = {
   title: string;
   description: string;
   phrases: string[];
-  // Seconds between each phrase. Default 10 so the body has room between.
+  // Seconds of silence AFTER each phrase finishes speaking. Kept
+  // short (default 4) so the cadence feels like a soft ongoing voice
+  // rather than one phrase spoken and then forgotten.
   phraseGapSeconds?: number;
   // How long the whole track runs in seconds.
   durationSeconds?: number;
@@ -24,7 +26,7 @@ export function SubliminalPlayer({
   title,
   description,
   phrases,
-  phraseGapSeconds = 10,
+  phraseGapSeconds = 4,
   durationSeconds = 22 * 60,
   beatFrequency = 6,
 }: Props) {
