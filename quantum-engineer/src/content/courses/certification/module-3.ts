@@ -11,7 +11,7 @@ export const module3: CourseModule = {
       slug: "3-1-the-somatic-marker-method",
       title: "The Somatic Marker Method",
       eyebrow: "Lesson 3.1",
-      reading: "Watch — 17 minutes",
+      reading: "17 minutes of practice",
       blocks: [
         {
           type: "video",
@@ -48,7 +48,7 @@ export const module3: CourseModule = {
       slug: "3-2-the-question-that-reveals-everything",
       title: "The Question That Reveals Everything",
       eyebrow: "Lesson 3.2",
-      reading: "Watch — 14 minutes",
+      reading: "14 minutes of practice",
       blocks: [
         {
           type: "video",
@@ -84,7 +84,7 @@ export const module3: CourseModule = {
       slug: "3-3-parts-work",
       title: "Parts Work — Meeting Your Protective Systems",
       eyebrow: "Lesson 3.3",
-      reading: "Watch — 18 minutes",
+      reading: "18 minutes of practice",
       blocks: [
         {
           type: "video",

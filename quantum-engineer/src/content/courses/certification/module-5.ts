@@ -11,7 +11,7 @@ export const module5: CourseModule = {
       slug: "5-1-defining-who-you-actually-are",
       title: "Defining Who You Actually Are",
       eyebrow: "Lesson 5.1",
-      reading: "Watch — 18 minutes",
+      reading: "18 minutes of practice",
       blocks: [
         {
           type: "video",
@@ -47,7 +47,7 @@ export const module5: CourseModule = {
       slug: "5-2-the-daily-protocol",
       title: "The Daily Protocol",
       eyebrow: "Lesson 5.2",
-      reading: "Watch — 17 minutes",
+      reading: "17 minutes of practice",
       blocks: [
         {
           type: "video",
@@ -94,7 +94,7 @@ export const module5: CourseModule = {
       slug: "5-3-when-the-old-version-tries-to-return",
       title: "When the Old Version Tries to Return",
       eyebrow: "Lesson 5.3",
-      reading: "Watch — 14 minutes",
+      reading: "14 minutes of practice",
       blocks: [
         {
           type: "video",

@@ -15,6 +15,7 @@
     "stripe:listen": "stripe listen --forward-to localhost:3000/api/stripe/webhook"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.88.0",
     "@auth/prisma-adapter": "^2.7.2",
     "@prisma/client": "^5.22.0",
     "@vercel/blob": "^0.27.0",

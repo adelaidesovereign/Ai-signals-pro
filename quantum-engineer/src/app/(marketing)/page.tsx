@@ -34,8 +34,8 @@ export default function HomePage() {
               yourself, and this is the way back.
             </p>
             <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button href="/services" size="lg">
-                Come home to yourself
+              <Button href="/begin" size="lg">
+                Begin the work
               </Button>
               <Button href="/quiz" variant="secondary" size="lg">
                 Where am I stuck?

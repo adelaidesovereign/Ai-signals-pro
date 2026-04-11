@@ -70,42 +70,22 @@ function RenderBlock({ block }: { block: CourseBlock }) {
         </aside>
       );
     case "video":
-      return (
-        <div className="my-6 overflow-hidden rounded-soft border border-sage/20 bg-cream-warm shadow-card">
-          <div className="relative aspect-video bg-cream-deep">
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gold/90 text-sage-deep shadow-soft transition-transform hover:scale-105">
-                <svg
-                  className="ml-1 h-6 w-6"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-hidden
-                >
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </div>
-              <p className="font-sans text-[11px] uppercase tracking-[0.25em] text-sage-deep/60">
-                Video placeholder
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center justify-between gap-4 border-t border-sage/10 px-5 py-3 text-sm">
-            <p className="font-serif text-lg text-sage">{block.title}</p>
-            <p className="font-sans text-xs uppercase tracking-[0.15em] text-sage-deep/60">
-              {block.duration}
-            </p>
-          </div>
-        </div>
-      );
+      // Video blocks are retained in the type union for backward
+      // compatibility but are no longer rendered. The program is
+      // text + interactive practice + live calls only. No recorded
+      // media is required, and the restraint is a feature, not a gap.
+      return null;
     case "script":
       return (
-        <div className="my-6 rounded-soft border border-sage/15 bg-cream-warm px-6 py-5">
+        <div className="my-10 rounded-soft border-l-2 border-sage/40 bg-cream-warm px-8 py-7 shadow-card">
           <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-sage">
-            Full script
+            From Adelaide
           </p>
-          <p className="mt-3 whitespace-pre-wrap font-serif text-xl leading-relaxed text-sage-deep/90">
-            {block.text}
-          </p>
+          <div className="mt-4 space-y-5 font-serif text-[1.35rem] leading-[1.65] text-sage-deep/95">
+            {block.text.split(/\n\n+/).map((para, i) => (
+              <p key={i}>{para}</p>
+            ))}
+          </div>
         </div>
       );
     case "tool":

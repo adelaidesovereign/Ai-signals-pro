@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { SessionProviders } from "@/components/providers/SessionProviders";
+import { PWARegister } from "@/components/providers/PWARegister";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,6 +20,18 @@ export const metadata: Metadata = {
     type: "website",
   },
   robots: { index: true, follow: true },
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "The Quantum Engineer",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#7A8C7E",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -29,10 +42,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Fonts are pulled directly from Google Fonts CSS in production. In
-            restricted dev sandboxes with no outbound network, the CSS font
-            stack in globals.css takes over with Georgia / system-ui, which
-            already carries the design system. */}
         <link
           rel="preconnect"
           href="https://fonts.googleapis.com"
@@ -47,9 +56,11 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap"
           rel="stylesheet"
         />
+        <link rel="apple-touch-icon" href="/icon-192.png" />
       </head>
       <body className="min-h-screen bg-cream text-sage-deep antialiased">
         <SessionProviders>{children}</SessionProviders>
+        <PWARegister />
       </body>
     </html>
   );

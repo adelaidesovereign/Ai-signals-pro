@@ -11,7 +11,7 @@ export const module6: CourseModule = {
       slug: "6-1-the-identity-in-action",
       title: "The Identity in Action",
       eyebrow: "Lesson 6.1",
-      reading: "Watch — 16 minutes",
+      reading: "16 minutes of practice",
       blocks: [
         {
           type: "video",
@@ -46,7 +46,7 @@ export const module6: CourseModule = {
       slug: "6-2-teaching-others-what-you-know",
       title: "Teaching Others What You Know",
       eyebrow: "Lesson 6.2",
-      reading: "Watch — 15 minutes",
+      reading: "15 minutes of practice",
       blocks: [
         {
           type: "video",
@@ -81,7 +81,7 @@ export const module6: CourseModule = {
       slug: "6-3-what-comes-next",
       title: "What Comes Next",
       eyebrow: "Lesson 6.3",
-      reading: "Watch — 12 minutes",
+      reading: "12 minutes of practice",
       blocks: [
         {
           type: "video",

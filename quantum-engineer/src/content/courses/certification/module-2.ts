@@ -11,7 +11,7 @@ export const module2: CourseModule = {
       slug: "2-1-your-brain-is-running-old-code",
       title: "Your Brain Is Running Old Code",
       eyebrow: "Lesson 2.1",
-      reading: "Watch — 16 minutes",
+      reading: "16 minutes of practice",
       blocks: [
         {
           type: "video",
@@ -46,7 +46,7 @@ export const module2: CourseModule = {
       slug: "2-2-how-the-program-was-installed",
       title: "How the Program Was Installed",
       eyebrow: "Lesson 2.2",
-      reading: "Watch — 15 minutes",
+      reading: "15 minutes of practice",
       blocks: [
         {
           type: "video",
@@ -81,7 +81,7 @@ export const module2: CourseModule = {
       slug: "2-3-why-coping-does-not-work",
       title: "Why Coping Does Not Work",
       eyebrow: "Lesson 2.3",
-      reading: "Watch — 13 minutes",
+      reading: "13 minutes of practice",
       blocks: [
         {
           type: "video",

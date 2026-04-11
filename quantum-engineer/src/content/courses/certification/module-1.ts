@@ -11,7 +11,7 @@ export const module1: CourseModule = {
       slug: "1-1-the-program-you-have-been-running",
       title: "The Program You Have Been Running",
       eyebrow: "Lesson 1.1",
-      reading: "Watch — 14 minutes",
+      reading: "14 minutes of practice",
       blocks: [
         {
           type: "video",
@@ -28,11 +28,11 @@ export const module1: CourseModule = {
         },
         {
           type: "p",
-          text: "Before you watch the video, let the question sit in your body. Who are you when no one is watching. Not the answer you would give if someone were testing you. The answer that comes in a quiet room. That answer is the beginning of the work, and it is also the reason you are here.",
+          text: "Before you begin the practice, let the question sit in your body. Who are you when no one is watching. Not the answer you would give if someone were testing you. The answer that comes in a quiet room. That answer is the beginning of the work, and it is also the reason you are here.",
         },
         {
           type: "note",
-          text: "After you watch, open your notes below and write the first three words that came to you. Not sentences. Three words. They are a signal, not a summary.",
+          text: "When you are ready, open your notes below and write the first three words that came to you. Not sentences. Three words. They are a signal, not a summary.",
         },
         {
           type: "tool",
@@ -50,7 +50,7 @@ export const module1: CourseModule = {
       slug: "1-2-the-root-versus-the-symptom",
       title: "The Root Versus the Symptom",
       eyebrow: "Lesson 1.2",
-      reading: "Watch — 13 minutes",
+      reading: "13 minutes of practice",
       blocks: [
         {
           type: "video",
@@ -85,7 +85,7 @@ export const module1: CourseModule = {
       slug: "1-3-who-you-are-without-fear",
       title: "Who You Are Without Fear",
       eyebrow: "Lesson 1.3",
-      reading: "Watch — 15 minutes",
+      reading: "15 minutes of practice",
       blocks: [
         {
           type: "video",

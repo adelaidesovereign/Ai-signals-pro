@@ -11,7 +11,7 @@ export const module4: CourseModule = {
       slug: "4-1-theta-state",
       title: "Why Theta State Is the Only Access Point",
       eyebrow: "Lesson 4.1",
-      reading: "Watch — 16 minutes",
+      reading: "16 minutes of practice",
       blocks: [
         {
           type: "video",
@@ -52,7 +52,7 @@ export const module4: CourseModule = {
       slug: "4-2-memory-reconsolidation",
       title: "Memory Reconsolidation — The Brain's Update Mechanism",
       eyebrow: "Lesson 4.2",
-      reading: "Watch — 19 minutes",
+      reading: "19 minutes of practice",
       blocks: [
         {
           type: "video",
@@ -92,7 +92,7 @@ export const module4: CourseModule = {
       slug: "4-3-the-installation-protocol",
       title: "The Installation Protocol",
       eyebrow: "Lesson 4.3",
-      reading: "Watch — 22 minutes",
+      reading: "22 minutes of practice",
       blocks: [
         {
           type: "video",
@@ -109,7 +109,7 @@ export const module4: CourseModule = {
         },
         {
           type: "p",
-          text: "Thirty uninterrupted minutes. A quiet room. Phone off. Follow the six steps in the order Adelaide teaches them on the video. Do not rush. Do not skip the nervous system settle just because it feels basic. The settle is the door, and the door will not hold if you force it. When the session ends, write one sentence in the notes about what was present in the room when the old state and the new state were both in your body at the same time. That sentence is a marker. Come back to it next time you do the protocol.",
+          text: "Thirty uninterrupted minutes. A quiet room. Phone off. Follow the six steps in the order Adelaide lays them out in the teaching above. Do not rush. Do not skip the nervous system settle just because it feels basic. The settle is the door, and the door will not hold if you force it. When the session ends, write one sentence in the notes about what was present in the room when the old state and the new state were both in your body at the same time. That sentence is a marker. Come back to it next time you do the protocol.",
         },
         {
           type: "tool",

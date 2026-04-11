@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ToolShell } from "./ToolShell";
 import { useToolStorage } from "./useToolStorage";
+import { AskAdelaide } from "./AskAdelaide";
 
 type SomaticSession = {
   pattern: string;
@@ -199,22 +200,32 @@ export function SomaticFind({
       )}
 
       {step === "done" && (
-        <div className="text-center">
-          <p className="font-serif text-2xl text-sage">That was a root find.</p>
-          <p className="mt-4 max-w-prose text-sage-deep/85">
-            What surfaced is a marker. Come back to this tomorrow. Some roots
-            take three or four passes before they reveal themselves.
-          </p>
-          <p className="mt-6 text-sm text-sage-deep/60">
-            You have done {state.sessions}{" "}
-            {state.sessions === 1 ? "session" : "sessions"} on this pattern.
-          </p>
-          <button
-            onClick={reset}
-            className="mt-5 rounded-soft border border-sage/40 bg-cream-warm px-6 py-3 font-sans text-xs uppercase tracking-quiet text-sage-deep hover:border-sage"
-          >
-            Begin a new session
-          </button>
+        <div>
+          <div className="text-center">
+            <p className="font-serif text-2xl text-sage">
+              That was a root find.
+            </p>
+            <p className="mt-4 max-w-prose text-sage-deep/85">
+              What surfaced is a marker. Come back to this tomorrow. Some
+              roots take three or four passes before they reveal themselves.
+            </p>
+            <p className="mt-6 text-sm text-sage-deep/60">
+              You have done {state.sessions}{" "}
+              {state.sessions === 1 ? "session" : "sessions"} on this pattern.
+            </p>
+            <button
+              onClick={reset}
+              className="mt-5 rounded-soft border border-sage/40 bg-cream-warm px-6 py-3 font-sans text-xs uppercase tracking-quiet text-sage-deep hover:border-sage"
+            >
+              Begin a new session
+            </button>
+          </div>
+
+          <AskAdelaide
+            toolName={title}
+            toolPrompt={description}
+            userWriting={`Pattern: ${state.pattern}\nLocation in body: ${state.location}\nQuality: ${state.quality}\nWhat surfaced: ${state.surfaced}`}
+          />
         </div>
       )}
     </ToolShell>

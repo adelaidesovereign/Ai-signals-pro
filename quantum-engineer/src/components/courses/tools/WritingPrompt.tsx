@@ -2,6 +2,7 @@
 
 import { useToolStorage } from "./useToolStorage";
 import { ToolShell } from "./ToolShell";
+import { AskAdelaide } from "./AskAdelaide";
 
 export function WritingPrompt({
   title,
@@ -32,6 +33,12 @@ export function WritingPrompt({
         <span>{wordCount} words</span>
         <span>Private. Saves automatically to this device.</span>
       </div>
+
+      <AskAdelaide
+        toolName={title}
+        toolPrompt={prompt}
+        userWriting={value}
+      />
     </ToolShell>
   );
 }

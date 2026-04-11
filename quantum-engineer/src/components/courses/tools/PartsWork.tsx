@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ToolShell } from "./ToolShell";
 import { useToolStorage } from "./useToolStorage";
+import { AskAdelaide } from "./AskAdelaide";
 
 type PartConversation = {
   partName: string;
@@ -119,6 +120,12 @@ export function PartsWork({
             Begin a new conversation
           </button>
         </div>
+
+        <AskAdelaide
+          toolName={title}
+          toolPrompt={description}
+          userWriting={`Part: ${state.partName}\nLocation in body: ${state.location}\nAge it feels: ${state.age}\nWhat it is protecting: ${state.protecting}\nWhat it needs: ${state.whatItNeeds}`}
+        />
       </ToolShell>
     );
   }

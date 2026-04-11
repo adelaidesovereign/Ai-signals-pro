@@ -2,6 +2,7 @@
 
 import { ToolShell } from "./ToolShell";
 import { useToolStorage } from "./useToolStorage";
+import { AskAdelaide } from "./AskAdelaide";
 
 type FieldDef = { key: string; label: string; placeholder: string };
 
@@ -47,6 +48,15 @@ export function IdentityBuilder({
         {filledCount} of {fields.length} filled. Return any time and add more.
         This is the image your morning installation holds.
       </p>
+
+      <AskAdelaide
+        toolName={title}
+        toolPrompt={description}
+        userWriting={fields
+          .map((f) => `${f.label}: ${value[f.key] ?? ""}`)
+          .filter((line) => line.split(": ")[1]?.trim())
+          .join("\n")}
+      />
     </ToolShell>
   );
 }

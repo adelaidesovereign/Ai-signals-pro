@@ -1,0 +1,42 @@
+{
+  "name": "Adelaide Taylor — The Quantum Engineer",
+  "short_name": "The Quantum Engineer",
+  "description": "The science of coming home to who you actually are.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5F0E8",
+  "theme_color": "#7A8C7E",
+  "orientation": "portrait-primary",
+  "categories": ["education", "health", "lifestyle"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Today's practice",
+      "url": "/field-guide/read/11-the-daily-protocol",
+      "description": "Open the daily protocol checklist"
+    },
+    {
+      "name": "Field Guide",
+      "url": "/field-guide",
+      "description": "Open the Field Guide reader"
+    },
+    {
+      "name": "Your journal",
+      "url": "/dashboard/journal",
+      "description": "Open your private journal"
+    }
+  ]
+}
