@@ -28,24 +28,26 @@ const PRESETS: Record<
   { premiumSpeed: number; rate: number; pitch: number; volume: number }
 > = {
   coach: {
-    // Gentle pace, a notch lower than neutral, speaking-to-an-adult volume.
-    premiumSpeed: 0.88,
+    // Gentle pace, speaking-to-an-adult volume. premiumSpeed is
+    // passed to ElevenLabs and OpenAI so the actual words come out
+    // at this tempo (range 0.7..1.2).
+    premiumSpeed: 0.82,
     rate: 0.8,
     pitch: 0.78,
     volume: 0.95,
   },
   subliminal: {
-    // Extra soft — like soothing a baby to sleep.
-    premiumSpeed: 0.8,
-    rate: 0.68,
-    pitch: 0.75,
+    // Extra soft — like soothing a baby to sleep. Slowest.
+    premiumSpeed: 0.72,
+    rate: 0.62,
+    pitch: 0.72,
     volume: 0.55,
   },
   meditation: {
-    // Slow, warm, deeply paced. Lower register than a normal speaking voice.
-    premiumSpeed: 0.8,
-    rate: 0.72,
-    pitch: 0.78,
+    // Deeply paced. The voice holds each word longer than normal.
+    premiumSpeed: 0.74,
+    rate: 0.66,
+    pitch: 0.75,
     volume: 0.85,
   },
 };

@@ -33,11 +33,18 @@ type Body = {
 // from https://elevenlabs.io/app/voice-library
 const DEFAULT_ELEVENLABS_VOICE_ID = "piTKgcLEGmPE4e6mEKli";
 
-async function tryElevenLabs(text: string): Promise<Response | null> {
+async function tryElevenLabs(
+  text: string,
+  speed: number,
+): Promise<Response | null> {
   const key = process.env.ELEVENLABS_API_KEY;
   if (!key) return null;
   const voiceId =
     process.env.ELEVENLABS_VOICE_ID ?? DEFAULT_ELEVENLABS_VOICE_ID;
+
+  // ElevenLabs speed accepts 0.7..1.2. Clamp into that range so an
+  // extreme client value never gets rejected upstream.
+  const clampedSpeed = Math.max(0.7, Math.min(1.2, speed));
 
   try {
     const res = await fetch(
@@ -53,14 +60,16 @@ async function tryElevenLabs(text: string): Promise<Response | null> {
           text,
           model_id: "eleven_turbo_v2_5",
           voice_settings: {
-            // Tuned for whisper / ASMR quality — high stability
-            // so the delivery stays calm, high similarity so it
-            // sounds like the trained voice, no style exaggeration,
-            // no speaker boost which makes things sharper.
+            // Tuned for whisper / ASMR quality — high stability so
+            // delivery stays calm, high similarity so it sounds like
+            // the trained voice, no style exaggeration, no speaker
+            // boost (which makes things sharper), and an explicit
+            // speed parameter so the words come out slow.
             stability: 0.82,
             similarity_boost: 0.92,
             style: 0,
             use_speaker_boost: false,
+            speed: clampedSpeed,
           },
         }),
       },
@@ -149,7 +158,7 @@ export async function POST(req: Request) {
   const speed = typeof body.speed === "number" ? body.speed : 0.9;
 
   // Try ElevenLabs first — best quality.
-  const eleven = await tryElevenLabs(text);
+  const eleven = await tryElevenLabs(text, speed);
   if (eleven) return eleven;
 
   // Fall back to OpenAI if configured.
