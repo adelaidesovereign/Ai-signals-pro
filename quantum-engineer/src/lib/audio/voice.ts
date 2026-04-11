@@ -25,29 +25,39 @@ let cancelCurrent: (() => void) | null = null;
 
 const PRESETS: Record<
   SpeakPreset,
-  { premiumSpeed: number; rate: number; pitch: number; volume: number }
+  {
+    premiumSpeed: number;
+    playbackRate: number;
+    rate: number;
+    pitch: number;
+    volume: number;
+  }
 > = {
   coach: {
-    // Gentle pace, speaking-to-an-adult volume. premiumSpeed is
-    // passed to ElevenLabs and OpenAI so the actual words come out
-    // at this tempo (range 0.7..1.2).
-    premiumSpeed: 0.82,
+    // Coach talks to you at a gentle pace with a slightly deeper tone.
+    // premiumSpeed goes to the TTS API; playbackRate is applied to
+    // the returned audio element with preservesPitch=false, which
+    // both slows the audio AND drops its pitch — one lever for both.
+    premiumSpeed: 0.95,
+    playbackRate: 0.92,
     rate: 0.8,
-    pitch: 0.78,
+    pitch: 0.72,
     volume: 0.95,
   },
   subliminal: {
-    // Extra soft — like soothing a baby to sleep. Slowest.
-    premiumSpeed: 0.72,
+    // Extra soft, extra deep — like soothing a baby to sleep.
+    premiumSpeed: 0.9,
+    playbackRate: 0.88,
     rate: 0.62,
-    pitch: 0.72,
+    pitch: 0.65,
     volume: 0.55,
   },
   meditation: {
-    // Deeply paced. The voice holds each word longer than normal.
-    premiumSpeed: 0.74,
+    // Slow, warm, deep, deliberately paced for theta descent work.
+    premiumSpeed: 0.9,
+    playbackRate: 0.9,
     rate: 0.66,
-    pitch: 0.75,
+    pitch: 0.7,
     volume: 0.85,
   },
 };
@@ -191,6 +201,24 @@ async function premiumSpeak(
   return new Promise<boolean>((resolve) => {
     const audio = new Audio(url);
     audio.volume = cfg.volume;
+
+    // Drop the pitch naturally by slowing playback while letting the
+    // pitch move with it. preservesPitch defaults to true on modern
+    // browsers, so we explicitly disable it. The combined effect is
+    // a voice that is slightly slower AND noticeably deeper without
+    // any server-side pitch-shifting.
+    audio.playbackRate = cfg.playbackRate;
+    // preservesPitch / webkitPreservesPitch / mozPreservesPitch
+    // depending on the engine. Setting all three covers every
+    // browser safely.
+    const a = audio as HTMLAudioElement & {
+      preservesPitch?: boolean;
+      webkitPreservesPitch?: boolean;
+      mozPreservesPitch?: boolean;
+    };
+    a.preservesPitch = false;
+    a.webkitPreservesPitch = false;
+    a.mozPreservesPitch = false;
 
     let settled = false;
     const done = (ok: boolean) => {
