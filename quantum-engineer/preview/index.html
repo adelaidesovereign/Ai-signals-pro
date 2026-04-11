@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adelaide Taylor — The Quantum Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #F5F0E8;
+  --cream-deep: #EDE6D6;
+  --cream-warm: #FAFAF8;
+  --sage: #7A8C7E;
+  --sage-light: #A8B8A4;
+  --sage-deep: #5C6B5E;
+  --gold: #C9A84C;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  background: var(--cream);
+  color: var(--sage-deep);
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-size: 18px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  color: var(--sage);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+}
+a { color: inherit; text-decoration: none; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+.container-narrow { max-width: 780px; margin: 0 auto; padding: 0 2rem; }
+.container-reading { max-width: 680px; margin: 0 auto; padding: 0 2rem; }
+
+/* Nav */
+.nav {
+  position: sticky; top: 0; z-index: 40;
+  background: rgba(245, 240, 232, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(122, 140, 126, 0.1);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.25rem 0;
+}
+.brand {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.5rem;
+  color: var(--sage);
+}
+.brand span {
+  font-family: "Inter", sans-serif;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--sage-light);
+  margin-left: 0.5rem;
+}
+.nav ul { display: flex; list-style: none; gap: 1.75rem; align-items: center; }
+.nav ul li a {
+  font-size: 0.875rem;
+  color: var(--sage-deep);
+  transition: color 0.2s;
+}
+.nav ul li a:hover { color: var(--sage); }
+.nav-cta {
+  border: 1px solid rgba(122, 140, 126, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 14px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--sage);
+}
+@media (max-width: 640px) {
+  .nav ul li:not(:last-child) { display: none; }
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 1rem 2rem;
+  border-radius: 14px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+.btn-primary {
+  background: var(--sage);
+  color: var(--cream-warm);
+  box-shadow: 0 10px 40px -20px rgba(92, 107, 94, 0.25);
+}
+.btn-primary:hover { background: var(--sage-deep); }
+.btn-secondary {
+  border: 1px solid rgba(122, 140, 126, 0.4);
+  background: var(--cream-warm);
+  color: var(--sage-deep);
+}
+.btn-secondary:hover {
+  border-color: var(--sage);
+  background: var(--cream-deep);
+}
+.btn-sm { padding: 0.6rem 1.25rem; font-size: 0.7rem; }
+
+/* Hero */
+.hero { padding: 7rem 0 10rem; text-align: center; }
+.eyebrow {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--sage);
+}
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4.75rem);
+  line-height: 1.05;
+  margin: 1.5rem auto 0;
+  max-width: 900px;
+}
+.hero h1 .accent { color: var(--sage-deep); }
+.hero .sub {
+  font-size: 1.25rem;
+  color: rgba(92, 107, 94, 0.85);
+  max-width: 580px;
+  margin: 2rem auto 0;
+}
+.hero .whisper {
+  font-style: italic;
+  color: rgba(92, 107, 94, 0.7);
+  max-width: 520px;
+  margin: 1.25rem auto 0;
+  font-size: 1rem;
+}
+.hero .ctas {
+  display: flex; gap: 1rem; justify-content: center; margin-top: 3rem;
+  flex-wrap: wrap;
+}
+
+.hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(122, 140, 126, 0.35), transparent);
+  max-width: 900px; margin: 0 auto;
+}
+
+/* Sections */
+section { padding: 6rem 0; }
+.section-head { text-align: center; margin-bottom: 4rem; }
+.section-head h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-top: 0.75rem;
+}
+.section-head p {
+  max-width: 640px;
+  margin: 1rem auto 0;
+  color: rgba(92, 107, 94, 0.85);
+}
+
+/* Cards */
+.cards { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.card {
+  background: var(--cream-warm);
+  border: 1px solid rgba(122, 140, 126, 0.1);
+  border-radius: 14px;
+  padding: 2.5rem;
+  box-shadow: 0 1px 2px rgba(92, 107, 94, 0.04), 0 12px 32px -18px rgba(92, 107, 94, 0.18);
+  transition: box-shadow 0.3s;
+}
+.card:hover { box-shadow: 0 10px 40px -20px rgba(92, 107, 94, 0.25); }
+.card.accent { border-color: rgba(122, 140, 126, 0.3); }
+.card .eyebrow { color: var(--sage); margin-bottom: 0.75rem; display: block; }
+.card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.card p { color: rgba(92, 107, 94, 0.85); }
+.card .btn { margin-top: 2rem; }
+
+/* Origin section */
+.origin { background: rgba(237, 230, 214, 0.6); padding: 6rem 0; }
+.origin h2 {
+  font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+  line-height: 1.15;
+  margin-top: 1.5rem;
+}
+.origin p { font-size: 1.125rem; margin-top: 1.25rem; color: rgba(92, 107, 94, 0.9); }
+
+/* CTA block */
+.cta-block {
+  background: var(--cream-warm);
+  border-radius: 14px;
+  padding: 4rem 2.5rem;
+  text-align: center;
+  box-shadow: 0 1px 2px rgba(92, 107, 94, 0.04), 0 12px 32px -18px rgba(92, 107, 94, 0.18);
+}
+.cta-block h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+.cta-block p {
+  margin: 1.5rem auto;
+  max-width: 480px;
+  color: rgba(92, 107, 94, 0.85);
+}
+
+/* Footer */
+footer {
+  background: rgba(237, 230, 214, 0.6);
+  margin-top: 6rem;
+  padding: 4rem 0 2rem;
+  border-top: 1px solid rgba(122, 140, 126, 0.15);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 3rem;
+}
+.footer-grid h4 {
+  font-family: "Inter", sans-serif;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--sage);
+  margin-bottom: 1rem;
+}
+.footer-grid ul { list-style: none; }
+.footer-grid ul li { margin-bottom: 0.5rem; font-size: 0.9rem; }
+.footer-bottom {
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(122, 140, 126, 0.15);
+  display: flex; justify-content: space-between;
+  font-size: 0.75rem;
+  color: rgba(92, 107, 94, 0.6);
+  flex-wrap: wrap; gap: 1rem;
+}
+
+/* Preview strip */
+.preview-strip {
+  background: var(--sage-deep);
+  color: var(--cream-warm);
+  text-align: center;
+  padding: 0.75rem 1rem;
+  font-size: 0.8rem;
+  font-family: "Inter", sans-serif;
+}
+.preview-strip a { color: var(--gold); text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="preview-strip">
+  Preview file — open <a href="./README.html">preview/README.html</a> to see every page in this mock.
+</div>
+
+<header class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="./index.html" class="brand">
+        Adelaide Taylor<span>The Quantum Engineer</span>
+      </a>
+      <ul>
+        <li><a href="./about.html">About</a></li>
+        <li><a href="./services.html">The Work</a></li>
+        <li><a href="./quiz.html">Quiz</a></li>
+        <li><a href="./dashboard.html">Member Login</a></li>
+        <li><a href="./services.html" class="nav-cta">Begin</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <p class="eyebrow">Adelaide Taylor</p>
+    <h1>
+      Reality is not fixed.<br>
+      Your brain is running a program.<br>
+      <span class="accent">I teach you how to rewrite it.</span>
+    </h1>
+    <p class="sub">
+      Not manifestation. Mechanism. The science of coming home to who you actually are.
+    </p>
+    <p class="whisper">
+      This is not a program you complete. It is a remembering. You are not broken. You were never broken. You have been asleep to yourself, and this is the way back.
+    </p>
+    <div class="ctas">
+      <a href="./services.html" class="btn btn-primary">Come home to yourself</a>
+      <a href="./quiz.html" class="btn btn-secondary">Where am I stuck?</a>
+    </div>
+  </div>
+</section>
+
+<div class="hairline"></div>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Three doorways home</p>
+      <h2>Whichever one you walk through, you are walking toward yourself.</h2>
+      <p>These are not products. They are three rooms, at three depths, for three different points in the same remembering. Choose the one that meets you where you actually are right now.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <span class="eyebrow">The first doorway</span>
+        <h3>I want to understand the system.</h3>
+        <p>The Field Guide is the whole map — thirteen layers, in order, written to read in a few quiet hours. By the end, you will not have a new technique. You will have seen yourself.</p>
+        <a href="./services.html" class="btn btn-secondary">Field Guide — $27</a>
+      </div>
+      <div class="card accent">
+        <span class="eyebrow">The deeper doorway</span>
+        <h3>I am ready to come home to who I actually am.</h3>
+        <p>The Certification Program is six modules of the real work. Root belief finding. Theta installation. The daily protocol. The unhurried return to the person you were before fear told you to be smaller.</p>
+        <a href="./services.html" class="btn btn-primary">Certification — $497</a>
+      </div>
+      <div class="card">
+        <span class="eyebrow">The ongoing doorway</span>
+        <h3>I want people for the long walk home.</h3>
+        <p>The Inner Circle is a small, private room of people practising the same return. Monthly live calls. A feed for the questions that do not belong anywhere else. A soft place to be exactly who you are.</p>
+        <a href="./services.html" class="btn btn-secondary">Inner Circle — $97/mo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="origin">
+  <div class="container-narrow">
+    <p class="eyebrow">The reason this exists</p>
+    <h2>Seventeen years of therapy gave me coping mechanisms. The breakdowns kept coming.</h2>
+    <p>Because coping never touches the root. The root is always identity. I was running a program that was never mine.</p>
+    <p>I had brilliant therapists. I did real work. I built a catalogue of tools for managing the crisis of the moment. And the same crisis kept returning in a new costume.</p>
+    <p>The framework in the Field Guide is what actually changed things. Not because it's clever. Because it works at the layer the pattern was built on.</p>
+    <p style="margin-top: 2.5rem;"><a href="./about.html" class="btn btn-secondary">Read the full story</a></p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">What this is not</p>
+      <h2>Not coping. Not positive thinking.</h2>
+      <p>This is the mechanism of subconscious reprogramming, backed by documented science. Every claim is traceable.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <h3>The CIA Gateway Process</h3>
+        <p>The 1983 classified report, declassified in 2003, documenting how specific brainwave states grant access to subconscious reprogramming at a fundamental level.</p>
+      </div>
+      <div class="card">
+        <h3>Memory Reconsolidation</h3>
+        <p>The Nader, Schafe, LeDoux (2000) research proving that consolidated memories can be permanently rewritten under specific, reproducible conditions.</p>
+      </div>
+      <div class="card">
+        <h3>HeartMath research</h3>
+        <p>Peer-reviewed findings on the heart's electromagnetic field and the measurable coherence effect between heart and brain.</p>
+      </div>
+      <div class="card">
+        <h3>Penrose-Hameroff Orch-OR</h3>
+        <p>A theory of consciousness grounded in quantum processes within the brain's microtubules — not mystical, physical.</p>
+      </div>
+      <div class="card">
+        <h3>Free Energy Principle</h3>
+        <p>Karl Friston's unifying theory of how the brain generates experience by minimising prediction error.</p>
+      </div>
+      <div class="card">
+        <h3>AIP Advances 2025</h3>
+        <p>The recent peer-reviewed paper proposing consciousness as a foundational field — the physics catching up to what the practice has shown for decades.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container-narrow">
+    <div class="cta-block">
+      <h2>Who are you when no one is watching?</h2>
+      <p>That person is not a fantasy. She is who you were before fear told you to be smaller. The Field Guide is the first step back to her.</p>
+      <a href="./services.html" class="btn btn-primary">Begin the Field Guide — $27</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <p class="brand">Adelaide Taylor</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: rgba(92, 107, 94, 0.75);">
+          Consciousness engineering. The science of coming home to who you actually are.
+        </p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="./about.html">About Adelaide</a></li>
+          <li><a href="./services.html">The Work</a></li>
+          <li><a href="./quiz.html">Which Layer Are You Stuck In</a></li>
+          <li><a href="./dashboard.html">Member Login</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Letters from Adelaide</h4>
+        <p style="font-size: 0.9rem; color: rgba(92, 107, 94, 0.75);">Occasional, unhurried writing. No noise.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Adelaide Taylor. All rights reserved.</p>
+      <p>ShesAdelaide.com</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

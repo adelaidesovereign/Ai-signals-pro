@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About Adelaide — The Quantum Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #F5F0E8; --cream-deep: #EDE6D6; --cream-warm: #FAFAF8;
+  --sage: #7A8C7E; --sage-light: #A8B8A4; --sage-deep: #5C6B5E;
+  --gold: #C9A84C;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  background: var(--cream); color: var(--sage-deep);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 18px; line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  color: var(--sage); font-weight: 500; line-height: 1.15;
+}
+a { color: inherit; text-decoration: none; }
+.container-narrow { max-width: 780px; margin: 0 auto; padding: 0 2rem; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+.nav { position: sticky; top: 0; z-index: 40; background: rgba(245, 240, 232, 0.85); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(122, 140, 126, 0.1); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 0; }
+.brand { font-family: "Cormorant Garamond", serif; font-size: 1.5rem; color: var(--sage); }
+.brand span { font-family: "Inter", sans-serif; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--sage-light); margin-left: 0.5rem; }
+.nav ul { display: flex; list-style: none; gap: 1.75rem; align-items: center; }
+.nav ul li a { font-size: 0.875rem; color: var(--sage-deep); }
+.nav-cta { border: 1px solid rgba(122, 140, 126, 0.3); padding: 0.5rem 1rem; border-radius: 14px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--sage); }
+@media (max-width: 640px) { .nav ul li:not(:last-child) { display: none; } }
+
+.eyebrow { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.25em; color: var(--sage); }
+.hero { padding: 6rem 0 4rem; }
+.hero h1 { font-size: clamp(2.75rem, 6vw, 4.5rem); margin-top: 1.25rem; }
+.hero .subtitle { font-family: "Inter", sans-serif; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--sage-light); margin-top: 1rem; }
+
+.body-section { padding-bottom: 5rem; }
+.body-section p { font-size: 1.125rem; line-height: 1.85; color: rgba(92, 107, 94, 0.9); margin-bottom: 2rem; }
+
+.quote-section { background: rgba(237, 230, 214, 0.6); padding: 5rem 0; }
+.quote-section h2 { font-size: clamp(2rem, 4.5vw, 3rem); margin-top: 1rem; }
+.quote-section .lead { font-size: 1.125rem; color: rgba(92, 107, 94, 0.85); margin: 1.25rem 0 2.5rem; }
+.quote-section p { font-size: 1.125rem; line-height: 1.85; color: rgba(92, 107, 94, 0.9); margin-bottom: 1.5rem; }
+
+.closing { padding: 5rem 0 7rem; }
+.closing h2 { font-size: 2.5rem; margin-top: 1rem; }
+.closing p { font-size: 1.125rem; line-height: 1.85; color: rgba(92, 107, 94, 0.9); margin: 1.5rem 0; }
+.btn { display: inline-flex; align-items: center; padding: 1rem 2rem; border-radius: 14px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; background: var(--sage); color: var(--cream-warm); transition: background 0.3s; font-weight: 500; }
+.btn:hover { background: var(--sage-deep); }
+.closing .cta-wrap { text-align: center; margin-top: 3rem; }
+
+.preview-strip { background: var(--sage-deep); color: var(--cream-warm); text-align: center; padding: 0.75rem 1rem; font-size: 0.8rem; }
+.preview-strip a { color: var(--gold); text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="preview-strip">
+  Preview — <a href="./index.html">Home</a> · <a href="./services.html">Services</a> · <a href="./quiz.html">Quiz</a> · <a href="./chapter-01.html">Field Guide Ch. 1</a> · <a href="./lesson-01.html">Certification M1L1</a> · <a href="./dashboard.html">Dashboard</a> · <a href="./inner-circle.html">Inner Circle</a>
+</div>
+
+<header class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="./index.html" class="brand">Adelaide Taylor<span>The Quantum Engineer</span></a>
+      <ul>
+        <li><a href="./about.html">About</a></li>
+        <li><a href="./services.html">The Work</a></li>
+        <li><a href="./quiz.html">Quiz</a></li>
+        <li><a href="./dashboard.html">Member Login</a></li>
+        <li><a href="./services.html" class="nav-cta">Begin</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container-narrow">
+    <p class="eyebrow">About</p>
+    <h1>Adelaide Taylor</h1>
+    <p class="subtitle">Nurse. Researcher. Entrepreneur. 5/1 Splenic Projector.</p>
+  </div>
+</section>
+
+<section class="body-section">
+  <div class="container-narrow">
+    <p>I spent seventeen years in therapy. I am not saying that to dismiss the work or the people who did it with me. The therapists were brilliant. The tools were real. The breakdowns kept coming anyway.</p>
+    <p>Because coping never touches the root. And the root is always identity. I was running a program that was installed before I had a say in it, and I was trying to succeed at being someone I had never agreed to become.</p>
+    <p>The cruelest part was how good I was at it. I could hold a room. I could hit a goal. I could look like someone who had it together. And inside, the same three sentences were playing on loop, year after year, no matter what the outside looked like.</p>
+    <p>At some point I stopped asking how to cope better and started asking a different question. Not "what is wrong with me" but "what is actually running the show." That question took me into neuroscience, quantum physics, Human Design, the declassified CIA Gateway Process report from 1983, HeartMath research, Karl Friston's work on prediction, Richard Schwartz's parts work, Nader and LeDoux's work on memory reconsolidation.</p>
+    <p>None of it was new. All of it had been separated into silos. What was missing was a map — a single, sequential model that showed how the layers fit together, in what order, and what you had to do at each one.</p>
+    <p>That map is what I built. That map is what you are here for.</p>
+  </div>
+</section>
+
+<section class="quote-section">
+  <div class="container-narrow">
+    <p class="eyebrow">The question that changed everything</p>
+    <h2>Who are you when no one is watching?</h2>
+    <p class="lead">What do you love when no one is judging? What would you have, how would you walk, how would you talk, if fear did not exist?</p>
+    <p>That person is who you actually are. The fear is old trauma. This framework removes it.</p>
+    <p>I do not teach manifestation. I am not selling a mindset. This is a consciousness engineering brand, and the word engineering is deliberate. An engineer works with a mechanism. A mechanism is predictable. If you know how the system behaves, you can work with it on purpose.</p>
+    <p>Your brain is a mechanism. Your nervous system is a mechanism. Your subconscious programming was installed by a mechanism and it can be updated by the same one. Nothing in this work is mystical. Everything in it is teachable.</p>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="container-narrow">
+    <p class="eyebrow">A note on what this is not</p>
+    <h2>Not a manifestation brand.</h2>
+    <p>I will never tell you to think positive. Positive thinking on top of a contradicting subconscious is why you feel like a liar when you say the affirmation.</p>
+    <p>I will never tell you to raise your vibration without telling you what that means and how to actually do it at the level of the nervous system.</p>
+    <p>I will not pretend this is fast or easy. It is neither. It is also not hard in the way you are expecting. Most of the work is quiet, daily, and extremely specific.</p>
+    <div class="cta-wrap">
+      <a href="./services.html" class="btn">Begin the Work</a>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

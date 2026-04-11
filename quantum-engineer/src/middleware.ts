@@ -1,13 +1,10 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const PROTECTED_PREFIXES = [
-  "/dashboard",
-  "/field-guide/read",
-  "/certification/learn",
-  "/inner-circle",
-  "/account",
-];
+// Only the truly private surfaces are redirected here. The course reader
+// pages (/field-guide, /certification, /inner-circle) handle their own auth
+// so everyone can preview the content without being bounced to /login.
+const PROTECTED_PREFIXES = ["/dashboard", "/account"];
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -32,11 +29,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/dashboard/:path*",
-    "/field-guide/read/:path*",
-    "/certification/learn/:path*",
-    "/inner-circle/:path*",
-    "/account/:path*",
-  ],
+  matcher: ["/dashboard/:path*", "/account/:path*"],
 };

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
@@ -30,14 +29,17 @@ async function userHasAccess(userId: string) {
 
 export default async function FieldGuideIndex() {
   const session = await auth();
-  if (!session?.user?.id) {
-    redirect("/login?next=/field-guide");
-  }
 
-  const hasAccess = await userHasAccess(session.user.id);
-  const progress = await prisma.lessonProgress.findMany({
-    where: { userId: session.user.id, courseSlug: "field-guide" },
-  });
+  // Anyone can browse the table of contents and the first chapter. Only
+  // signed-in users with a paid purchase get chapters 2+ and saved progress.
+  const hasAccess = session?.user?.id
+    ? await userHasAccess(session.user.id)
+    : false;
+  const progress = session?.user?.id
+    ? await prisma.lessonProgress.findMany({
+        where: { userId: session.user.id, courseSlug: "field-guide" },
+      })
+    : [];
   const completedBySlug = new Map(
     progress.filter((p) => p.completed).map((p) => [p.lessonSlug, true]),
   );
@@ -47,10 +49,10 @@ export default async function FieldGuideIndex() {
   return (
     <div className="min-h-screen bg-cream">
       <CourseNav
-        backHref="/dashboard"
-        backLabel="Dashboard"
+        backHref={session?.user?.id ? "/dashboard" : "/"}
+        backLabel={session?.user?.id ? "Dashboard" : "Home"}
         title={fieldGuide.title}
-        userName={session.user.firstName ?? session.user.username}
+        userName={session?.user?.firstName ?? session?.user?.username ?? null}
       />
 
       <Container size="narrow" className="py-16 sm:py-24">
@@ -100,11 +102,7 @@ export default async function FieldGuideIndex() {
             return (
               <Link
                 key={chapter.slug}
-                href={
-                  locked
-                    ? "/services#field-guide"
-                    : `/field-guide/read/${chapter.slug}`
-                }
+                href={`/field-guide/read/${chapter.slug}`}
                 className="group block rounded-soft border border-sage/15 bg-cream-warm px-6 py-5 transition-all hover:border-sage/40 hover:shadow-card"
               >
                 <div className="flex items-start justify-between gap-6">
@@ -122,7 +120,7 @@ export default async function FieldGuideIndex() {
                   <div className="flex items-center gap-3">
                     {locked ? (
                       <span className="font-sans text-[10px] uppercase tracking-[0.15em] text-sage-deep/60">
-                        Locked
+                        Preview
                       </span>
                     ) : done ? (
                       <span className="flex h-7 w-7 items-center justify-center rounded-full bg-sage text-cream-warm">

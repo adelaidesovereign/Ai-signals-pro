@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
@@ -21,17 +20,13 @@ export const metadata: Metadata = {
 
 export default async function InnerCirclePage() {
   const session = await auth();
-  if (!session?.user?.id) {
-    redirect("/login?next=/inner-circle");
-  }
+  const userId = session?.user?.id;
 
-  const activeSub = await prisma.subscription.findFirst({
-    where: {
-      userId: session.user.id,
-      product: "INNER_CIRCLE",
-      status: "ACTIVE",
-    },
-  });
+  const activeSub = userId
+    ? await prisma.subscription.findFirst({
+        where: { userId, product: "INNER_CIRCLE", status: "ACTIVE" },
+      })
+    : null;
   const hasAccess = Boolean(activeSub);
 
   const [posts, progress] = await Promise.all([
@@ -50,9 +45,9 @@ export default async function InnerCirclePage() {
           },
         })
       : Promise.resolve([]),
-    prisma.lessonProgress.findMany({
-      where: { userId: session.user.id },
-    }),
+    userId
+      ? prisma.lessonProgress.findMany({ where: { userId } })
+      : Promise.resolve([]),
   ]);
 
   const fieldGuideDone = progress.filter(
@@ -65,10 +60,10 @@ export default async function InnerCirclePage() {
   return (
     <div className="min-h-screen bg-cream">
       <CourseNav
-        backHref="/dashboard"
-        backLabel="Dashboard"
+        backHref={userId ? "/dashboard" : "/"}
+        backLabel={userId ? "Dashboard" : "Home"}
         title="The Inner Circle"
-        userName={session.user.firstName ?? session.user.username}
+        userName={session?.user?.firstName ?? session?.user?.username ?? null}
       />
 
       <Container size="wide" className="py-16 sm:py-24">
@@ -234,7 +229,7 @@ export default async function InnerCirclePage() {
             <CommunityFeed
               canPost={hasAccess}
               currentUserName={
-                session.user.firstName ?? session.user.username ?? ""
+                session?.user?.firstName ?? session?.user?.username ?? ""
               }
               initialPosts={posts.map((p) => ({
                 id: p.id,

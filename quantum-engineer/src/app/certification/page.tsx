@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
@@ -26,14 +25,15 @@ async function userHasAccess(userId: string) {
 
 export default async function CertificationIndex() {
   const session = await auth();
-  if (!session?.user?.id) {
-    redirect("/login?next=/certification");
-  }
+  const userId = session?.user?.id;
 
-  const hasAccess = await userHasAccess(session.user.id);
-  const progress = await prisma.lessonProgress.findMany({
-    where: { userId: session.user.id, courseSlug: "certification" },
-  });
+  // Anyone can browse the module map. Signed-in users see their progress.
+  const hasAccess = userId ? await userHasAccess(userId) : false;
+  const progress = userId
+    ? await prisma.lessonProgress.findMany({
+        where: { userId, courseSlug: "certification" },
+      })
+    : [];
   const completed = new Set(
     progress.filter((p) => p.completed).map((p) => p.lessonSlug),
   );
@@ -42,10 +42,10 @@ export default async function CertificationIndex() {
   return (
     <div className="min-h-screen bg-cream">
       <CourseNav
-        backHref="/dashboard"
-        backLabel="Dashboard"
+        backHref={userId ? "/dashboard" : "/"}
+        backLabel={userId ? "Dashboard" : "Home"}
         title={certification.title}
-        userName={session.user.firstName ?? session.user.username}
+        userName={session?.user?.firstName ?? session?.user?.username ?? null}
       />
 
       <Container size="wide" className="py-16 sm:py-24">
@@ -106,9 +106,11 @@ export default async function CertificationIndex() {
               <div className="mt-8 grid gap-3 sm:grid-cols-3">
                 {mod.lessons.map((lesson) => {
                   const done = completed.has(lesson.slug);
-                  const href = hasAccess
-                    ? `/certification/learn/${mod.slug}/${lesson.slug}`
-                    : "/services#certification";
+                  const href = `/certification/learn/${mod.slug}/${lesson.slug}`;
+                  const isFirstLesson =
+                    mod.slug === certification.modules[0].slug &&
+                    lesson.slug === certification.modules[0].lessons[0].slug;
+                  const locked = !hasAccess && !isFirstLesson;
                   return (
                     <Link
                       key={lesson.slug}
@@ -117,7 +119,7 @@ export default async function CertificationIndex() {
                     >
                       <div className="flex items-start justify-between">
                         <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-sage">
-                          {lesson.eyebrow}
+                          {lesson.eyebrow}{locked ? " · Locked" : isFirstLesson && !hasAccess ? " · Preview" : ""}
                         </p>
                         {done && (
                           <span className="flex h-5 w-5 items-center justify-center rounded-full bg-sage text-cream-warm">

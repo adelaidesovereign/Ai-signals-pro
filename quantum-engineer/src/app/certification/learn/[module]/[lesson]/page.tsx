@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
@@ -28,48 +28,49 @@ export async function generateStaticParams() {
   }));
 }
 
+async function userHasAccess(userId: string) {
+  const [purchase, sub] = await Promise.all([
+    prisma.purchase.findFirst({
+      where: { userId, product: "CERTIFICATION", status: "PAID" },
+    }),
+    prisma.subscription.findFirst({
+      where: { userId, product: "CERTIFICATION", status: "ACTIVE" },
+    }),
+  ]);
+  return Boolean(purchase || sub);
+}
+
 export default async function CertificationLessonPage({ params }: Props) {
   const session = await auth();
-  if (!session?.user?.id) {
-    redirect(
-      `/login?next=/certification/learn/${params.module}/${params.lesson}`,
-    );
-  }
+  const userId = session?.user?.id;
 
   const found = findCertificationLesson(params.module, params.lesson);
   if (!found) notFound();
   const { module: mod, lesson } = found;
 
-  const [purchase, sub, progress, note] = await Promise.all([
-    prisma.purchase.findFirst({
-      where: { userId: session.user.id, product: "CERTIFICATION", status: "PAID" },
-    }),
-    prisma.subscription.findFirst({
-      where: { userId: session.user.id, product: "CERTIFICATION", status: "ACTIVE" },
-    }),
-    prisma.lessonProgress.findUnique({
-      where: {
-        userId_courseSlug_lessonSlug: {
-          userId: session.user.id,
-          courseSlug: "certification",
-          lessonSlug: lesson.slug,
-        },
-      },
-    }),
-    prisma.lessonNote.findFirst({
-      where: {
-        userId: session.user.id,
-        courseSlug: "certification",
-        lessonSlug: lesson.slug,
-      },
-      orderBy: { updatedAt: "desc" },
-    }),
-  ]);
+  const hasAccess = userId ? await userHasAccess(userId) : false;
 
-  const hasAccess = Boolean(purchase || sub);
-  if (!hasAccess) {
-    redirect("/services#certification");
-  }
+  const [progress, note] = userId
+    ? await Promise.all([
+        prisma.lessonProgress.findUnique({
+          where: {
+            userId_courseSlug_lessonSlug: {
+              userId,
+              courseSlug: "certification",
+              lessonSlug: lesson.slug,
+            },
+          },
+        }),
+        prisma.lessonNote.findFirst({
+          where: {
+            userId,
+            courseSlug: "certification",
+            lessonSlug: lesson.slug,
+          },
+          orderBy: { updatedAt: "desc" },
+        }),
+      ])
+    : [null, null];
 
   // Find prev/next lesson across modules.
   const all = flatLessons();
@@ -79,16 +80,35 @@ export default async function CertificationLessonPage({ params }: Props) {
   const prev = idx > 0 ? all[idx - 1] : null;
   const next = idx < all.length - 1 ? all[idx + 1] : null;
 
+  // The first lesson of Module 1 is open to anyone. The rest need access.
+  const isFirstLesson = idx === 0;
+  const locked = !hasAccess && !isFirstLesson;
+
   return (
     <div className="min-h-screen bg-cream">
       <CourseNav
         backHref="/certification"
         backLabel="Back to the program"
         title={certification.title}
-        userName={session.user.firstName ?? session.user.username}
+        userName={session?.user?.firstName ?? session?.user?.username ?? null}
       />
 
       <Container size="reading" className="py-16 sm:py-24">
+        {!hasAccess && isFirstLesson && (
+          <div className="mb-10 rounded-soft border border-gold/40 bg-cream-warm px-6 py-5 text-sm text-sage-deep/85">
+            You are previewing Lesson 1.1. The remaining seventeen lessons,
+            your notes, and your saved progress are inside the full
+            Certification Program —{" "}
+            <Link
+              href="/services#certification"
+              className="underline hover:text-sage"
+            >
+              enrol for $497
+            </Link>
+            .
+          </div>
+        )}
+
         <p className="font-sans text-xs uppercase tracking-[0.25em] text-sage">
           {mod.eyebrow} &middot; {mod.title}
         </p>
@@ -97,16 +117,42 @@ export default async function CertificationLessonPage({ params }: Props) {
         </h1>
         <p className="mt-4 text-sm text-sage-deep/60">{lesson.reading}</p>
 
-        <div className="mt-12">
-          <CourseBlocks blocks={lesson.blocks} />
-        </div>
+        {locked ? (
+          <div className="mt-14 rounded-soft border border-sage/20 bg-cream-warm p-8 text-center shadow-card">
+            <p className="font-sans text-xs uppercase tracking-[0.25em] text-sage">
+              Lesson locked
+            </p>
+            <h2 className="mt-3 font-serif text-3xl text-sage">
+              This lesson opens with the full program.
+            </h2>
+            <p className="mt-4 text-sage-deep/85">
+              Lesson 1.1 is open to everyone as a preview. The remaining
+              seventeen lessons, the video recordings, the guided sessions,
+              and your saved notes are inside the Certification Program.
+            </p>
+            <div className="mt-8">
+              <Link
+                href="/services#certification"
+                className="inline-flex items-center justify-center rounded-soft bg-sage px-8 py-4 font-sans text-sm uppercase tracking-quiet text-cream-warm shadow-soft transition-all hover:bg-sage-deep"
+              >
+                Enrol — $497
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <div className="mt-12">
+            <CourseBlocks blocks={lesson.blocks} />
+          </div>
+        )}
 
         <div className="mt-16 space-y-6">
-          <CompletionToggle
-            courseSlug="certification"
-            lessonSlug={lesson.slug}
-            initialCompleted={Boolean(progress?.completed)}
-          />
+          {hasAccess && userId && (
+            <CompletionToggle
+              courseSlug="certification"
+              lessonSlug={lesson.slug}
+              initialCompleted={Boolean(progress?.completed)}
+            />
+          )}
 
           <div className="flex items-stretch justify-between gap-4 pt-6">
             {prev ? (
@@ -142,11 +188,13 @@ export default async function CertificationLessonPage({ params }: Props) {
           </div>
         </div>
 
-        <LessonNotes
-          courseSlug="certification"
-          lessonSlug={lesson.slug}
-          initialBody={note?.body ?? ""}
-        />
+        {hasAccess && userId && (
+          <LessonNotes
+            courseSlug="certification"
+            lessonSlug={lesson.slug}
+            initialBody={note?.body ?? ""}
+          />
+        )}
       </Container>
     </div>
   );
