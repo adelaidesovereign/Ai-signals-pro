@@ -8,6 +8,10 @@ import { SomaticFind } from "./tools/SomaticFind";
 import { HeartCoherence } from "./tools/HeartCoherence";
 import { PartsWork } from "./tools/PartsWork";
 import { ReconsolidationHold } from "./tools/ReconsolidationHold";
+import { MantraInstaller } from "./tools/MantraInstaller";
+import { PresentMomentAnchor } from "./tools/PresentMomentAnchor";
+import { VisionLetter } from "./tools/VisionLetter";
+import { WeeklyReview } from "./tools/WeeklyReview";
 
 export function CourseBlocks({ blocks }: { blocks: CourseBlock[] }) {
   return (
@@ -165,6 +169,40 @@ function RenderInteractive({ block }: { block: CourseInteractive }) {
     case "reconsolidation":
       return (
         <ReconsolidationHold
+          title={block.title}
+          description={block.description}
+          storageKey={block.storageKey}
+        />
+      );
+    case "mantra-installer":
+      return (
+        <MantraInstaller
+          title={block.title}
+          description={block.description}
+          storageKey={block.storageKey}
+          repeats={block.repeats}
+        />
+      );
+    case "present-moment-anchor":
+      return (
+        <PresentMomentAnchor
+          title={block.title}
+          description={block.description}
+          storageKey={block.storageKey}
+        />
+      );
+    case "vision-letter":
+      return (
+        <VisionLetter
+          title={block.title}
+          description={block.description}
+          storageKey={block.storageKey}
+          timeframe={block.timeframe}
+        />
+      );
+    case "weekly-review":
+      return (
+        <WeeklyReview
           title={block.title}
           description={block.description}
           storageKey={block.storageKey}

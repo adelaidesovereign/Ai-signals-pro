@@ -96,6 +96,40 @@ export type CourseReconsolidation = {
   storageKey: string;
 };
 
+export type CourseMantraInstaller = {
+  type: "tool";
+  tool: "mantra-installer";
+  title: string;
+  description: string;
+  repeats?: number;
+  storageKey: string;
+};
+
+export type CoursePresentMomentAnchor = {
+  type: "tool";
+  tool: "present-moment-anchor";
+  title: string;
+  description: string;
+  storageKey: string;
+};
+
+export type CourseVisionLetter = {
+  type: "tool";
+  tool: "vision-letter";
+  title: string;
+  description: string;
+  timeframe?: string;
+  storageKey: string;
+};
+
+export type CourseWeeklyReview = {
+  type: "tool";
+  tool: "weekly-review";
+  title: string;
+  description: string;
+  storageKey: string;
+};
+
 export type CourseInteractive =
   | CourseWritingPrompt
   | CourseBreathwork
@@ -104,7 +138,11 @@ export type CourseInteractive =
   | CourseSomaticFind
   | CourseHeartCoherence
   | CoursePartsWork
-  | CourseReconsolidation;
+  | CourseReconsolidation
+  | CourseMantraInstaller
+  | CoursePresentMomentAnchor
+  | CourseVisionLetter
+  | CourseWeeklyReview;
 
 export type CourseBlock =
   | CourseParagraph

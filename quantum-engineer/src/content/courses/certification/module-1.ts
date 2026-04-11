@@ -36,6 +36,14 @@ export const module1: CourseModule = {
         },
         {
           type: "tool",
+          tool: "present-moment-anchor",
+          title: "Before you begin, come back to the room",
+          description:
+            "A five-sense anchor before the work starts. Fifteen specific present-moment truths. The body needs this before any identity work can land.",
+          storageKey: "cert-1-1-anchor",
+        },
+        {
+          type: "tool",
           tool: "writing-prompt",
           title: "Three words",
           prompt:

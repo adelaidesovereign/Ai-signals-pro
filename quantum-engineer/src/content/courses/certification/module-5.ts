@@ -32,14 +32,21 @@ export const module5: CourseModule = {
         },
         {
           type: "tool",
-          tool: "writing-prompt",
-          title: "Thirty present-tense sentences",
-          prompt:
-            "Write at least thirty present-tense sentences about who she is in the specific sensory details of her day. Every sentence must be something the body could actually feel. Start each one with 'I' or 'She' and let them pile up.",
-          placeholder:
-            "1. She wakes up and…\n2. Her body is…\n3. The first thing she does is…\n…",
-          minRows: 15,
-          storageKey: "cert-5-1-thirty-sentences",
+          tool: "vision-letter",
+          title: "A letter from one year from now",
+          description:
+            "Write a letter from the version of you who has been living as her for twelve months. What does she want her current self to know? What is she doing that the current version cannot yet picture?",
+          timeframe: "one year from today",
+          storageKey: "cert-5-1-vision-letter",
+        },
+        {
+          type: "tool",
+          tool: "mantra-installer",
+          title: "Install one sentence",
+          description:
+            "Pick the single sentence from the letter that carries the most charge. Write it here. The installer will pace your breath around it for ten slow repetitions — this is the sentence you take into the hypnagogic window tonight.",
+          repeats: 10,
+          storageKey: "cert-5-1-mantra",
         },
       ],
     },
@@ -115,14 +122,11 @@ export const module5: CourseModule = {
         },
         {
           type: "tool",
-          tool: "writing-prompt",
-          title: "Your return time, tracked",
-          prompt:
-            "Each time you notice you have drifted back into the old state, write the date and how long it took you to notice. Over the weeks, watch the numbers get smaller. That is the real metric.",
-          placeholder:
-            "— Date / hours it took to notice / what brought me back —\n\n",
-          minRows: 8,
-          storageKey: "cert-5-3-return-time",
+          tool: "weekly-review",
+          title: "Your weekly return review",
+          description:
+            "Each week, name where the old version showed up, where the new one showed up, how fast you came back, and what next week needs. This is the real metric.",
+          storageKey: "cert-5-3-weekly-review",
         },
       ],
     },

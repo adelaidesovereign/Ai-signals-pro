@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { SessionProviders } from "@/components/providers/SessionProviders";
 import { PWARegister } from "@/components/providers/PWARegister";
+import { FloatingCoach } from "@/components/site/FloatingCoach";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -60,6 +61,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-cream text-sage-deep antialiased">
         <SessionProviders>{children}</SessionProviders>
+        <FloatingCoach />
         <PWARegister />
       </body>
     </html>

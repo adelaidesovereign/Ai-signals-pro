@@ -106,13 +106,12 @@ export const module6: CourseModule = {
         },
         {
           type: "tool",
-          tool: "writing-prompt",
-          title: "Who am I collapsing into today?",
-          prompt:
-            "The closing sentence of the whole course. Write it now. Write it tomorrow morning. Write it every morning for the rest of your life. Present tense. In her body. This is the whole practice, distilled into one line.",
-          placeholder: "Today I am collapsing into the one who…",
-          minRows: 5,
-          storageKey: "cert-6-3-today",
+          tool: "mantra-installer",
+          title: "Today's sentence",
+          description:
+            "The closing practice of the whole course, and the one you take with you forever. Write your present-tense identity sentence once. The installer paces your breath around it, ten times, slow. This is the whole practice, distilled.",
+          repeats: 10,
+          storageKey: "cert-6-3-today-mantra",
         },
       ],
     },

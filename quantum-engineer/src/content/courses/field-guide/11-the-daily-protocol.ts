@@ -152,5 +152,14 @@ export const chapter11: CourseLesson = {
       ],
       storageKey: "fg-11-daily-protocol",
     },
+    {
+      type: "tool",
+      tool: "mantra-installer",
+      title: "The morning sentence",
+      description:
+        "The one present-tense sentence you say before your feet touch the floor. Write it here, then the installer paces your breath around it for ten slow repetitions.",
+      repeats: 10,
+      storageKey: "fg-11-morning-mantra",
+    },
   ],
 };
