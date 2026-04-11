@@ -34,30 +34,30 @@ const PRESETS: Record<
   }
 > = {
   coach: {
-    // Coach talks to you at a gentle pace with a deeper tone.
+    // Coach talks to you at a gentle pace with a gently deeper tone.
     // premiumSpeed goes to the TTS API; playbackRate is applied to
     // the returned audio element with preservesPitch=false, which
     // both slows the audio AND drops its pitch — one lever for both.
     premiumSpeed: 0.95,
-    playbackRate: 0.87,
+    playbackRate: 0.9,
     rate: 0.8,
-    pitch: 0.72,
+    pitch: 0.75,
     volume: 0.95,
   },
   subliminal: {
-    // Extra soft, deepest of the three — like soothing a baby to sleep.
+    // Extra soft — like soothing a baby to sleep. Still the deepest.
     premiumSpeed: 0.9,
-    playbackRate: 0.82,
+    playbackRate: 0.85,
     rate: 0.62,
-    pitch: 0.65,
+    pitch: 0.68,
     volume: 0.55,
   },
   meditation: {
-    // Slow, warm, deep, deliberately paced for theta descent work.
+    // Slow, warm, deliberately paced for theta descent work.
     premiumSpeed: 0.9,
-    playbackRate: 0.85,
+    playbackRate: 0.88,
     rate: 0.66,
-    pitch: 0.7,
+    pitch: 0.72,
     volume: 0.85,
   },
 };
