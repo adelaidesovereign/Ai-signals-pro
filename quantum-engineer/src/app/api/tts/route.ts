@@ -26,13 +26,12 @@ type Body = {
   speed?: number;
 };
 
-// ElevenLabs default voice: Charlotte — warm, low register, naturally
-// soothing with a slower delivery. Described as a "seductive English
-// female" in the voice library, which in practice means the calmest,
-// most intimate-sounding of the common presets.
+// ElevenLabs default voice: Matilda — American female, warm, soft,
+// with a gentle natural delivery. A good default for a soothing
+// practice tool.
 // Override by setting ELEVENLABS_VOICE_ID in your env to any voice from
 // https://elevenlabs.io/app/voice-library
-const DEFAULT_ELEVENLABS_VOICE_ID = "XB0fDUnXU5powFXDhCwa";
+const DEFAULT_ELEVENLABS_VOICE_ID = "XrExE9yKIg1WjnnlVkGX";
 
 async function tryElevenLabs(text: string): Promise<Response | null> {
   const key = process.env.ELEVENLABS_API_KEY;
