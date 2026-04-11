@@ -13,11 +13,21 @@ export async function GET(req: Request) {
 
   const config = PRODUCT_CONFIG[product];
   const priceId = process.env[config.priceEnvKey];
-  if (!priceId) {
-    return NextResponse.json(
-      { error: `${config.priceEnvKey} is not configured.` },
-      { status: 500 },
-    );
+  const stripeSecret = process.env.STRIPE_SECRET_KEY;
+
+  // Dev fallback — if Stripe is not configured yet (local dev, staging),
+  // send the visitor to a friendly explainer page instead of erroring.
+  const isStripeMissing =
+    !stripeSecret ||
+    stripeSecret.startsWith("sk_test_placeholder") ||
+    !priceId ||
+    priceId.includes("_dev") ||
+    priceId === "";
+  if (isStripeMissing) {
+    const origin = process.env.NEXTAUTH_URL ?? new URL(req.url).origin;
+    const dest = new URL(`${origin}/checkout-unavailable`);
+    dest.searchParams.set("product", product);
+    return NextResponse.redirect(dest, { status: 303 });
   }
 
   const session = await auth();

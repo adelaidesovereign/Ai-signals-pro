@@ -77,8 +77,8 @@ export default function HomePage() {
                 not have a new technique. You will have seen yourself.
               </p>
               <div className="mt-8">
-                <Button href="/services#field-guide" variant="secondary">
-                  Field Guide — $27
+                <Button href="/field-guide" variant="secondary">
+                  Open the Field Guide
                 </Button>
               </div>
             </Card>
@@ -97,8 +97,8 @@ export default function HomePage() {
                 you to be smaller.
               </p>
               <div className="mt-8">
-                <Button href="/services#certification">
-                  Certification — $497
+                <Button href="/certification">
+                  Open the Certification
                 </Button>
               </div>
             </Card>
@@ -117,8 +117,8 @@ export default function HomePage() {
                 who you are.
               </p>
               <div className="mt-8">
-                <Button href="/services#inner-circle" variant="secondary">
-                  Inner Circle — $97/mo
+                <Button href="/inner-circle" variant="secondary">
+                  Open the Inner Circle
                 </Button>
               </div>
             </Card>
@@ -256,8 +256,8 @@ export default function HomePage() {
               her.
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button href="/services#field-guide" size="lg">
-                Begin the Field Guide — $27
+              <Button href="/field-guide" size="lg">
+                Begin the Field Guide
               </Button>
               <Link
                 href="/quiz"

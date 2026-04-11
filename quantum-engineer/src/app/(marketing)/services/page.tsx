@@ -48,14 +48,19 @@ export default function ServicesPage() {
                   you go. Progress holds across your devices.
                 </p>
                 <div className="mt-8 space-y-3">
+                  <Button href="/field-guide" size="lg">
+                    Open the Field Guide
+                  </Button>
                   <Button
                     href="/api/stripe/checkout?product=field-guide"
+                    variant="secondary"
                     size="lg"
                   >
-                    Buy the Field Guide — $27
+                    Buy it — $27
                   </Button>
                   <p className="text-xs text-sage-deep/60">
-                    Immediate access. Your account is created at checkout.
+                    Read the first chapter as a preview. The rest opens with
+                    your purchase.
                   </p>
                 </div>
               </div>
@@ -118,9 +123,13 @@ export default function ServicesPage() {
                   theta installation, nervous system regulation, the daily
                   protocol that wires the new identity in permanently.
                 </p>
-                <div className="mt-8 space-y-4">
+                <div className="mt-8 space-y-3">
+                  <Button href="/certification" size="lg">
+                    Open the Certification Program
+                  </Button>
                   <Button
                     href="/api/stripe/checkout?product=certification"
+                    variant="secondary"
                     size="lg"
                   >
                     Enrol — $497
@@ -133,7 +142,8 @@ export default function ServicesPage() {
                     Payment plan — 3 &times; $167
                   </Button>
                   <p className="text-xs text-sage-deep/60">
-                    Lifetime access. Future updates included at no extra cost.
+                    Preview Lesson 1.1 on the open page. The rest of the
+                    program opens with enrolment.
                   </p>
                 </div>
               </div>
@@ -206,14 +216,18 @@ export default function ServicesPage() {
                   Sovereign Subliminals in your library every month.
                 </p>
                 <div className="mt-8 space-y-3">
+                  <Button href="/inner-circle" size="lg">
+                    Open the Inner Circle
+                  </Button>
                   <Button
                     href="/api/stripe/checkout?product=inner-circle"
+                    variant="secondary"
                     size="lg"
                   >
                     Join — $97/month
                   </Button>
                   <p className="text-xs text-sage-deep/60">
-                    Cancel any time. You keep what you have written.
+                    Take a look inside. Cancel any time once you're a member.
                   </p>
                 </div>
               </div>
