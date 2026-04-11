@@ -26,12 +26,12 @@ type Body = {
   speed?: number;
 };
 
-// ElevenLabs default voice: Matilda — American female, warm, soft,
-// with a gentle natural delivery. A good default for a soothing
-// practice tool.
-// Override by setting ELEVENLABS_VOICE_ID in your env to any voice from
-// https://elevenlabs.io/app/voice-library
-const DEFAULT_ELEVENLABS_VOICE_ID = "XrExE9yKIg1WjnnlVkGX";
+// ElevenLabs default voice: Nicole — an American female ASMR-style
+// whisper voice. Specifically designed for the soothing, close-to-
+// the-ear quality you want for subliminals and guided meditations.
+// Override by setting ELEVENLABS_VOICE_ID in your env to any voice
+// from https://elevenlabs.io/app/voice-library
+const DEFAULT_ELEVENLABS_VOICE_ID = "piTKgcLEGmPE4e6mEKli";
 
 async function tryElevenLabs(text: string): Promise<Response | null> {
   const key = process.env.ELEVENLABS_API_KEY;
@@ -53,9 +53,13 @@ async function tryElevenLabs(text: string): Promise<Response | null> {
           text,
           model_id: "eleven_turbo_v2_5",
           voice_settings: {
-            stability: 0.78,
-            similarity_boost: 0.88,
-            style: 0.15,
+            // Tuned for whisper / ASMR quality — high stability
+            // so the delivery stays calm, high similarity so it
+            // sounds like the trained voice, no style exaggeration,
+            // no speaker boost which makes things sharper.
+            stability: 0.82,
+            similarity_boost: 0.92,
+            style: 0,
             use_speaker_boost: false,
           },
         }),
