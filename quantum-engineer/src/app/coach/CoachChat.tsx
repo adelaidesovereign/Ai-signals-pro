@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { softSpeak, cancelSpeech, waitForVoices } from "@/lib/audio/voice";
 
 type Message = {
   role: "user" | "assistant";
@@ -8,6 +9,7 @@ type Message = {
 };
 
 const STORAGE_KEY = "qe:coach:messages";
+const VOICE_PREF_KEY = "qe:coach:voice-enabled";
 const MAX_STORED = 40;
 
 export function CoachChat({
@@ -30,6 +32,7 @@ export function CoachChat({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [fallbackActive, setFallbackActive] = useState(false);
+  const [voiceOn, setVoiceOn] = useState(true);
   const hydratedRef = useRef(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -43,12 +46,27 @@ export function CoachChat({
           setMessages(parsed);
         }
       }
+      const voicePref = window.localStorage.getItem(VOICE_PREF_KEY);
+      if (voicePref !== null) {
+        setVoiceOn(voicePref === "true");
+      }
     } catch {
       /* ignore corrupted local state */
     }
     hydratedRef.current = true;
+    waitForVoices();
+    return () => {
+      cancelSpeech();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!hydratedRef.current) return;
+    window.localStorage.setItem(VOICE_PREF_KEY, voiceOn ? "true" : "false");
+    if (!voiceOn) cancelSpeech();
+  }, [voiceOn]);
 
   useEffect(() => {
     if (!hydratedRef.current) return;
@@ -104,6 +122,9 @@ export function CoachChat({
         ...prev,
         { role: "assistant", content: data.reply },
       ]);
+      if (voiceOn && typeof data.reply === "string") {
+        softSpeak(data.reply, "coach").catch(() => {});
+      }
     } catch {
       setError("Connection dropped. Try once more.");
     } finally {
@@ -122,6 +143,20 @@ export function CoachChat({
 
   return (
     <div className="rounded-soft border border-sage/15 bg-cream-warm shadow-card">
+      <div className="flex items-center justify-between border-b border-sage/15 px-6 py-3 sm:px-8">
+        <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-sage">
+          Adelaide is {voiceOn ? "reading aloud" : "reading silently"}
+        </p>
+        <button
+          onClick={() => {
+            setVoiceOn(!voiceOn);
+            if (voiceOn) cancelSpeech();
+          }}
+          className="font-sans text-[10px] uppercase tracking-[0.15em] text-sage-deep/70 hover:text-sage"
+        >
+          {voiceOn ? "Silence her voice" : "Turn her voice on"}
+        </button>
+      </div>
       {fallbackActive && (
         <div className="border-b border-sage/15 bg-cream-deep/50 px-6 py-3">
           <p className="text-xs text-sage-deep/75">

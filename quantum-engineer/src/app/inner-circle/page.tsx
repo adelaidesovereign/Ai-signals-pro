@@ -2,14 +2,12 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
-import {
-  MONTHLY_DROPS,
-  UPCOMING_CALLS,
-  SUBLIMINALS_LIBRARY,
-} from "@/content/inner-circle";
+import { MONTHLY_DROPS, UPCOMING_CALLS } from "@/content/inner-circle";
+import { SUBLIMINALS } from "@/content/subliminals";
 import { CourseNav } from "@/components/courses/CourseNav";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
+import { SubliminalPlayer } from "@/components/courses/tools/SubliminalPlayer";
 import { CommunityFeed } from "./CommunityFeed";
 
 export const metadata: Metadata = {
@@ -187,25 +185,27 @@ export default async function InnerCirclePage() {
               Sacred Sovereign Subliminals
             </h2>
             <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-sage-deep/60">
-              New track each month
+              Generated live. No downloads.
             </p>
           </div>
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
-            {SUBLIMINALS_LIBRARY.map((track) => (
-              <Card key={track.slug}>
-                <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-sage-deep/60">
-                  {track.duration}
-                </p>
-                <h3 className="mt-2 font-serif text-xl text-sage">
-                  {track.title}
-                </h3>
-                <p className="mt-3 text-sm text-sage-deep/85">
-                  {track.description}
-                </p>
-                <p className="mt-4 font-sans text-[10px] uppercase tracking-[0.15em] text-sage">
-                  {hasAccess ? "Available in your library" : "Members only"}
-                </p>
-              </Card>
+          <p className="mt-3 max-w-prose text-base text-sage-deep/85">
+            Each track is a full subliminal experience. Soft voice identity
+            phrases woven over theta binaural beats and a slow ambient drone,
+            generated in your browser in real time. Use headphones and a quiet
+            room. Close your eyes. The body does not need to understand every
+            word — the nervous system does.
+          </p>
+
+          <div className="mt-8 space-y-6">
+            {SUBLIMINALS.map((track) => (
+              <SubliminalPlayer
+                key={track.slug}
+                title={track.title}
+                description={track.description}
+                phrases={track.phrases}
+                durationSeconds={track.durationMinutes * 60}
+                beatFrequency={track.beatFrequency}
+              />
             ))}
           </div>
         </section>

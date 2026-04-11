@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 const links = [
   { href: "/about", label: "About" },
   { href: "/services", label: "The Work" },
+  { href: "/meditations", label: "Meditations" },
   { href: "/quiz", label: "Quiz" },
   { href: "/login", label: "Member Login" },
 ];
