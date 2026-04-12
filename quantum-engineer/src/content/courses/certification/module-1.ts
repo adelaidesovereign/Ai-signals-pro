@@ -265,92 +265,258 @@ export const module1: CourseModule = {
       ],
     },
 
-    // ----- Lesson 1.3 -----
+    // ----- Lesson 1.3 — TOP 1% STANDARD -----
     {
       slug: "1-3-the-settle",
       title: "The Settle — Three Moves That Regulate You in Two Minutes",
       eyebrow: "Lesson 1.3",
-      reading: "15 minutes of practice",
+      reading: "30 minutes of reading and practice",
       blocks: [
         {
           type: "script",
-          text: "There are three things a body needs to move from the middle or bottom rung of the ladder back to ventral vagal. Three things that are mechanical, not emotional. They work every time because they are built on the way the vagus nerve actually operates.\n\nMove one. The long exhale. Your vagus nerve is most activated by exhales that are longer than your inhales. Breathe in for four seconds. Breathe out for eight. Five cycles. The body cannot maintain fight-or-flight while it is doing this. It is not possible.\n\nMove two. Orient. Slowly turn your head and let your eyes land on things in the room — a corner of the wall, a plant, a texture, the light. Linger on each one. This is an ancient safety signal. You are telling the brainstem that the environment is known and there is no predator behind you.\n\nMove three. Name one specific, present-moment truth that is safe. Not a general affirmation. A specific truth. The door is closed. The air is warm. No one in this room is about to hurt me. The body is literal. It needs a specific fact to register that the scan can stop.\n\nTwo minutes. Three moves. This is the condition every other practice in the program requires.",
+          text: "This is the most practical lesson in the entire program. Not the deepest, not the most emotional, not the most intellectually complex. The most practical. Because what I am about to teach you is a two-minute sequence that you will use before every other practice, every morning for the rest of the program, and probably every morning for the rest of your life.\n\nThree moves. Each one is mechanical, not emotional. They do not require you to believe anything, feel anything, or be in a particular mood. They work because they are built on the way the vagus nerve physically operates. The vagus nerve does not care what you are thinking. It responds to specific physiological inputs, and when those inputs are present, it sends one signal to the entire body: safe. Come down. The scan can stop.\n\nI spent years trying to regulate my nervous system through understanding. I would notice I was activated, I would analyse why, I would try to talk myself through it. None of that worked because I was trying to use the prefrontal cortex to manage the brainstem, and the brainstem does not take instructions from the prefrontal cortex. It takes instructions from the body — from breath, from posture, from the eyes, from specific sensory inputs that it has been responding to since before humans had language.\n\nThe settle gives the brainstem what it actually needs. Not an explanation. A signal.",
+        },
+        {
+          type: "h",
+          text: "Move one — the long exhale. Why it works at the level of the nerve.",
+        },
+        {
+          type: "p",
+          text: "Your vagus nerve has two branches. The ventral branch (the one that produces the feeling of safety) is activated most powerfully by one specific event: an exhale that is longer than the inhale. This is not a wellness tip. This is the direct mechanical relationship between breath and vagal tone. When you breathe in, your heart rate slightly increases. When you breathe out, your heart rate slightly decreases. The longer the exhale relative to the inhale, the more the heart slows, the more the vagus nerve activates, and the further your body moves toward ventral.",
+        },
+        {
+          type: "p",
+          text: "The ratio that works most reliably is four seconds in, eight seconds out. Five cycles. By the third cycle, most people notice a shift — the shoulders drop without being told to, the jaw unclenches slightly, the visual field softens at the edges. That is not relaxation in the wellness sense. That is the brainstem receiving a mechanical signal and beginning to downregulate the sympathetic branch.",
+        },
+        {
+          type: "p",
+          text: "If you are currently in dorsal (shutdown, flat, numb), the long exhale may feel like it does nothing at first. That is because dorsal is already a state of low arousal — the body is already slow. The long exhale works here too, but its effect is subtler. In dorsal, the exhale is not calming you down — it is waking up the ventral branch that has gone offline. You may notice, after three or four cycles, that you feel slightly more present, slightly more 'here,' as if the room became marginally more real. That is ventral coming back online.",
         },
         {
           type: "tool",
           tool: "breathwork",
-          title: "The long exhale",
+          title: "Move one — the long exhale",
           description:
-            "Four seconds in, eight seconds out. Five cycles. The vagus nerve activates on the exhale. Your heart rate will drop measurably by the third cycle.",
+            "Four seconds in, eight seconds out. Five cycles. The breathing circle paces you. By the third cycle, notice what your shoulders do. Notice what your jaw does. Notice if the room gets slightly more present.",
           inhale: 4,
           exhale: 8,
           cycles: 5,
           storageKey: "cert-1-3-long-exhale",
         },
         {
+          type: "h",
+          text: "What your body just did — and what to do if it did not work.",
+        },
+        {
+          type: "p",
+          text: "If you felt the drop — the shoulders, the jaw, the slight softening — that is the vagal brake engaging. Your parasympathetic nervous system just took the wheel from your sympathetic system. That happened in under ninety seconds. No insight required. No emotional processing. Just the nerve doing what the nerve does when it gets the right input.",
+        },
+        {
+          type: "p",
+          text: "If you did not feel much, that is also data. It usually means one of two things: either you are in dorsal (the effect is subtler and takes more cycles), or you are so accustomed to the activated state that the first five cycles only moved you from a 9 to an 8 on the activation scale and the difference was too small to notice. In either case, the move still worked — your heart rate shifted, your vagal tone changed, the brainstem got the signal. Trust the mechanism even when the sensation is quiet. Over the coming week, as you do this every morning, the shifts will get louder.",
+        },
+        {
+          type: "h",
+          text: "Move two — orient. The ancient safety scan.",
+        },
+        {
+          type: "p",
+          text: "After the exhale, do this: slowly turn your head to the right. Let your eyes land on one thing in the room. A corner. A texture. A colour. Linger on it for two or three seconds. Then slowly turn your head to the left and let your eyes land on something else. Linger again.",
+        },
+        {
+          type: "p",
+          text: "This is called orienting, and it is one of the oldest safety signals in the mammalian nervous system. For millions of years, the act of slowly scanning the environment told the brainstem one thing: there is no predator behind me. The environment is known. I can come out of vigilance. Your brainstem does not know that you live in an apartment in 2026. It is still running the same code it ran on the savannah. When you slowly orient, it reads the slow movement and the detailed visual attention as proof of safety — because a body that is about to be attacked does not linger on textures.",
+        },
+        {
+          type: "p",
+          text: "You may notice, during the orient, that your breath deepens slightly without you choosing to deepen it. You may notice the muscles behind your eyes relax. You may notice that the room, which a moment ago was slightly flat or slightly threatening, begins to feel more like a room you are simply sitting in. These are all reports from the brainstem. It is updating the threat assessment in real time based on the data your eyes are giving it.",
+        },
+        {
+          type: "h",
+          text: "Move three — name one specific, present-moment safe truth.",
+        },
+        {
+          type: "p",
+          text: "After you orient, do one more thing. Name — out loud or inside your chest — one specific, present-moment fact that is safe. Not an affirmation. Not a general statement. A specific, verifiable truth about this exact moment.",
+        },
+        {
+          type: "list",
+          items: [
+            "The door is closed.",
+            "The air in this room is warm.",
+            "No one in this room is about to hurt me.",
+            "My back is against something solid.",
+            "I can hear the hum of the refrigerator, and nothing else.",
+          ],
+        },
+        {
+          type: "p",
+          text: "The body is extremely literal. An affirmation like 'I am safe and protected' does not register because the body cannot verify it — it is a general claim about a general future, and the nervous system does not do general. But 'the door is closed' is verifiable in this second. The brainstem checks the door, confirms the claim, and files it as true. One more data point in the direction of safety. The accumulation of these specific, tiny truths is what eventually shifts the baseline from 'scanning for threat' to 'resting in the known.'",
+        },
+        {
           type: "tool",
           tool: "present-moment-anchor",
-          title: "Orient and anchor",
+          title: "Move two and three — orient and anchor",
           description:
-            "Name five things you see, four things you hear, three things you feel, two things you smell, one thing you taste. Your body is giving you fifteen specific present-moment truths. That is enough to break the scan.",
+            "Five things you see. Four things you hear. Three things you feel. Two things you smell. One thing you taste. Fifteen specific present-moment truths delivered directly to the brainstem. When you finish, notice how the room feels different from when you started.",
           storageKey: "cert-1-3-anchor",
         },
         {
+          type: "h",
+          text: "The complete settle — what two minutes looks like.",
+        },
+        {
+          type: "p",
+          text: "From now on, whenever this program says 'do the settle first,' this is what it means:",
+        },
+        {
+          type: "list",
+          items: [
+            "Long exhale. Four in, eight out. Five cycles. (~90 seconds)",
+            "Orient. Slowly look right, linger. Slowly look left, linger. (~15 seconds)",
+            "Name. One specific present-moment safe truth. (~5 seconds)",
+          ],
+        },
+        {
+          type: "p",
+          text: "Total: under two minutes. You will do this before every morning installation, before every reconsolidation hold, before every guided meditation, before every EFT tapping session. It is the first two minutes of every practice in this program. And over time, as the body learns the sequence, it will begin to drop into ventral the moment you start the first exhale — the way a child's body relaxes the moment it recognises the opening bars of a lullaby it has heard a hundred times.",
+        },
+        {
+          type: "quote",
+          text: "The settle is not the work. The settle is the condition the work requires. Without it, everything that follows is a seed planted on concrete.",
+        },
+        {
           type: "note",
-          text: "Do these three moves once right now. Then do them every single morning before your feet touch the floor, and once more before every practice in this program. They are not the work. They are the condition the work requires.",
+          text: "Do the complete settle once more right now. Long exhale, five cycles. Orient left and right. Name one safe truth. Then notice: the inside of your body is different from when you opened this lesson. That difference is the ground floor of the entire program.",
         },
       ],
     },
 
-    // ----- Lesson 1.4 -----
+    // ----- Lesson 1.4 — TOP 1% STANDARD -----
     {
       slug: "1-4-building-safety-every-day",
       title: "Building a Regulated Baseline",
       eyebrow: "Lesson 1.4",
-      reading: "20 minutes of practice",
+      reading: "30 minutes of reading and practice",
       blocks: [
         {
           type: "script",
-          text: "A nervous system that has been in survival mode for years does not come down in one session. It comes down through repetition. The same way the old activation was built — through thousands of small moments — the new baseline is built through thousands of small moments of safety.\n\nYour job this week is not to start the deep work. Your job is to practice safety. Morning settle. Midday check-in. Evening settle. Three touch points across the day where you give the body one clear signal: you are safe. Nothing more.\n\nThe daily checklist below is your first protocol. Not the full daily protocol that comes later in the program — just the safety layer. Do this for one full week before moving to Module 2. The body needs to believe the floor is solid before it will let you go deeper.",
+          text: "A nervous system that has been running in survival mode for years does not come down in one session. I wish it did. It would have saved me a lot of mornings. But the body does not work that way, and pretending it does is why most programs produce a three-day high followed by a quiet return to the old state.\n\nThe activation you carry was not built in a day. It was built across thousands of small moments — the first argument overheard at age four, the first time the room went quiet and your stomach tightened without knowing why, the hundredth time you braced for something and something came. Each moment was a single rep on a barbell the body was not old enough to put down. Over years, the reps compounded into a resting state. The resting state became the baseline. The baseline became what you thought of as 'just how I am.'\n\nThe new baseline is built the same way the old one was — through repetition. Not willpower. Not a decision to be calmer. Repetition of the specific physiological signals the vagus nerve responds to, delivered at the same three points in the day, every single day, until the body stops treating safety as a temporary event and begins treating it as the floor it stands on.",
+        },
+        {
+          type: "h",
+          text: "Why three touch points, specifically.",
+        },
+        {
+          type: "p",
+          text: "The nervous system has a natural rhythm across the day. Cortisol peaks in the morning — the body's alarm clock, designed to bring you from sleep into alertness. By midday, the sympathetic branch often takes over, especially if the morning was stressful or the work is demanding. By evening, the body is supposed to transition toward parasympathetic dominance for sleep preparation — but for most people in chronic activation, this transition does not happen cleanly. They carry the day's activation into the night, sleep poorly, and wake up already behind.",
+        },
+        {
+          type: "p",
+          text: "Three settles — morning, midday, evening — interrupt this cycle at its most vulnerable points. The morning settle catches the body before cortisol hijacks it into old patterns. The midday check-in catches the sympathetic build-up before it becomes the afternoon's dominant state. The evening settle gives the body an explicit parasympathetic signal before sleep, so the night is actually restorative rather than a continuation of the day's bracing.",
+        },
+        {
+          type: "p",
+          text: "This is not a habit hack. This is the minimum effective dose of vagal input required to begin shifting a chronic baseline. One settle per day is maintenance. Three settles per day is construction. You are building a new floor.",
+        },
+        {
+          type: "h",
+          text: "What to expect across the seven days.",
+        },
+        {
+          type: "p",
+          text: "Days one and two: the settle will feel deliberate, like something you are doing on purpose. The shift afterward may be subtle — a slight drop in shoulder tension, a marginally deeper breath. You may wonder if it is doing anything.",
+        },
+        {
+          type: "p",
+          text: "Days three and four: the body begins to anticipate. You may find that on the third morning, the moment you start the first exhale, your shoulders begin to drop before the second cycle. That anticipation is the nervous system beginning to learn the sequence. It is the first sign that the body is building the pattern, not just tolerating it.",
+        },
+        {
+          type: "p",
+          text: "Days five through seven: the settle begins to feel familiar. Not automatic yet — that takes weeks — but familiar in the way that the first few notes of a song you have heard many times immediately bring a felt memory of the rest of the song. Your body is beginning to associate the first long exhale with the full sequence of safety signals that follows it. This associative learning is the foundation of every installation that comes later in the program.",
+        },
+        {
+          type: "quote",
+          text: "One settle per day is maintenance. Three settles per day is construction. You are building a new floor.",
+        },
+        {
+          type: "h",
+          text: "A note on what safety feels like when you are not used to it.",
+        },
+        {
+          type: "p",
+          text: "For some of you — maybe many of you — the experience of genuine safety in your own body will feel strange the first few times. It may feel suspicious. Unearned. Too quiet. A nervous system that has been bracing for a long time sometimes experiences the absence of bracing as a kind of falling, as if the thing that was holding you up has been removed and you are not sure the ground is there.",
+        },
+        {
+          type: "p",
+          text: "That is not a sign the settle is not working. It is a sign it is working and your body does not yet trust the result. The body has a phrase for what you are feeling: 'new.' That is all. Not dangerous. Not wrong. New. And new, repeated three times a day for seven days, gradually becomes known. And known is the doorway to the rest of the program.",
+        },
+        {
+          type: "h",
+          text: "Your first daily protocol.",
+        },
+        {
+          type: "p",
+          text: "This is not the full daily protocol — that comes in Module 6 with heart coherence, the identity installation, the midday anchor, the evening review, and the hypnagogic install. This is just the safety layer. Three moments. Three settles. Seven days.",
         },
         {
           type: "tool",
           tool: "daily-checklist",
           title: "The safety protocol — week one",
           description:
-            "Your first protocol. Three moments of safety across the day. The streak counter builds automatically. This is not discipline — it is repetition at the level the nervous system learns.",
+            "Your first protocol. Three moments of safety across the day. The streak counter builds automatically. When it reaches seven, you are ready for Module 2. Not before. The body needs the week.",
           items: [
             {
               key: "morning-settle",
               label: "Morning settle",
-              detail: "Three moves: long exhale (5 cycles), orient the room, name one safe truth.",
+              detail: "Before your feet touch the floor. Long exhale (5 cycles), orient the room, name one safe truth. Under two minutes.",
             },
             {
               key: "midday-check",
               label: "Midday check-in",
-              detail: "Hand on heart. Three slow breaths. Ask: where am I on the ladder right now?",
+              detail: "Hand on heart. Three slow breaths. Ask yourself: where am I on the ladder right now? If sympathetic, do one round of long exhale. If dorsal, do the orient.",
             },
             {
               key: "evening-settle",
               label: "Evening settle",
-              detail: "Three moves again before bed. Let the body end the day in ventral.",
+              detail: "The full three moves again, in bed, before sleep. Let the body close the day in ventral so the night actually restores instead of continuing the day's activation.",
             },
           ],
           storageKey: "cert-1-4-safety-protocol",
         },
         {
+          type: "h",
+          text: "After a few days — describe what you are finding.",
+        },
+        {
           type: "p",
-          text: "When your streak reaches seven days, you are ready for Module 2. Not before. The body needs the week. Trust the pace.",
+          text: "Come back to this page after three or four days of the protocol and write in the box below. Most people who have been in survival mode for a long time have no vocabulary for what safety feels like in their body. They know what anxiety feels like. They know what numbness feels like. But the quiet presence of an unbraced body in a known room is genuinely unfamiliar. Describing it gives the conscious mind a reference point, and reference points are what the subconscious uses to recognise the state next time.",
         },
         {
           type: "tool",
           tool: "writing-prompt",
           title: "What does safety feel like in your body?",
           prompt:
-            "Most people who have been in survival mode for a long time do not actually know what safety feels like. After doing the settle for a few days, describe the sensation. Where in your body do you notice it? What is different about the way the room feels? What is different about the way your chest holds?",
-          placeholder: "When the settle lands, the inside of my body feels like…",
-          minRows: 6,
+            "After doing the settle for a few days, describe the sensation that follows it. Not what you think you should feel — what you actually feel. Where in your body do you notice the shift? What happens to the quality of the room around you? Does the light change? Does the volume change? What happens to the tightness you identified in Lesson 1.2? Describe it as if you are writing a letter to someone who has never felt it.",
+          placeholder: "When the settle lands, the inside of my body feels like…\n\nThe room around me changes in this way…\n\nThe place where I usually hold tension feels…",
+          minRows: 10,
           storageKey: "cert-1-4-safety-feeling",
+        },
+        {
+          type: "h",
+          text: "What happens next.",
+        },
+        {
+          type: "p",
+          text: "When your streak reaches seven days, you are ready for Module 2 — The Heart as the Gate. In that module, you will learn to enter heart coherence, which is the second condition every practice in the program requires. The settle brings the nervous system to ventral. Heart coherence brings the heart and the brain into electromagnetic alignment. Together they form the two-step gate that opens every installation, every reconsolidation hold, and every guided meditation from Module 3 onward.",
+        },
+        {
+          type: "p",
+          text: "Do not rush past the seven days. The body is not slow because it is stubborn. It is slow because it is thorough. It needs the repetition the same way a foundation needs time to cure before you build on top of it. Seven days is the minimum. If it takes ten, that is fine. The gate does not have a deadline.",
+        },
+        {
+          type: "note",
+          text: "One more settle before you close this lesson. Long exhale, five cycles. Orient. Name one safe truth. Then put your hand on your chest and say, inside your body, not out loud: I am building the floor. The floor is holding. That is enough for today.",
         },
       ],
     },
