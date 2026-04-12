@@ -54,6 +54,31 @@ h6 {
   );
 }
 
+/* Gold accent rules from the shes-adelaide design */
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-gold),
+    transparent
+  );
+}
+
+.gold-rule-left {
+  height: 1px;
+  width: 80px;
+  background: linear-gradient(90deg, var(--color-gold), transparent);
+}
+
+/* Photo frame — the soft rounded container for Adelaide's portraits */
+.photo-frame {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px -20px rgba(92, 107, 94, 0.3);
+}
+
 /* Minimal scrollbar styling on cream background */
 ::-webkit-scrollbar {
   width: 10px;

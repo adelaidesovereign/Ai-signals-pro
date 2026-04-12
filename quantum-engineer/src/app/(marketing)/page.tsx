@@ -1,45 +1,157 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
+const EVIDENCE = [
+  {
+    year: "1983 · Declassified 2003",
+    title: "The CIA Gateway Process Report",
+    body: "The U.S. Army commissioned the CIA to investigate whether consciousness could alter physical reality. The classified finding: it can. The report documents specific brainwave protocols for accessing states where identity restructuring becomes possible. This is Layer 8 of the framework.",
+  },
+  {
+    year: "2000 · Nader, Schafe, LeDoux",
+    title: "Memory Reconsolidation",
+    body: "Peer-reviewed research proving that consolidated memories can be permanently rewritten under specific, reproducible conditions. Not a metaphor for change — the exact neurobiological mechanism that makes identity-level rewiring possible.",
+  },
+  {
+    year: "Quantum Biology",
+    title: "Penrose-Hameroff Orch-OR Theory",
+    body: "Consciousness arises from quantum computations in microtubules within neurons. Not metaphor. Measurable quantum processes occurring in your biology right now. This is the mechanism behind Layer 1.",
+  },
+  {
+    year: "Neuroscience",
+    title: "Karl Friston's Free Energy Principle",
+    body: "Your brain is a prediction machine. It constructs reality based on prior beliefs and minimises surprise. Change the predictions, change the reality your brain constructs. This is the neuroscience underneath every layer.",
+  },
+  {
+    year: "Peer-reviewed · HeartMath",
+    title: "The Heart's Electromagnetic Field",
+    body: "Decades of peer-reviewed findings on the heart's electromagnetic field and the measurable coherence effect between heart and brain. The signature you are broadcasting is not metaphorical — it is electromagnetic, and it can be measured several feet from the body.",
+  },
+  {
+    year: "2025 · Peer-Reviewed",
+    title: "Consciousness as a Foundational Field",
+    body: "Published in AIP Advances. Evidence that consciousness is not a byproduct of brain activity but a foundational field that physical reality emerges from. The framework was built on this premise years before the paper confirmed it.",
+  },
+];
+
 export default function HomePage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden pt-24 pb-32 sm:pt-32 sm:pb-40">
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-cream via-cream to-cream-deep/60" />
+      {/* Hero — 2-column: photo left, text right */}
+      <section className="relative overflow-hidden pt-20 pb-24 sm:pt-28 sm:pb-32">
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-cream via-cream to-cream-deep/50" />
         <Container size="wide" className="relative">
-          <div className="mx-auto max-w-4xl text-center">
-            <p className="font-sans text-xs uppercase tracking-[0.25em] text-sage">
-              Adelaide Taylor
-            </p>
-            <h1 className="mt-6 font-serif text-5xl leading-[1.05] text-sage sm:text-6xl lg:text-7xl">
-              Reality is not fixed.
-              <br />
-              Your brain is running a program.
-              <br />
-              <span className="text-sage-deep">
+          <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-16">
+            <div className="photo-frame order-1 aspect-[4/5] w-full max-w-md justify-self-center lg:order-none lg:max-w-none">
+              <Image
+                src="/images/addiepower.png"
+                alt="Adelaide Taylor"
+                fill
+                priority
+                sizes="(max-width: 1024px) 90vw, 45vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="order-2 text-center lg:order-none lg:text-left">
+              <p className="font-sans text-xs uppercase tracking-[0.28em] text-sage">
+                The Quantum Engineer
+              </p>
+              <h1 className="mt-6 font-serif text-5xl leading-[1.05] text-sage sm:text-6xl lg:text-7xl">
+                Reality is not fixed.
+                <br />
+                Your brain is running
+                <br />
+                <span className="italic text-sage-deep">a program.</span>
+              </h1>
+              <p className="mx-auto mt-8 max-w-xl text-xl text-sage-deep/85 lg:mx-0">
                 I teach you how to rewrite it.
-              </span>
-            </h1>
-            <p className="mx-auto mt-8 max-w-2xl text-lg text-sage-deep/85 sm:text-xl">
-              Not manifestation. Mechanism. The science of coming home to who
-              you actually are.
+              </p>
+              <p className="mx-auto mt-5 max-w-xl text-base italic text-sage-deep/70 lg:mx-0">
+                Not manifestation. Mechanism. The science of coming home to
+                who you actually are.
+              </p>
+              <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start">
+                <Button href="/begin" size="lg">
+                  Come home to yourself
+                </Button>
+                <Button href="/quiz" variant="secondary" size="lg">
+                  Where am I stuck?
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Positioning statement */}
+      <section className="bg-cream-deep/60 py-20 sm:py-24">
+        <Container size="narrow">
+          <div className="text-center">
+            <div className="gold-rule mx-auto mb-10 w-40" />
+            <p className="font-serif text-2xl leading-relaxed text-sage-deep sm:text-3xl">
+              Adelaide Taylor teaches the intersection of quantum physics,
+              neuroscience, CIA-documented consciousness research, and Human
+              Design as a precise system for engineering identity and reality.
             </p>
-            <p className="mx-auto mt-5 max-w-xl text-base italic text-sage-deep/70">
-              This is not a program you complete. It is a remembering. You are
-              not broken. You were never broken. You have been asleep to
-              yourself, and this is the way back.
+            <p className="mt-8 font-serif text-xl italic text-sage sm:text-2xl">
+              Not manifestation. Mechanism.
             </p>
-            <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button href="/begin" size="lg">
-                Begin the work
-              </Button>
-              <Button href="/quiz" variant="secondary" size="lg">
-                Where am I stuck?
-              </Button>
+            <div className="gold-rule mx-auto mt-10 w-40" />
+          </div>
+        </Container>
+      </section>
+
+      {/* Meet Adelaide — photo + bio */}
+      <section className="py-24 sm:py-32">
+        <Container size="wide">
+          <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-16">
+            <div className="photo-frame aspect-[4/5] w-full max-w-md justify-self-center lg:max-w-none">
+              <Image
+                src="/images/addiechin.png"
+                alt="Adelaide Taylor"
+                fill
+                sizes="(max-width: 1024px) 90vw, 45vw"
+                className="object-cover"
+              />
+            </div>
+            <div>
+              <p className="font-sans text-xs uppercase tracking-[0.28em] text-sage">
+                Meet Adelaide
+              </p>
+              <h2 className="mt-5 font-serif text-4xl leading-tight text-sage sm:text-5xl">
+                Entrepreneur. Researcher.{" "}
+                <span className="italic text-gold">Quantum Engineer.</span>
+              </h2>
+              <div className="gold-rule-left mt-6" />
+              <div className="mt-8 space-y-5 text-lg leading-relaxed text-sage-deep/90">
+                <p>
+                  She built the thirteen-layer framework from thousands of
+                  hours of peer-reviewed research in quantum physics,
+                  neuroscience, and consciousness studies. Cross-referencing
+                  classified government documents with measurable biological
+                  processes.
+                </p>
+                <p>
+                  The result is a system that maps precisely how consciousness
+                  generates physical reality — and how to intervene at each
+                  layer to engineer a different outcome.
+                </p>
+              </div>
+              <div className="mt-8">
+                <Link
+                  href="/about"
+                  className="group inline-flex items-center gap-2 font-sans text-sm uppercase tracking-[0.2em] text-sage hover:text-gold"
+                >
+                  Her full story
+                  <span className="transition-transform group-hover:translate-x-1">
+                    →
+                  </span>
+                </Link>
+              </div>
             </div>
           </div>
         </Container>
@@ -91,10 +203,10 @@ export default function HomePage() {
                 I am ready to come home to who I actually am.
               </h3>
               <p className="mt-4 text-sage-deep/85">
-                The Certification Program is six modules of the real work.
-                Root belief finding. Theta installation. The daily protocol.
-                The unhurried return to the person you were before fear told
-                you to be smaller.
+                The Certification Program is eight modules of the real work.
+                Root belief finding. EFT tapping. Reconsolidation. The daily
+                protocol. The unhurried return to the person you were before
+                fear told you to be smaller.
               </p>
               <div className="mt-8">
                 <Button href="/certification">
@@ -126,99 +238,68 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* Origin story */}
+      {/* Evidence — alternating left-right */}
       <section className="bg-cream-deep/60 py-24 sm:py-32">
-        <Container size="narrow">
-          <div className="space-y-8">
-            <p className="font-sans text-xs uppercase tracking-[0.25em] text-sage">
-              The reason this exists
-            </p>
-            <h2 className="font-serif text-4xl leading-tight text-sage sm:text-5xl">
-              Seventeen years of therapy gave me coping mechanisms. The
-              breakdowns kept coming.
-            </h2>
-            <div className="space-y-5 text-lg text-sage-deep/90">
-              <p>
-                Because coping never touches the root. The root is always
-                identity. I was running a program that was never mine.
-              </p>
-              <p>
-                I had brilliant therapists. I did real work. I built a
-                catalogue of tools for managing the crisis of the moment. And
-                the same crisis kept returning in a new costume.
-              </p>
-              <p>
-                The framework in the Field Guide is what actually changed
-                things. Not because it's clever. Because it works at the layer
-                the pattern was built on.
-              </p>
-            </div>
-            <div className="pt-4">
-              <Button href="/about" variant="secondary">
-                Read the full story
-              </Button>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* What makes this different */}
-      <section className="py-24 sm:py-32">
         <Container size="wide">
           <SectionHeading
-            eyebrow="What this is not"
-            title="Not coping. Not positive thinking."
+            eyebrow="The Evidence"
+            title="This is not theory. This is documented."
+            align="center"
           >
             <p>
-              This is the mechanism of subconscious reprogramming, backed by
-              documented science. Every claim is traceable. Every practice is
-              built on something you can read the paper on.
+              Built on research that governments, physicists, and
+              neuroscientists have documented for decades.
             </p>
           </SectionHeading>
 
-          <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                title: "The CIA Gateway Process",
-                body: "The 1983 classified report, declassified in 2003, documenting how specific brainwave states grant access to subconscious reprogramming at a fundamental level.",
-              },
-              {
-                title: "Memory Reconsolidation",
-                body: "The Nader, Schafe, LeDoux (2000) research proving that consolidated memories can be permanently rewritten under specific, reproducible conditions.",
-              },
-              {
-                title: "HeartMath research",
-                body: "Peer-reviewed findings on the heart's electromagnetic field and the measurable coherence effect between heart and brain.",
-              },
-              {
-                title: "Penrose-Hameroff Orch-OR",
-                body: "A theory of consciousness grounded in quantum processes within the brain's microtubules — not mystical, physical.",
-              },
-              {
-                title: "Free Energy Principle",
-                body: "Karl Friston's unifying theory of how the brain generates experience by minimising prediction error — the mathematical backbone of why the RAS filters the way it does.",
-              },
-              {
-                title: "AIP Advances 2025",
-                body: "The recent peer-reviewed paper proposing consciousness as a foundational field — the physics catching up to what the practice has shown for decades.",
-              },
-            ].map((item) => (
-              <Card key={item.title}>
-                <h3 className="font-serif text-2xl text-sage">{item.title}</h3>
-                <p className="mt-3 text-sage-deep/85">{item.body}</p>
-              </Card>
+          <div className="mt-20 space-y-16">
+            {EVIDENCE.map((item, i) => (
+              <div
+                key={item.title}
+                className={`grid gap-8 md:grid-cols-2 md:gap-16 ${
+                  i % 2 !== 0 ? "md:[&>*:first-child]:order-2" : ""
+                }`}
+              >
+                <div className="space-y-3">
+                  <p className="font-sans text-xs uppercase tracking-[0.25em] text-gold">
+                    {item.year}
+                  </p>
+                  <h3 className="font-serif text-3xl leading-tight text-sage">
+                    {item.title}
+                  </h3>
+                </div>
+                <div>
+                  <p className="text-lg leading-relaxed text-sage-deep/90">
+                    {item.body}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
 
-          <p className="mx-auto mt-14 max-w-prose text-center text-sage-deep/70">
+          <p className="mx-auto mt-20 max-w-prose text-center text-sage-deep/70">
             Every source referenced here is public. None of this is secret. It
-            just has not been put together in one place, in the right order,
+            has just not been put together in one place, in the right order,
             before.
           </p>
         </Container>
       </section>
 
-      {/* Testimonials placeholder */}
+      {/* Blockquote */}
+      <section className="py-24 sm:py-32">
+        <Container size="narrow">
+          <div className="text-center">
+            <div className="gold-rule mx-auto mb-12 w-32" />
+            <blockquote className="font-serif text-4xl italic leading-tight text-sage sm:text-5xl">
+              You do not need to believe harder. You need to reprogram the
+              system.
+            </blockquote>
+            <div className="gold-rule mx-auto mt-12 w-32" />
+          </div>
+        </Container>
+      </section>
+
+      {/* Testimonials */}
       <section className="bg-cream-deep/60 py-24">
         <Container size="narrow">
           <SectionHeading
@@ -230,9 +311,9 @@ export default function HomePage() {
             {[1, 2].map((i) => (
               <Card key={i}>
                 <p className="font-serif text-xl leading-relaxed text-sage-deep/90">
-                  "A quote from a real student will live here as soon as the
-                  first cohort completes the Certification Program. Adelaide
-                  will only publish what's true."
+                  &ldquo;A quote from a real student will live here as soon as
+                  the first cohort completes the Certification Program.
+                  Adelaide will only publish what&rsquo;s true.&rdquo;
                 </p>
                 <p className="mt-6 font-sans text-xs uppercase tracking-[0.15em] text-sage">
                   Student — Certification Program
@@ -243,21 +324,33 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* CTA */}
-      <section className="py-24 sm:py-32">
-        <Container size="narrow">
-          <div className="rounded-soft bg-cream-warm p-10 text-center shadow-card sm:p-16">
-            <h2 className="font-serif text-4xl text-sage sm:text-5xl">
-              Who are you when no one is watching?
+      {/* CTA with background image */}
+      <section className="relative overflow-hidden py-24 sm:py-32">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/addiechill.png"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover opacity-20"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-cream via-cream/85 to-cream" />
+        </div>
+        <Container size="narrow" className="relative">
+          <div className="text-center">
+            <p className="font-sans text-xs uppercase tracking-[0.28em] text-sage">
+              Begin
+            </p>
+            <h2 className="mt-6 font-serif text-4xl leading-tight text-sage sm:text-5xl lg:text-6xl">
+              You already know something has to change.
             </h2>
-            <p className="mx-auto mt-6 max-w-prose text-lg text-sage-deep/85">
-              That person is not a fantasy. She is who you were before fear
-              told you to be smaller. The Field Guide is the first step back to
-              her.
+            <p className="mx-auto mt-8 max-w-2xl text-lg text-sage-deep/85">
+              The question is whether you keep running the old program or
+              install a new one. Thirteen layers. Every mechanism documented.
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button href="/field-guide" size="lg">
-                Begin the Field Guide
+                Begin the Field Guide — $27
               </Button>
               <Link
                 href="/quiz"
