@@ -233,6 +233,7 @@ async function premiumSpeak(
 
   return new Promise<boolean>((resolve) => {
     const audio = new Audio(url);
+    audio.crossOrigin = "anonymous";
     audio.volume = cfg.volume;
 
     // Drop the pitch naturally by slowing playback while letting the
@@ -241,9 +242,6 @@ async function premiumSpeak(
     // a voice that is slightly slower AND noticeably deeper without
     // any server-side pitch-shifting.
     audio.playbackRate = cfg.playbackRate;
-    // preservesPitch / webkitPreservesPitch / mozPreservesPitch
-    // depending on the engine. Setting all three covers every
-    // browser safely.
     const a = audio as HTMLAudioElement & {
       preservesPitch?: boolean;
       webkitPreservesPitch?: boolean;
@@ -252,6 +250,39 @@ async function premiumSpeak(
     a.preservesPitch = false;
     a.webkitPreservesPitch = false;
     a.mozPreservesPitch = false;
+
+    // Route the audio element through a Web Audio BiquadFilter for a
+    // darker, closer-to-the-ear intimate sound. This is the difference
+    // between "spoken softly" and "true ASMR whisper". The low-pass
+    // drops frequencies above ~2800 Hz, which removes sibilance and
+    // harshness and leaves only the warm body of the voice.
+    try {
+      const Ctor =
+        (window.AudioContext as typeof AudioContext | undefined) ??
+        ((window as unknown as { webkitAudioContext?: typeof AudioContext })
+          .webkitAudioContext as typeof AudioContext | undefined);
+      if (Ctor) {
+        const ctx = new Ctor();
+        const source = ctx.createMediaElementSource(audio);
+        const filter = ctx.createBiquadFilter();
+        filter.type = "lowpass";
+        filter.frequency.value = preset === "subliminal" ? 2400 : 2800;
+        filter.Q.value = 0.7;
+        const warmth = ctx.createBiquadFilter();
+        warmth.type = "lowshelf";
+        warmth.frequency.value = 300;
+        warmth.gain.value = 2.5;
+        const outputGain = ctx.createGain();
+        outputGain.gain.value = 1;
+        source.connect(filter);
+        filter.connect(warmth);
+        warmth.connect(outputGain);
+        outputGain.connect(ctx.destination);
+      }
+    } catch {
+      /* Web Audio routing failed — audio still plays through the
+         element's default output, just without the filter. */
+    }
 
     let settled = false;
     const done = (ok: boolean) => {
