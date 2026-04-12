@@ -73,6 +73,44 @@ const EMERGE: MeditationStep[] = [
 // ---------- Meditations ----------
 
 export const MEDITATIONS: Meditation[] = [
+  // ======================================================================
+  // SOS — 3-minute emergency regulation. The first meditation in the
+  // library and the one accessible from the dashboard SOS button.
+  // ======================================================================
+  {
+    slug: "sos-come-back",
+    title: "SOS — come back to yourself in three minutes",
+    subtitle:
+      "An emergency regulation practice for the moment you are activated and need to come down right now",
+    intention:
+      "This is the one you use when your nervous system has spiked and you cannot think clearly. Three minutes. No build-up. Immediate regulation. Do it standing, sitting, lying down, in a car, in a bathroom stall. Anywhere. Right now.",
+    durationMinutes: 3,
+    beatFrequency: 6,
+    stages: [
+      {
+        name: "Right now",
+        steps: [
+          { text: "Stop. You are here. You are listening.", pause: 3 },
+          { text: "Put one hand on the center of your chest.", pause: 4 },
+          { text: "Breathe in through your nose for four seconds.", pause: 4 },
+          { text: "Hold for one second.", pause: 1 },
+          { text: "Breathe out through your mouth for eight seconds. Slow.", pause: 8 },
+          { text: "Again. In for four.", pause: 4 },
+          { text: "Hold.", pause: 1 },
+          { text: "Out for eight. All the way out.", pause: 8 },
+          { text: "One more. In.", pause: 4 },
+          { text: "Out. Let everything drop one level.", pause: 8 },
+          { text: "Now look at something in the room. Anything. Name it silently.", pause: 5 },
+          { text: "Look at something else. Name it.", pause: 5 },
+          { text: "One more thing. Name it.", pause: 5 },
+          { text: "Name one thing that is true and safe right now. Specific. Not general.", pause: 6 },
+          { text: "You are here. The scan can stop. You came back.", pause: 6 },
+          { text: "When you are ready, continue your day. You do not have to earn your way back. You just came back.", pause: 4 },
+        ],
+      },
+    ],
+  },
+
   {
     slug: "coming-home-to-who-you-are",
     title: "Coming home to who you actually are",
