@@ -58,17 +58,17 @@ async function tryElevenLabs(
         },
         body: JSON.stringify({
           text,
-          // eleven_multilingual_v2 has the best emotional nuance and
-          // natural breath variation of the ElevenLabs models — key
-          // for whisper / ASMR / meditation work. Turbo is faster but
-          // flatter.
-          model_id: "eleven_multilingual_v2",
+          // Nicole specifically sounds most whispery / ASMR on the
+          // turbo_v2_5 model — that is the model she was tuned for.
+          // multilingual_v2 flattens her into a more narrator tone.
+          // For Nicole we stay on turbo.
+          model_id: "eleven_turbo_v2_5",
           voice_settings: {
-            // Lower stability (0.3..0.5 range) allows natural breath
-            // variation and a genuine whisper quality. Too high and
-            // she sounds like she is reading aloud; too low and it
-            // becomes unstable. 0.38 is the sweet spot for whisper.
-            stability: 0.38,
+            // Lower stability (0.25) allows the natural breath
+            // variation and soft whisper quality to come through.
+            // Higher stability makes Nicole sound like she is
+            // reading aloud rather than whispering.
+            stability: 0.25,
             similarity_boost: 0.85,
             style: 0,
             use_speaker_boost: false,

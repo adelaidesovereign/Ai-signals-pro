@@ -4,7 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { ThetaAudio } from "@/lib/audio/theta";
 import { AmbientAudio } from "@/lib/audio/ambient";
 import type { AmbientKind, SolfeggioFrequency } from "@/lib/audio/ambient";
-import { softSpeak, cancelSpeech, waitForVoices } from "@/lib/audio/voice";
+import {
+  softSpeak,
+  cancelSpeech,
+  waitForVoices,
+  preloadSpeak,
+} from "@/lib/audio/voice";
 
 // A full subliminal track — plays theta binaural beats, an optional
 // ambient soundscape (rain, ocean, forest), an optional solfeggio
@@ -41,6 +46,36 @@ export function SubliminalPlayer({
   const [elapsed, setElapsed] = useState(0);
   const [currentPhrase, setCurrentPhrase] = useState<string>("");
   const [showPhrase, setShowPhrase] = useState(false);
+  const [selectedAmbient, setSelectedAmbient] = useState<AmbientKind>(
+    ambient ?? "rain",
+  );
+  const [selectedSolfeggio, setSelectedSolfeggio] = useState<
+    SolfeggioFrequency | undefined
+  >(solfeggio);
+  const [voiceMode, setVoiceMode] = useState<"unknown" | "premium" | "browser">(
+    "unknown",
+  );
+
+  // Check whether the premium voice endpoint is actually configured so
+  // the UI can show the user honestly which voice they are about to hear.
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/tts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: "probe" }),
+    })
+      .then((res) => {
+        if (cancelled) return;
+        setVoiceMode(res.ok ? "premium" : "browser");
+      })
+      .catch(() => {
+        if (!cancelled) setVoiceMode("browser");
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const audioRef = useRef<ThetaAudio | null>(null);
   const ambientRef = useRef<AmbientAudio | null>(null);
@@ -92,6 +127,19 @@ export function SubliminalPlayer({
     const phrase = phrases[idx];
     setCurrentPhrase(phrase);
 
+    // Preload the next two phrases in the background so they're cached
+    // by the time they play — no dead-air while the API fetch lands.
+    const nextIdx1 =
+      orderRef.current[(indexRef.current + 1) % orderRef.current.length];
+    const nextIdx2 =
+      orderRef.current[(indexRef.current + 2) % orderRef.current.length];
+    if (phrases[nextIdx1]) {
+      preloadSpeak(phrases[nextIdx1], "subliminal").catch(() => {});
+    }
+    if (phrases[nextIdx2]) {
+      preloadSpeak(phrases[nextIdx2], "subliminal").catch(() => {});
+    }
+
     indexRef.current += 1;
     if (indexRef.current >= orderRef.current.length) {
       shuffleOrder();
@@ -121,11 +169,11 @@ export function SubliminalPlayer({
     await audio.start();
 
     // Layered ambient soundscape + optional solfeggio tone.
-    if (ambient || solfeggio) {
+    if (selectedAmbient !== "none" || selectedSolfeggio) {
       const ambientAudio = new AmbientAudio({
-        kind: ambient ?? "none",
+        kind: selectedAmbient,
         volume: 0.22,
-        solfeggio,
+        solfeggio: selectedSolfeggio,
         solfeggioVolume: 0.03,
       });
       ambientRef.current = ambientAudio;
@@ -158,6 +206,48 @@ export function SubliminalPlayer({
     setPlaying(false);
   }
 
+  async function swapAmbient(nextKind: AmbientKind) {
+    setSelectedAmbient(nextKind);
+    // If not currently playing, just update state for next play.
+    if (!playing) return;
+    // Crossfade: stop the current ambient, start a fresh one.
+    if (ambientRef.current) {
+      const old = ambientRef.current;
+      ambientRef.current = null;
+      old.stop().catch(() => {});
+    }
+    if (nextKind !== "none" || selectedSolfeggio) {
+      const fresh = new AmbientAudio({
+        kind: nextKind,
+        volume: 0.22,
+        solfeggio: selectedSolfeggio,
+        solfeggioVolume: 0.03,
+      });
+      ambientRef.current = fresh;
+      await fresh.start();
+    }
+  }
+
+  async function swapSolfeggio(next: SolfeggioFrequency | undefined) {
+    setSelectedSolfeggio(next);
+    if (!playing) return;
+    if (ambientRef.current) {
+      const old = ambientRef.current;
+      ambientRef.current = null;
+      old.stop().catch(() => {});
+    }
+    if (selectedAmbient !== "none" || next) {
+      const fresh = new AmbientAudio({
+        kind: selectedAmbient,
+        volume: 0.22,
+        solfeggio: next,
+        solfeggioVolume: 0.03,
+      });
+      ambientRef.current = fresh;
+      await fresh.start();
+    }
+  }
+
   const mm = Math.floor(elapsed / 60);
   const ss = String(elapsed % 60).padStart(2, "0");
   const totalMin = Math.floor(durationSeconds / 60);
@@ -175,7 +265,31 @@ export function SubliminalPlayer({
               {description}
             </p>
           </div>
+          <div
+            className={`rounded-full border px-3 py-1 text-[9px] uppercase tracking-[0.15em] ${
+              voiceMode === "premium"
+                ? "border-sage/40 bg-sage/10 text-sage"
+                : voiceMode === "browser"
+                  ? "border-gold/40 bg-gold/10 text-sage-deep"
+                  : "border-sage/20 bg-cream text-sage-deep/60"
+            }`}
+          >
+            {voiceMode === "premium"
+              ? "Premium voice"
+              : voiceMode === "browser"
+                ? "Browser voice"
+                : "Checking voice"}
+          </div>
         </div>
+        {voiceMode === "browser" && (
+          <p className="mt-4 rounded-soft border border-gold/30 bg-cream-warm px-4 py-3 text-xs text-sage-deep/80">
+            Premium voice is not configured on this deploy yet. You are
+            hearing your browser&apos;s fallback voice, which is why it
+            sounds robotic. Set <code>ELEVENLABS_API_KEY</code> in your{" "}
+            <code>.env.local</code> and restart the dev server to hear
+            Nicole&apos;s whispered voice instead.
+          </p>
+        )}
 
         <div className="mt-8 flex flex-col items-center">
           <div className="relative flex h-44 w-44 items-center justify-center">
@@ -216,6 +330,62 @@ export function SubliminalPlayer({
             >
               {showPhrase ? "Hide phrases" : "Show phrases"}
             </button>
+          </div>
+
+          {/* Soundscape selector */}
+          <div className="mt-8 w-full max-w-md rounded-soft border border-sage/15 bg-cream-warm/80 p-5">
+            <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-sage">
+              Soundscape
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {(
+                [
+                  { key: "none", label: "Theta only" },
+                  { key: "rain", label: "Rain" },
+                  { key: "ocean", label: "Ocean" },
+                  { key: "forest", label: "Forest" },
+                ] as const
+              ).map((opt) => (
+                <button
+                  key={opt.key}
+                  onClick={() => swapAmbient(opt.key)}
+                  className={`rounded-soft px-4 py-2 font-sans text-[11px] uppercase tracking-quiet transition-all ${
+                    selectedAmbient === opt.key
+                      ? "bg-sage text-cream-warm shadow-soft"
+                      : "border border-sage/30 bg-cream text-sage-deep hover:border-sage"
+                  }`}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+
+            <p className="mt-5 font-sans text-[10px] uppercase tracking-[0.25em] text-sage">
+              Solfeggio frequency
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {(
+                [
+                  { key: undefined, label: "Off" },
+                  { key: 396 as SolfeggioFrequency, label: "396 Hz — fear release" },
+                  { key: 528 as SolfeggioFrequency, label: "528 Hz — cellular repair" },
+                  { key: 639 as SolfeggioFrequency, label: "639 Hz — connection" },
+                  { key: 963 as SolfeggioFrequency, label: "963 Hz — pineal" },
+                ] as const
+              ).map((opt, i) => (
+                <button
+                  key={i}
+                  onClick={() => swapSolfeggio(opt.key)}
+                  className={`rounded-soft px-3 py-2 font-sans text-[10px] uppercase tracking-quiet transition-all ${
+                    selectedSolfeggio === opt.key
+                      ? "bg-sage text-cream-warm shadow-soft"
+                      : "border border-sage/30 bg-cream text-sage-deep hover:border-sage"
+                  }`}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
           </div>
 
           {showPhrase && currentPhrase && (

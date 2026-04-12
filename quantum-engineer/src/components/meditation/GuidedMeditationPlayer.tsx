@@ -2,7 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ThetaAudio } from "@/lib/audio/theta";
-import { softSpeak, cancelSpeech, waitForVoices } from "@/lib/audio/voice";
+import {
+  softSpeak,
+  cancelSpeech,
+  waitForVoices,
+  preloadSpeak,
+} from "@/lib/audio/voice";
 import type { Meditation, MeditationStep } from "@/content/meditations";
 
 // A player for guided meditations. Speaks each step in the soft voice,
@@ -75,6 +80,17 @@ export function GuidedMeditationPlayer({
     setCurrentText(step.text);
     setCurrentStage(step.stageName);
 
+    // Preload the NEXT step's audio in the background so when it's
+    // its turn it plays instantly. This eliminates the dead-air gap
+    // between lines that was causing the choppy cadence.
+    if (index + 1 < flat.length) {
+      preloadSpeak(flat[index + 1].text, "meditation").catch(() => {});
+    }
+    // Preload the one after that too — extra buffer.
+    if (index + 2 < flat.length) {
+      preloadSpeak(flat[index + 2].text, "meditation").catch(() => {});
+    }
+
     // Await the voice line fully. softSpeak returns a Promise that only
     // resolves once the audio (premium or browser) has actually finished
     // playing. No overlap, no choppy cut-off on long phrases.
@@ -88,16 +104,17 @@ export function GuidedMeditationPlayer({
     // the step index will have moved. Bail out cleanly.
     if (stepRef.current !== index) return;
 
-    // Scale the configured silence a little so the practice feels
-    // continuous instead of stilted. Long hold phases (20+ seconds)
-    // are left mostly intact; short in-between pauses tighten up.
+    // Hold the configured silence before the next line. Long holds
+    // (>18s) are kept mostly intact for the practice. Short pauses
+    // stay closer to what the script intended now that the audio
+    // doesn't have to wait on a fetch — smoother cadence.
     const scaledPause =
-      step.pause > 18 ? step.pause * 0.9 : step.pause * 0.65;
+      step.pause > 18 ? step.pause * 0.95 : step.pause * 0.85;
 
     timerRef.current = setTimeout(() => {
       if (stepRef.current !== index) return;
       runStep(index + 1);
-    }, Math.max(1.5, scaledPause) * 1000);
+    }, Math.max(1.8, scaledPause) * 1000);
   }
 
   async function play() {
@@ -110,10 +127,19 @@ export function GuidedMeditationPlayer({
     const audio = new ThetaAudio({ beatFrequency: meditation.beatFrequency });
     audioRef.current = audio;
     await audio.start();
+
+    // Preload the first three lines so the practice opens instantly
+    // instead of sitting in silence while the first fetch lands.
+    if (flat[0]) preloadSpeak(flat[0].text, "meditation").catch(() => {});
+    if (flat[1]) preloadSpeak(flat[1].text, "meditation").catch(() => {});
+    if (flat[2]) preloadSpeak(flat[2].text, "meditation").catch(() => {});
+
     setState("playing");
     setStepIndex(0);
     stepRef.current = 0;
-    runStep(0);
+    // Tiny delay so the preload has a head start before the first
+    // audio element attempts to play it.
+    setTimeout(() => runStep(0), 600);
   }
 
   function pause() {

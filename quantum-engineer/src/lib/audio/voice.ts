@@ -169,6 +169,39 @@ function browserSpeak(
 
 const audioCache = new Map<string, string>();
 
+/**
+ * Warm the audio cache for a future phrase so it plays instantly when
+ * it is its turn. Call this while a previous phrase is still speaking
+ * to eliminate silence gaps caused by the API fetch.
+ */
+export async function preloadSpeak(
+  text: string,
+  preset: SpeakPreset = "meditation",
+): Promise<void> {
+  if (!text.trim()) return;
+  if (typeof window === "undefined") return;
+  const cfg = PRESETS[preset];
+  const cacheKey = `${preset}|${text}`;
+  if (audioCache.has(cacheKey)) return;
+  try {
+    const res = await fetch("/api/tts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        text,
+        voice: "nova",
+        speed: cfg.premiumSpeed,
+      }),
+    });
+    if (!res.ok) return;
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    audioCache.set(cacheKey, url);
+  } catch {
+    /* ignore — will fall back to browser speech when played */
+  }
+}
+
 async function premiumSpeak(
   text: string,
   preset: SpeakPreset,
