@@ -33,10 +33,15 @@ async function tryElevenLabs(
         },
         body: JSON.stringify({
           text,
-          model_id: "eleven_turbo_v2_5",
+          // eleven_multilingual_v2 renders Nicole with more natural
+          // breath and whisper characteristics than turbo. Higher
+          // stability (0.5) makes the whisper consistent across every
+          // phrase instead of appearing on some and disappearing on
+          // others.
+          model_id: "eleven_multilingual_v2",
           voice_settings: {
-            stability: 0.2,
-            similarity_boost: 0.75,
+            stability: 0.5,
+            similarity_boost: 0.85,
             style: 0,
             use_speaker_boost: false,
             speed: clampedSpeed,
