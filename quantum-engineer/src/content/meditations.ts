@@ -472,6 +472,537 @@ export const MEDITATIONS: Meditation[] = [
       },
     ],
   },
+
+  // ======================================================================
+  // YOGA NIDRA — the oldest systematic guided meditation tradition.
+  // 45 minutes. 61-point body rotation of consciousness, sankalpa
+  // intention, opposites, visualization, integration.
+  // ======================================================================
+  {
+    slug: "yoga-nidra-coming-home",
+    title: "Yoga Nidra — the sleep of the yogi",
+    subtitle:
+      "A 45-minute Yoga Nidra with sankalpa, 61-point rotation of consciousness, opposites, and visualization",
+    intention:
+      "The oldest guided meditation tradition on earth, adapted for the framework. You lie down. You do nothing. Adelaide's voice walks you through the full sequence, and by the end the body has dropped below alpha into genuine theta. This is the single most restorative meditation in the library.",
+    durationMinutes: 45,
+    beatFrequency: 5,
+    stages: [
+      {
+        name: "Preparation",
+        steps: [
+          { text: "Lie down on your back. Let your legs be a comfortable distance apart. Palms facing up.", pause: 10 },
+          { text: "Let your body settle into whatever is holding you.", pause: 10 },
+          { text: "This is Yoga Nidra — the sleep of the yogi. You will stay just barely awake. Not sleeping. Not fully awake. In between.", pause: 10 },
+          { text: "If you fall asleep, that is also allowed. The practice still does its work.", pause: 10 },
+          { text: "Take one full breath in. Hold it at the top for a beat. And let it out slowly through the mouth.", pause: 10 },
+          { text: "Again. In. Hold. Out.", pause: 10 },
+          { text: "And now let the breath find its own pace. You are no longer directing it.", pause: 15 },
+        ],
+      },
+      {
+        name: "Sankalpa",
+        steps: [
+          { text: "Now I want you to find your sankalpa.", pause: 6 },
+          { text: "Your sankalpa is a short sentence in present tense that speaks to who you are underneath all the doing.", pause: 10 },
+          { text: "Not a goal. Not a wish. A truth. The one you would say if fear were not in the room.", pause: 12 },
+          { text: "Let it come. It may be words. It may be a feeling. Do not force it.", pause: 14 },
+          { text: "When the sentence arrives, silently repeat it three times inside your body. Not your head. Your body.", pause: 20 },
+          { text: "Hold it. Let the body remember it. You will return to it at the end.", pause: 14 },
+        ],
+      },
+      {
+        name: "Rotation of consciousness",
+        steps: [
+          { text: "Now we begin the rotation of consciousness. I will name a point on your body and you simply place your awareness there. Feel that point. No need to move anything.", pause: 8 },
+          { text: "Forehead.", pause: 2 },
+          { text: "Right eye.", pause: 2 },
+          { text: "Left eye.", pause: 2 },
+          { text: "Right ear.", pause: 2 },
+          { text: "Left ear.", pause: 2 },
+          { text: "Tip of the nose.", pause: 2 },
+          { text: "Chin.", pause: 2 },
+          { text: "Right shoulder.", pause: 2 },
+          { text: "Right elbow.", pause: 2 },
+          { text: "Right wrist.", pause: 2 },
+          { text: "Tip of the right thumb.", pause: 2 },
+          { text: "Second finger.", pause: 2 },
+          { text: "Third finger.", pause: 2 },
+          { text: "Fourth finger.", pause: 2 },
+          { text: "Fifth finger.", pause: 2 },
+          { text: "Right wrist.", pause: 2 },
+          { text: "Right elbow.", pause: 2 },
+          { text: "Right shoulder.", pause: 2 },
+          { text: "Center of the chest.", pause: 3 },
+          { text: "Left shoulder.", pause: 2 },
+          { text: "Left elbow.", pause: 2 },
+          { text: "Left wrist.", pause: 2 },
+          { text: "Left thumb.", pause: 2 },
+          { text: "Second finger.", pause: 2 },
+          { text: "Third finger.", pause: 2 },
+          { text: "Fourth finger.", pause: 2 },
+          { text: "Fifth finger.", pause: 2 },
+          { text: "Left wrist.", pause: 2 },
+          { text: "Left elbow.", pause: 2 },
+          { text: "Left shoulder.", pause: 2 },
+          { text: "Throat.", pause: 3 },
+          { text: "Right side of the chest.", pause: 3 },
+          { text: "Center of the chest.", pause: 3 },
+          { text: "Left side of the chest.", pause: 3 },
+          { text: "Navel.", pause: 3 },
+          { text: "Lower abdomen.", pause: 3 },
+          { text: "Right hip.", pause: 2 },
+          { text: "Right knee.", pause: 2 },
+          { text: "Right ankle.", pause: 2 },
+          { text: "Right big toe.", pause: 2 },
+          { text: "Second toe.", pause: 2 },
+          { text: "Third.", pause: 2 },
+          { text: "Fourth.", pause: 2 },
+          { text: "Fifth toe.", pause: 2 },
+          { text: "Right ankle.", pause: 2 },
+          { text: "Right knee.", pause: 2 },
+          { text: "Right hip.", pause: 2 },
+          { text: "Left hip.", pause: 2 },
+          { text: "Left knee.", pause: 2 },
+          { text: "Left ankle.", pause: 2 },
+          { text: "Left big toe.", pause: 2 },
+          { text: "Second.", pause: 2 },
+          { text: "Third.", pause: 2 },
+          { text: "Fourth.", pause: 2 },
+          { text: "Fifth toe.", pause: 2 },
+          { text: "Left ankle.", pause: 2 },
+          { text: "Left knee.", pause: 2 },
+          { text: "Left hip.", pause: 3 },
+          { text: "The whole front of the body.", pause: 5 },
+          { text: "The whole back of the body.", pause: 5 },
+          { text: "The whole body. Head to toe.", pause: 14 },
+        ],
+      },
+      {
+        name: "Breath awareness",
+        steps: [
+          { text: "Now bring your attention to the breath.", pause: 6 },
+          { text: "You are not changing it. You are watching it.", pause: 8 },
+          { text: "Count each out-breath silently. Ten, nine, eight, seven.", pause: 10 },
+          { text: "Six, five, four, three.", pause: 8 },
+          { text: "Two, one, and then start again at ten.", pause: 15 },
+          { text: "If you lose count, begin again. No correction. Just the return.", pause: 20 },
+        ],
+      },
+      {
+        name: "Opposites",
+        steps: [
+          { text: "Now I will name pairs of sensations. Feel each one briefly, then let it go.", pause: 6 },
+          { text: "Heaviness. Feel your whole body heavy.", pause: 10 },
+          { text: "Lightness. Feel your body light. Weightless.", pause: 10 },
+          { text: "Heaviness again. Just for a breath.", pause: 8 },
+          { text: "Lightness. The lightness of being held.", pause: 10 },
+          { text: "Warmth. A slow warmth through your chest.", pause: 10 },
+          { text: "Coolness. A cool touch across your forehead.", pause: 10 },
+          { text: "Joy. Remember a moment of real joy. Let it be in your body.", pause: 14 },
+          { text: "Sadness. Remember a moment of real sadness. Let it pass through.", pause: 14 },
+          { text: "Now both. Joy and sadness at once. Let them coexist.", pause: 14 },
+        ],
+      },
+      {
+        name: "Visualization",
+        steps: [
+          { text: "Now picture a deep blue sky.", pause: 8 },
+          { text: "You are looking up at it from a place where nothing is asked of you.", pause: 10 },
+          { text: "A full moon is rising in the blue.", pause: 10 },
+          { text: "The moon has been there your whole life.", pause: 10 },
+          { text: "The moon knows who you are without the fear.", pause: 12 },
+          { text: "Feel her gaze, held on you, without judgment.", pause: 14 },
+          { text: "The moon is the witness you have always been looking for. And she has always been there.", pause: 16 },
+        ],
+      },
+      {
+        name: "Return to sankalpa",
+        steps: [
+          { text: "Now bring back your sankalpa. The sentence you held at the beginning.", pause: 10 },
+          { text: "Repeat it silently three more times. Inside your body.", pause: 18 },
+          { text: "The body remembers it now. The subconscious has taken it in. It is installed.", pause: 12 },
+        ],
+      },
+      {
+        name: "Externalization",
+        steps: [
+          { text: "Begin to bring awareness back to the room.", pause: 8 },
+          { text: "Feel the surface under your body.", pause: 8 },
+          { text: "The sounds of the room around you.", pause: 8 },
+          { text: "Very gently, begin to move your fingers and your toes.", pause: 10 },
+          { text: "A deeper breath.", pause: 6 },
+          { text: "Stretch if your body asks for it.", pause: 8 },
+          { text: "When you are ready, roll onto your right side and rest there for a breath or two.", pause: 10 },
+          { text: "And slowly, when you are ready, open your eyes. You have come back from deep rest. Welcome home.", pause: 6 },
+        ],
+      },
+    ],
+  },
+
+  // ======================================================================
+  // NSDR — Non-Sleep Deep Rest. Andrew Huberman's evidence-based protocol.
+  // 20 minutes. Postural reset, longer exhales, precise body scan,
+  // stillness with awareness, return with intention.
+  // ======================================================================
+  {
+    slug: "nsdr-huberman-protocol",
+    title: "NSDR — Non-Sleep Deep Rest",
+    subtitle:
+      "A 20-minute evidence-based protocol for dopamine replenishment, nervous system reset, and accelerated learning",
+    intention:
+      "The modern science-backed version of yoga nidra. Use this after any hard mental work, between lessons, or any time your nervous system needs a reset. Peer-reviewed research shows NSDR replenishes dopamine and consolidates learning in a way ordinary rest does not. Twenty minutes buys you the equivalent of a much longer nap without the grogginess.",
+    durationMinutes: 20,
+    beatFrequency: 5,
+    stages: [
+      {
+        name: "Arrival",
+        steps: [
+          { text: "Lie down on your back, or sit upright if you prefer. Either works.", pause: 6 },
+          { text: "Let your eyes close.", pause: 4 },
+          { text: "Notice that you have decided to do this. That one decision is enough. Nothing else is required.", pause: 10 },
+          { text: "Let your body settle against whatever is holding you.", pause: 10 },
+        ],
+      },
+      {
+        name: "Breath reset",
+        steps: [
+          { text: "Take a deep breath in through your nose.", pause: 4 },
+          { text: "And a much longer breath out through your mouth. Longer than you think.", pause: 8 },
+          { text: "Again. In.", pause: 4 },
+          { text: "And out. Much longer.", pause: 8 },
+          { text: "The long exhale is the single fastest way to slow your heart rate. Your nervous system is downshifting as we speak.", pause: 10 },
+          { text: "One more. In through the nose. And a long slow exhale through the mouth.", pause: 12 },
+          { text: "Now let the breath go back to whatever it wants to do. You are no longer controlling it.", pause: 10 },
+        ],
+      },
+      {
+        name: "Precise body scan",
+        steps: [
+          { text: "Bring your attention to the top of your head.", pause: 8 },
+          { text: "Feel any sensation there. A tingle. A temperature. A nothing. Whatever is there.", pause: 10 },
+          { text: "Now move your attention slowly down to your forehead. Feel it.", pause: 10 },
+          { text: "Your eyes, resting behind their lids.", pause: 10 },
+          { text: "Your jaw, which is softer than it usually is.", pause: 10 },
+          { text: "Your throat.", pause: 10 },
+          { text: "Your shoulders. Feel them drop one more notch.", pause: 12 },
+          { text: "Your chest. The breath moving in and out, unhurried.", pause: 12 },
+          { text: "Your arms, all the way down to your fingertips.", pause: 12 },
+          { text: "Your belly. Let it be soft.", pause: 12 },
+          { text: "Your hips and lower back.", pause: 10 },
+          { text: "Your thighs.", pause: 10 },
+          { text: "Your knees.", pause: 8 },
+          { text: "Your calves.", pause: 8 },
+          { text: "Your ankles and feet.", pause: 10 },
+          { text: "The whole body. One single field of sensation.", pause: 14 },
+        ],
+      },
+      {
+        name: "Stillness with awareness",
+        steps: [
+          { text: "Now simply stay here. You are not asleep. You are not trying to do anything. You are aware, and you are still.", pause: 20 },
+          { text: "Thoughts may arrive. Let them pass through like weather.", pause: 20 },
+          { text: "The body is doing all the work for you. Dopamine is replenishing. The nervous system is resetting. You do not need to help.", pause: 25 },
+          { text: "Stay here.", pause: 30 },
+          { text: "A little longer.", pause: 25 },
+        ],
+      },
+      {
+        name: "Return",
+        steps: [
+          { text: "Begin to bring awareness back to the room.", pause: 6 },
+          { text: "Feel your hands and your feet.", pause: 6 },
+          { text: "Take a slightly deeper breath.", pause: 5 },
+          { text: "As you come back, set one gentle intention for the next hour of your life. Just one.", pause: 12 },
+          { text: "When you are ready, open your eyes. You have just given your nervous system a full reset. Move slowly into the next thing.", pause: 6 },
+        ],
+      },
+    ],
+  },
+
+  // ======================================================================
+  // BLESSING OF THE ENERGY CENTERS — Joe Dispenza style.
+  // 35 minutes. Seven energy centers held in awareness for ~4 minutes
+  // each, each one named and blessed. The most-reported breakthrough
+  // practice in the consciousness-engineering space.
+  // ======================================================================
+  {
+    slug: "blessing-of-the-energy-centers",
+    title: "Blessing of the Energy Centers",
+    subtitle:
+      "A 35-minute practice that holds each of the seven centers in awareness and blesses them open, one at a time",
+    intention:
+      "This is the practice that produces the most reported breakthroughs in the consciousness space. Seven energy centers, each held in focused awareness for several minutes with a specific intention. Do not analyse. Do not try. Let each center receive attention the way a plant receives sunlight. The centers respond to being seen.",
+    durationMinutes: 35,
+    beatFrequency: 6,
+    stages: [
+      {
+        name: "Settle",
+        steps: [
+          { text: "Sit upright, spine long. Or lie down — either works.", pause: 8 },
+          { text: "Let your eyes close.", pause: 6 },
+          { text: "Take one slow breath in, and a longer breath out.", pause: 10 },
+          { text: "Again. In. Out, longer.", pause: 10 },
+          { text: "Let your body drop one level deeper.", pause: 12 },
+          { text: "We are going to bring attention to each of your seven energy centers, one at a time. Each one receives your full awareness for a few minutes. Nothing to do. Just be there.", pause: 12 },
+        ],
+      },
+      {
+        name: "The root center",
+        steps: [
+          { text: "Bring your attention to the base of your spine. The root.", pause: 8 },
+          { text: "This is the centre of your safety, your groundedness, your belonging.", pause: 10 },
+          { text: "Feel it. Let your awareness rest there like a hand on a warm stone.", pause: 14 },
+          { text: "As you hold it, let a quiet blessing go to this place: I am safe. I belong here. I have a right to take up space.", pause: 16 },
+          { text: "Stay with the root. Let it receive the attention.", pause: 30 },
+          { text: "Feel the body respond to being seen at this layer.", pause: 30 },
+          { text: "A little longer. The root is opening.", pause: 25 },
+        ],
+      },
+      {
+        name: "The sacral center",
+        steps: [
+          { text: "Now move your awareness up to the sacral center, just below the navel.", pause: 10 },
+          { text: "This is the centre of creativity, pleasure, and your felt relationship with what is alive.", pause: 12 },
+          { text: "Let your attention rest here.", pause: 14 },
+          { text: "Bless this place: I am allowed to want. I am allowed to create. I am allowed to feel pleasure without earning it.", pause: 16 },
+          { text: "Stay. Hold it without doing anything. The center responds to being held.", pause: 30 },
+          { text: "A little longer.", pause: 25 },
+        ],
+      },
+      {
+        name: "The solar plexus",
+        steps: [
+          { text: "Move your awareness up to the solar plexus. Just below your ribs.", pause: 10 },
+          { text: "This is the centre of your will, your fire, your capacity to choose.", pause: 12 },
+          { text: "Let your awareness settle there.", pause: 12 },
+          { text: "Bless it: My will is mine. I choose what I give my energy to. I am allowed to say no.", pause: 16 },
+          { text: "Hold it. Nothing else.", pause: 30 },
+          { text: "A little longer. Feel it warm.", pause: 25 },
+        ],
+      },
+      {
+        name: "The heart center",
+        steps: [
+          { text: "Now the heart. Place a hand on the center of your chest if it helps.", pause: 10 },
+          { text: "This is the centre where everything meets. The bridge between the lower and upper. The seat of who you are.", pause: 14 },
+          { text: "Let your attention rest here. No strain. No agenda.", pause: 14 },
+          { text: "Bless it: I am loved. I am already loved. I do not have to earn this.", pause: 16 },
+          { text: "Stay. The heart opens slower than the other centers. Give it time.", pause: 35 },
+          { text: "Longer. Let the chest soften.", pause: 30 },
+        ],
+      },
+      {
+        name: "The throat center",
+        steps: [
+          { text: "Move up to the throat.", pause: 10 },
+          { text: "The centre of your truth. Your voice. What you are allowed to say.", pause: 12 },
+          { text: "Let your attention rest there.", pause: 12 },
+          { text: "Bless it: My voice is mine. I am allowed to say what is true even when it is inconvenient.", pause: 16 },
+          { text: "Stay. The throat holds a lot. Let it be held back.", pause: 30 },
+          { text: "A little longer.", pause: 25 },
+        ],
+      },
+      {
+        name: "The third eye",
+        steps: [
+          { text: "Move up to the space between your eyebrows. The third eye.", pause: 10 },
+          { text: "This is the centre of your knowing. Intuition. What you already see before you can prove it.", pause: 12 },
+          { text: "Let your awareness rest there.", pause: 14 },
+          { text: "Bless it: I trust what I already know. I do not need external permission to know it.", pause: 16 },
+          { text: "Stay. Feel it soften and open.", pause: 30 },
+          { text: "Longer.", pause: 25 },
+        ],
+      },
+      {
+        name: "The crown",
+        steps: [
+          { text: "Finally, move to the crown of your head.", pause: 10 },
+          { text: "The centre of your connection to the larger field you are part of.", pause: 12 },
+          { text: "Feel the top of your head as if it were slightly open.", pause: 14 },
+          { text: "Bless it: I am part of something larger. I do not have to hold it all alone.", pause: 16 },
+          { text: "Let the crown be held by the field. Let the field be held by the crown.", pause: 30 },
+          { text: "A little longer. The whole system is open now.", pause: 30 },
+        ],
+      },
+      {
+        name: "Integration",
+        steps: [
+          { text: "Now feel all seven centers at once. Root to crown. A single column of awareness.", pause: 20 },
+          { text: "The whole system has been seen. It is all still here. Held.", pause: 20 },
+          { text: "Stay as long as the body wants.", pause: 30 },
+        ],
+      },
+      { name: "Emerge", steps: EMERGE },
+    ],
+  },
+
+  // ======================================================================
+  // SOMATIC EXPERIENCING PENDULATION — Peter Levine's trauma work.
+  // 20 minutes. Alternating between felt activation and felt safety
+  // so the nervous system learns it can leave threat state and return.
+  // ======================================================================
+  {
+    slug: "somatic-pendulation",
+    title: "Pendulation — the nervous system returning to itself",
+    subtitle:
+      "A 20-minute Somatic Experiencing practice. Alternating between the felt sense of activation and the felt sense of resource so the body learns the return",
+    intention:
+      "Peter Levine's Somatic Experiencing approach rests on one insight: trauma is not in the event, it is in the nervous system's inability to discharge the activation. Pendulation teaches the body that it can move between activation and safety without getting stuck. This meditation walks you through the pendulation slowly, so the nervous system learns the path.",
+    durationMinutes: 20,
+    beatFrequency: 6,
+    stages: [
+      { name: "Settle", steps: SETTLE.slice(0, 7) },
+      {
+        name: "Locate the activation",
+        steps: [
+          { text: "Bring to mind a situation from your life where your body is activated. Not the worst one. A medium one. A recurring tightness you know well.", pause: 12 },
+          { text: "Feel it in your body. Where does the activation live?", pause: 12 },
+          { text: "It might be a clenching, a bracing, a shallow breath, a held shoulder. Notice the exact location.", pause: 14 },
+          { text: "Just five percent of the activation. Not the whole thing. Five percent is enough.", pause: 14 },
+          { text: "Stay with the edge of it, not the centre. Watch it the way you would watch weather.", pause: 18 },
+        ],
+      },
+      {
+        name: "Locate the resource",
+        steps: [
+          { text: "Now gently move your attention to a different part of your body. A place that feels neutral or good.", pause: 12 },
+          { text: "Maybe your feet on the floor. Maybe the warmth behind your knees. Maybe your hand on your chest.", pause: 14 },
+          { text: "Find the part that is safe. That is your resource.", pause: 14 },
+          { text: "Rest your awareness there. Let it expand a little.", pause: 18 },
+        ],
+      },
+      {
+        name: "Pendulation",
+        steps: [
+          { text: "Now gently bring your attention back to the edge of the activation. Just the edge.", pause: 14 },
+          { text: "And now back to the resource. Feel the safe place again.", pause: 14 },
+          { text: "Activation.", pause: 14 },
+          { text: "Resource.", pause: 14 },
+          { text: "Activation.", pause: 14 },
+          { text: "Resource. Let it be a slow swing between them.", pause: 18 },
+          { text: "Notice what happens in the activation as you keep returning to the resource.", pause: 18 },
+          { text: "The body is learning it can leave and come back. This is the practice.", pause: 20 },
+          { text: "Keep swinging at your own pace. I will be quiet for a moment.", pause: 40 },
+          { text: "One more round. Activation. Resource. Activation. Resource.", pause: 20 },
+        ],
+      },
+      {
+        name: "Settle into the new default",
+        steps: [
+          { text: "Now rest in the resource. Let the activation go wherever it goes.", pause: 14 },
+          { text: "Your nervous system has just practiced something it did not know it could do. Let that land.", pause: 18 },
+          { text: "This is the return. This is the whole practice.", pause: 20 },
+        ],
+      },
+      { name: "Emerge", steps: EMERGE.slice(0, 5) },
+    ],
+  },
+
+  // ======================================================================
+  // LONG-FORM FIELD COLLAPSE — 60-minute Dispenza-style retreat practice.
+  // The longest and deepest meditation in the library. For serious days.
+  // Settle, body scan, heart coherence, identity install, 20+ minutes
+  // of held-state observation, integration.
+  // ======================================================================
+  {
+    slug: "long-form-field-collapse",
+    title: "The long-form field collapse",
+    subtitle:
+      "A 60-minute practice for the days you need to drop all the way down. Built on the same sequence Dispenza's retreat students use",
+    intention:
+      "This is the deepest meditation in the library. Sixty minutes. Do not do it on a stolen fifteen-minute break. Do it on a quiet morning when nothing else is asked of you. The practice holds you through the full arc — settle, body scan, heart coherence, identity install, and twenty minutes of held-state field observation. The held state is where the real collapse happens.",
+    durationMinutes: 60,
+    beatFrequency: 5,
+    stages: [
+      {
+        name: "Long settle",
+        steps: [
+          { text: "Sit or lie down. Let your body find its quiet shape.", pause: 10 },
+          { text: "Close your eyes. The next hour is yours.", pause: 10 },
+          { text: "There is nothing on the other side of this that needs your attention more than this does.", pause: 12 },
+          { text: "Let that land. Nothing else is pulling at you.", pause: 14 },
+          { text: "Take one breath in, slow. And a much longer breath out.", pause: 12 },
+          { text: "Again. In.", pause: 8 },
+          { text: "Out, longer.", pause: 12 },
+          { text: "Once more. In.", pause: 8 },
+          { text: "Out. All the way out.", pause: 14 },
+          { text: "Let the breath become its own. I am going to be quiet for a while. Just stay.", pause: 40 },
+        ],
+      },
+      {
+        name: "Body scan",
+        steps: [
+          { text: "Bring your awareness to the top of your head.", pause: 10 },
+          { text: "Notice it. No change required.", pause: 10 },
+          { text: "Slowly, move the attention down to your forehead. Your eyes behind their lids. Your jaw unclenched. Your throat.", pause: 20 },
+          { text: "Your shoulders. Your chest. Your arms all the way to your fingertips.", pause: 20 },
+          { text: "Your belly, soft. Your lower back. Your hips.", pause: 20 },
+          { text: "Your thighs. Your knees. Your calves. Your ankles. Your feet.", pause: 20 },
+          { text: "The whole body. Held as one single field of sensation.", pause: 25 },
+          { text: "Stay in the whole body for a moment longer. No part pulled at. No part excluded.", pause: 30 },
+        ],
+      },
+      {
+        name: "Heart coherence",
+        steps: [
+          { text: "Now place your attention at the center of your chest.", pause: 10 },
+          { text: "Breathe in and out as if the breath were moving through the heart.", pause: 14 },
+          { text: "Five seconds in, five seconds out. Let me pace you for a few rounds, then I will step back.", pause: 10 },
+          { text: "In.", pause: 5 },
+          { text: "Out.", pause: 5 },
+          { text: "In.", pause: 5 },
+          { text: "Out.", pause: 5 },
+          { text: "In.", pause: 5 },
+          { text: "Out.", pause: 5 },
+          { text: "Now bring up one real, specific memory of appreciation. A person. A moment. A place.", pause: 14 },
+          { text: "Let the felt sense of it live in your chest while you keep breathing through the heart.", pause: 20 },
+          { text: "Stay. I will be quiet. You are changing the shape of your heart field right now.", pause: 45 },
+          { text: "A little longer. Do not rush this. It is the door to everything else.", pause: 45 },
+        ],
+      },
+      {
+        name: "Identity install",
+        steps: [
+          { text: "Now, from this coherent state, invite the version of you you have been installing.", pause: 14 },
+          { text: "The one without fear. Not imagined from outside — felt from inside her body.", pause: 16 },
+          { text: "Feel her back. Her jaw. Her shoulders. Her breath.", pause: 16 },
+          { text: "Let her fill the space your body occupies. You are not pretending. You are remembering.", pause: 20 },
+          { text: "Hold her. This is who you are.", pause: 30 },
+          { text: "Longer. Let every cell catch up to the state.", pause: 30 },
+          { text: "A little longer still. She is not coming. She is here.", pause: 30 },
+        ],
+      },
+      {
+        name: "Open field observation",
+        steps: [
+          { text: "Now stop reaching for anything. Stop picturing. Stop trying to hold any particular image.", pause: 14 },
+          { text: "Just be open. The held state has its own life now. You do not have to maintain it.", pause: 18 },
+          { text: "This is the window. You are going to stay here for a while. I will say very little.", pause: 20 },
+          { text: "Anything that arises — a thought, an image, a feeling — let it pass through. Do not grab.", pause: 25 },
+          { text: "The field is rearranging right now. You can feel it if you are still enough.", pause: 30 },
+          { text: "Stay.", pause: 60 },
+          { text: "A little longer.", pause: 60 },
+          { text: "Longer still.", pause: 60 },
+          { text: "The work is being done for you. You are not required to help.", pause: 60 },
+          { text: "Stay.", pause: 60 },
+          { text: "Almost done. A few more breaths of the held state.", pause: 45 },
+        ],
+      },
+      {
+        name: "Integration",
+        steps: [
+          { text: "Very gently, begin to let the practice close.", pause: 10 },
+          { text: "Notice how the inside of your body feels now compared to when you started.", pause: 12 },
+          { text: "Something has shifted. You do not have to name what.", pause: 12 },
+          { text: "Whatever the field has reorganized around your new state is already in motion. You do not have to track it.", pause: 16 },
+          { text: "Take a deeper breath.", pause: 8 },
+          { text: "And one more.", pause: 8 },
+        ],
+      },
+      { name: "Emerge", steps: EMERGE },
+    ],
+  },
 ];
 
 export function findMeditation(slug: string): Meditation | null {
