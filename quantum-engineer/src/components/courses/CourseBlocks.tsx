@@ -12,6 +12,12 @@ import { MantraInstaller } from "./tools/MantraInstaller";
 import { PresentMomentAnchor } from "./tools/PresentMomentAnchor";
 import { VisionLetter } from "./tools/VisionLetter";
 import { WeeklyReview } from "./tools/WeeklyReview";
+import { EFTTapping } from "./tools/EFTTapping";
+import { PrePostAssessment } from "./tools/PrePostAssessment";
+import { SelfCompassionBreak } from "./tools/SelfCompassionBreak";
+import { PolyvagalLadder } from "./tools/PolyvagalLadder";
+import { DecoherenceCatcher } from "./tools/DecoherenceCatcher";
+import { CommitmentScroll } from "./tools/CommitmentScroll";
 
 export function CourseBlocks({ blocks }: { blocks: CourseBlock[] }) {
   return (
@@ -203,6 +209,55 @@ function RenderInteractive({ block }: { block: CourseInteractive }) {
     case "weekly-review":
       return (
         <WeeklyReview
+          title={block.title}
+          description={block.description}
+          storageKey={block.storageKey}
+        />
+      );
+    case "eft-tapping":
+      return (
+        <EFTTapping
+          title={block.title}
+          description={block.description}
+          storageKey={block.storageKey}
+        />
+      );
+    case "pre-post-assessment":
+      return (
+        <PrePostAssessment
+          title={block.title}
+          description={block.description}
+          storageKey={block.storageKey}
+          snapshotLabel={block.snapshotLabel}
+        />
+      );
+    case "self-compassion-break":
+      return (
+        <SelfCompassionBreak
+          title={block.title}
+          description={block.description}
+          storageKey={block.storageKey}
+        />
+      );
+    case "polyvagal-ladder":
+      return (
+        <PolyvagalLadder
+          title={block.title}
+          description={block.description}
+          storageKey={block.storageKey}
+        />
+      );
+    case "decoherence-catcher":
+      return (
+        <DecoherenceCatcher
+          title={block.title}
+          description={block.description}
+          storageKey={block.storageKey}
+        />
+      );
+    case "commitment-scroll":
+      return (
+        <CommitmentScroll
           title={block.title}
           description={block.description}
           storageKey={block.storageKey}

@@ -130,6 +130,55 @@ export type CourseWeeklyReview = {
   storageKey: string;
 };
 
+export type CourseEFTTapping = {
+  type: "tool";
+  tool: "eft-tapping";
+  title: string;
+  description: string;
+  storageKey: string;
+};
+
+export type CoursePrePostAssessment = {
+  type: "tool";
+  tool: "pre-post-assessment";
+  title: string;
+  description: string;
+  snapshotLabel?: string;
+  storageKey: string;
+};
+
+export type CourseSelfCompassionBreak = {
+  type: "tool";
+  tool: "self-compassion-break";
+  title: string;
+  description: string;
+  storageKey: string;
+};
+
+export type CoursePolyvagalLadder = {
+  type: "tool";
+  tool: "polyvagal-ladder";
+  title: string;
+  description: string;
+  storageKey: string;
+};
+
+export type CourseDecoherenceCatcher = {
+  type: "tool";
+  tool: "decoherence-catcher";
+  title: string;
+  description: string;
+  storageKey: string;
+};
+
+export type CourseCommitmentScroll = {
+  type: "tool";
+  tool: "commitment-scroll";
+  title: string;
+  description: string;
+  storageKey: string;
+};
+
 export type CourseInteractive =
   | CourseWritingPrompt
   | CourseBreathwork
@@ -142,7 +191,13 @@ export type CourseInteractive =
   | CourseMantraInstaller
   | CoursePresentMomentAnchor
   | CourseVisionLetter
-  | CourseWeeklyReview;
+  | CourseWeeklyReview
+  | CourseEFTTapping
+  | CoursePrePostAssessment
+  | CourseSelfCompassionBreak
+  | CoursePolyvagalLadder
+  | CourseDecoherenceCatcher
+  | CourseCommitmentScroll;
 
 export type CourseBlock =
   | CourseParagraph

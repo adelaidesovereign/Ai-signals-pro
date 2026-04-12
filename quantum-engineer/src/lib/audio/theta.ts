@@ -25,6 +25,12 @@ export type ThetaConfig = {
   binauralGain: number; // 0..1
   droneGain: number; // 0..1
   fadeSeconds: number;
+  // Bilateral stimulation — alternating left/right click tones at a
+  // slow pace (default ~1 Hz). Based on EMDR bilateral stimulation
+  // research showing this activates the amygdala and facilitates
+  // trauma processing. Set bilateralGain to 0 to disable.
+  bilateralGain: number; // 0..1
+  bilateralRate: number; // Hz, how fast the alternation is (0.5–2)
 };
 
 const DEFAULT_CONFIG: ThetaConfig = {
@@ -33,6 +39,8 @@ const DEFAULT_CONFIG: ThetaConfig = {
   binauralGain: 0.08,
   droneGain: 0.045,
   fadeSeconds: 2.5,
+  bilateralGain: 0,
+  bilateralRate: 1,
 };
 
 export class ThetaAudio {
@@ -144,6 +152,52 @@ export class ThetaAudio {
     thetaMod.connect(thetaModDepth);
     thetaModDepth.connect(master.gain);
     thetaMod.start();
+
+    // --- 4. Bilateral stimulation (EMDR-adjacent) ---
+    // Alternating left/right soft click tones. Research shows
+    // bilateral audio stimulation activates the amygdala and
+    // decreases dorsolateral prefrontal activation — the state
+    // needed for trauma processing. Only active when
+    // bilateralGain > 0.
+    if (cfg.bilateralGain > 0) {
+      // Gentle click tone oscillator.
+      const bilateralOsc = ctx.createOscillator();
+      bilateralOsc.type = "sine";
+      bilateralOsc.frequency.value = 800; // soft click pitch
+      const bilateralEnv = ctx.createGain();
+      bilateralEnv.gain.value = 0;
+
+      // Panner that swings left → right on a slow LFO.
+      const panner = ctx.createStereoPanner();
+      const panLfo = ctx.createOscillator();
+      panLfo.type = "sine";
+      panLfo.frequency.value = cfg.bilateralRate;
+      panLfo.connect(panner.pan);
+      panLfo.start();
+
+      // Pulse the envelope at the bilateral rate so we hear
+      // distinct left-right clicks, not a continuous tone.
+      const pulseRate = cfg.bilateralRate * 2;
+      const pulser = ctx.createOscillator();
+      pulser.type = "square";
+      pulser.frequency.value = pulseRate;
+      const pulserGain = ctx.createGain();
+      pulserGain.gain.value = cfg.bilateralGain;
+      pulser.connect(pulserGain);
+      pulserGain.connect(bilateralEnv.gain);
+      pulser.start();
+
+      bilateralOsc.connect(bilateralEnv);
+      bilateralEnv.connect(panner);
+      panner.connect(master);
+      bilateralOsc.start();
+
+      this.stopFns.push(
+        () => { try { bilateralOsc.stop(); } catch {} },
+        () => { try { panLfo.stop(); } catch {} },
+        () => { try { pulser.stop(); } catch {} },
+      );
+    }
 
     // Fade master in
     master.gain.linearRampToValueAtTime(
