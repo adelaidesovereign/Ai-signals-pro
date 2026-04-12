@@ -42,68 +42,41 @@ async function tryElevenLabs(
   const voiceId =
     process.env.ELEVENLABS_VOICE_ID ?? DEFAULT_ELEVENLABS_VOICE_ID;
 
-  // ElevenLabs speed accepts 0.7..1.2. Clamp into that range so an
-  // extreme client value never gets rejected upstream.
   const clampedSpeed = Math.max(0.7, Math.min(1.2, speed));
 
-  // Wrap the text with the [whispers] audio tag that ElevenLabs
-  // understands as an emotion cue. Only applied when the text does
-  // not already contain any square-bracket tag so callers can
-  // override the emotion if they ever need to.
-  const taggedText = /\[[a-zA-Z]+\]/.test(text)
-    ? text
-    : `[whispers] ${text}`;
-
-  // Try models in order. eleven_v3 honours audio tags like [whispers]
-  // properly but may not be available on every account. turbo_v2_5 is
-  // available everywhere but emotion-tag support is partial. We try
-  // the tagged version on v3 first, then the tagged version on
-  // turbo_v2_5, then finally the untagged version on turbo_v2_5 as a
-  // last resort.
-  const attempts: Array<{ model: string; input: string }> = [
-    { model: "eleven_v3", input: taggedText },
-    { model: "eleven_turbo_v2_5", input: taggedText },
-    { model: "eleven_turbo_v2_5", input: text },
-  ];
-
-  let res: Response | null = null;
-  for (const attempt of attempts) {
-    try {
-      res = await fetch(
-        `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
-        {
-          method: "POST",
-          headers: {
-            "xi-api-key": key,
-            "Content-Type": "application/json",
-            Accept: "audio/mpeg",
-          },
-          body: JSON.stringify({
-            text: attempt.input,
-            model_id: attempt.model,
-            voice_settings: {
-              stability: 0.25,
-              similarity_boost: 0.85,
-              style: 0,
-              use_speaker_boost: false,
-              speed: clampedSpeed,
-            },
-          }),
+  try {
+    const res = await fetch(
+      `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
+      {
+        method: "POST",
+        headers: {
+          "xi-api-key": key,
+          "Content-Type": "application/json",
+          Accept: "audio/mpeg",
         },
-      );
-      if (res.ok) break;
-      const detail = await res.text();
-      console.warn(
-        `[tts] ElevenLabs ${attempt.model} failed`,
-        res.status,
-        detail.slice(0, 200),
-      );
-    } catch (err) {
-      console.error("[tts] ElevenLabs fetch threw", err);
-    }
-  }
+        body: JSON.stringify({
+          text,
+          model_id: "eleven_turbo_v2_5",
+          voice_settings: {
+            // Nicole's whisper comes from low stability (breath
+            // variation) + low speed + no speaker boost. No audio
+            // tags — turbo reads them literally instead of
+            // interpreting them as vocal gestures.
+            stability: 0.2,
+            similarity_boost: 0.75,
+            style: 0,
+            use_speaker_boost: false,
+            speed: clampedSpeed,
+          },
+        }),
+      },
+    );
 
-  if (!res || !res.ok) return null;
+    if (!res.ok) {
+      const detail = await res.text();
+      console.warn("[tts] ElevenLabs rejected", res.status, detail.slice(0, 200));
+      return null;
+    }
 
   try {
     const audio = await res.arrayBuffer();
