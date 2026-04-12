@@ -147,36 +147,120 @@ export const module1: CourseModule = {
       ],
     },
 
-    // ----- Lesson 1.2 -----
+    // ----- Lesson 1.2 — TOP 1% STANDARD -----
     {
       slug: "1-2-your-nervous-system",
       title: "Your Nervous System — The Polyvagal Ladder",
       eyebrow: "Lesson 1.2",
-      reading: "25 minutes of practice",
+      reading: "35 minutes of reading and practice",
       blocks: [
         {
           type: "script",
-          text: "Stephen Porges, the neuroscientist behind polyvagal theory, discovered something that changes how we understand the body.\n\nYour nervous system is not binary — on or off, stressed or calm. It operates on a ladder with three rungs.\n\nThe top rung is called the ventral vagal state. This is where the body feels safe. You are calm, curious, present, socially open. Your breath is easy. Your shoulders are soft. Your thinking is clear. This is the only state in which you can learn new things at depth, update old beliefs, and install a new identity.\n\nThe middle rung is the sympathetic state. Fight or flight. Your heart rate is elevated. You are scanning for danger. Your jaw is tight. Your mind is racing. You might call this anxiety, anger, hustle, or just being wound tight.\n\nThe bottom rung is the dorsal vagal state. Shutdown. Numb. Flat. Nothing feels worth the effort. You might call this depression, dissociation, or being exhausted all the time.\n\nMost people who come to this work have been living on the middle or bottom rung for so long that they have forgotten the top one exists. The activation feels like personality. The numbness feels like who they are.\n\nIt is neither. It is a nervous system state. And it can change.",
+          text: "There is a reason I am starting the program here and not with the science of the brain, or the quantum physics, or even the question of who you are underneath the fear. The reason is your body.\n\nIf your body does not feel safe, nothing I teach you in the next seven modules will land. You could have the most precise framework in the world and the most powerful tools ever built, and if your nervous system is in survival mode while you try to use them, the body will reject them. Every. Single. Time.\n\nI learned this the hard way. I had all the intellectual understanding years before I had the actual change. I could explain the subconscious, the RAS, the reconsolidation mechanism, the observer effect — I could lecture on it. And my body was still bracing. My chest was still tight at three in the morning. The loop was still running. Because understanding is a prefrontal cortex event, and the loop lives in the brainstem and the amygdala, and the brainstem does not attend lectures.",
         },
         {
           type: "h",
-          text: "Where do you live on the ladder?",
+          text: "Your body right now — a micro-practice.",
         },
         {
           type: "p",
-          text: "This tool maps your current default state. Not where you are in a good moment — where you spend most of your time. Be honest about where you actually live on the ladder, because that is the baseline you are about to shift.",
+          text: "Before I explain the science, I want you to feel it first. Place both feet flat on the floor. Feel the weight of your body in the chair. Now scan, quickly, without analysing: where is the tension? Is it in your jaw? Your shoulders? Your belly? Behind your eyes? Most people carry tension in one or two signature places. They are so used to it that it feels like a permanent feature of their body rather than a state. Notice where yours lives. You do not have to change it. Just see it.",
+        },
+        {
+          type: "p",
+          text: "That tension is not a personality trait. It is a nervous system state. And it has a name.",
+        },
+        {
+          type: "h",
+          text: "The polyvagal ladder — three rungs, three completely different bodies.",
+        },
+        {
+          type: "p",
+          text: "Stephen Porges spent decades studying the vagus nerve — the longest nerve in the body, running from the brainstem all the way down through the heart, lungs, and gut. What he discovered is that your autonomic nervous system is not a simple on-off switch (stressed or calm). It operates as a ladder with three distinct rungs, and which rung you are standing on determines everything about how you experience reality.",
+        },
+        {
+          type: "h",
+          text: "The top rung — ventral vagal. What safety feels like.",
+        },
+        {
+          type: "p",
+          text: "This is the state the body was designed to operate from. When you are in ventral vagal, you are calm but not sedated. Present but not hypervigilant. Your breath is easy — you do not think about it. Your shoulders hang from their sockets without holding. Your jaw is unclenched. Your eyes are soft. You can make eye contact without effort. You can think clearly, take in new information, connect with another person without scanning for threat.",
+        },
+        {
+          type: "p",
+          text: "Critically — and this is the part that matters for the rest of the program — ventral vagal is the only state in which your brain is neurologically capable of updating old beliefs, learning new patterns, and accepting new identity information at the subconscious level. Memory reconsolidation, which is the mechanism you will use in Module 5 to permanently rewrite the root belief, requires ventral vagal. Heart coherence, which is the gate you will learn in Module 2, requires ventral vagal. The daily installation protocol in Module 6 requires ventral vagal. Every practice in this program requires the body to be in this state first.",
+        },
+        {
+          type: "p",
+          text: "If you are reading this and thinking 'I do not remember the last time I felt like that,' you are not alone. Most people who come to this work have not lived in ventral vagal as a baseline for years. Some have never known it as a sustained state. That is not a failure. That is the starting condition, and it is exactly what the next two lessons address.",
+        },
+        {
+          type: "h",
+          text: "The middle rung — sympathetic activation. What threat feels like.",
+        },
+        {
+          type: "p",
+          text: "When the nervous system detects danger — real or perceived, conscious or subconscious — it drops from the top rung to the middle. The sympathetic branch activates. Heart rate rises. Muscles tense. Blood moves toward the limbs for running or fighting. Digestion slows or stops. The visual field narrows. The brain shifts from open curiosity to focused scanning.",
+        },
+        {
+          type: "p",
+          text: "You might know this state as anxiety. Or anger. Or the inability to sit still. Or the constant need to be productive, as if stopping would be dangerous. Or the tight shoulders you have had since you were fifteen that you thought were just 'how your body is.' Or the way your jaw clenches in your sleep hard enough to crack a molar. All of these are the sympathetic branch telling the body: something is wrong. Stay ready.",
+        },
+        {
+          type: "p",
+          text: "Here is the part that matters: the 'something is wrong' that triggered the sympathetic activation may not be happening right now. It may have happened twenty years ago. But the nervous system stored the pattern as an ongoing instruction, and it has been running the instruction ever since, scanning the current environment through a filter that was set for the original environment. You are bracing for a blow that landed in 2004.",
+        },
+        {
+          type: "h",
+          text: "The bottom rung — dorsal vagal. What shutdown feels like.",
+        },
+        {
+          type: "p",
+          text: "When sympathetic activation goes on too long, or the threat is too overwhelming to fight or flee from, the nervous system drops to the lowest rung. The dorsal vagal branch takes over. This is the freeze, the collapse, the shutdown. Heart rate drops. Energy drops. Motivation drops. The world goes flat. Colours are less vivid. Pleasure is less available. Getting out of bed requires a negotiation that other people do not seem to need.",
+        },
+        {
+          type: "p",
+          text: "You might know this as depression. Or dissociation. Or chronic fatigue that no amount of sleep resolves. Or the strange experience of knowing something matters but not being able to feel that it matters. Or the numbness that arrives when you try to talk about the thing that hurt you most — the words come out but the feeling goes missing, as if someone turned the volume down on your emotional system.",
+        },
+        {
+          type: "p",
+          text: "Dorsal is not laziness. Dorsal is not a character flaw. Dorsal is the body's last resort when the threat was too big and the escape routes were too small. It is the nervous system's version of playing dead. And it can run for years, underneath a functioning surface, without the person on that surface having any idea that the body is in a survival state.",
+        },
+        {
+          type: "quote",
+          text: "The activation feels like personality. The numbness feels like who you are. Neither is true. Both are nervous system states with specific names, specific mechanisms, and specific ways back to the top of the ladder.",
+        },
+        {
+          type: "h",
+          text: "Where do you actually live?",
+        },
+        {
+          type: "p",
+          text: "Not where you are in your best moment. Not where you are on a holiday after three days of sleep. Where you spend most of your ordinary days. The tool below gives you three options. Pick the one that is honest, not the one that is hopeful. The honest answer is the starting location. And starting locations are not sentences — they are maps.",
         },
         {
           type: "tool",
           tool: "polyvagal-ladder",
           title: "Map your nervous system",
           description:
-            "Select the state where you spend most of your time. Write how it shows up in your daily life. Save the snapshot so you can see it change as the program progresses.",
+            "Select the state where you spend most of your time. Describe how it shows up in your body and your daily life. Save the snapshot — you will retake this after Module 2 and again after Module 6 to track the shift.",
           storageKey: "cert-1-2-polyvagal",
         },
         {
+          type: "h",
+          text: "What just happened.",
+        },
+        {
+          type: "p",
+          text: "You just named something that may have been running without a name for a very long time. If you selected sympathetic or dorsal, you may notice a small emotional response — maybe sadness, maybe relief, maybe a strange combination of both. That response is the body recognising itself in a description for the first time. It is not a problem. It is the first moment of being seen at the layer where the actual state lives.",
+        },
+        {
+          type: "p",
+          text: "The next lesson teaches you how to move yourself from whatever rung you are on back to the top of the ladder. Three moves. Two minutes. Mechanical, not emotional. The body does not need to understand why it is safe. It just needs the physiological signals. Lesson 1.3 gives you those signals.",
+        },
+        {
           type: "note",
-          text: "If you selected sympathetic or dorsal and it was hard to admit, that is the honest starting point. The next lesson teaches you the three moves that bring the body back to ventral. You will use them before every other practice in this program.",
+          text: "Before you move on: put one hand on your belly. Take one breath that goes all the way down to where your hand is. Let the exhale be twice as long as the inhale. That single breath just moved your vagus nerve one click toward ventral. One click is enough for now.",
         },
       ],
     },
