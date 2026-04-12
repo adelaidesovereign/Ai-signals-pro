@@ -8,6 +8,7 @@ import { flatLessons } from "@/content/courses/certification";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { MoodCheckin } from "@/components/site/MoodCheckin";
 
 export const metadata: Metadata = {
   title: "Your Dashboard",
@@ -105,6 +106,27 @@ export default async function DashboardPage() {
             There is no catching up required. The practice is waiting quietly,
             and so am I.
           </p>
+        </section>
+
+        {/* Mood check-in + SOS */}
+        <section className="mt-10 grid gap-4 md:grid-cols-[1fr_auto]">
+          <MoodCheckin />
+          <Link
+            href="/meditations/sos-come-back"
+            className="flex flex-col items-center justify-center rounded-soft border border-gold/40 bg-cream-warm px-8 py-6 text-center shadow-card transition-all hover:border-gold hover:shadow-soft"
+          >
+            <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-gold">
+              SOS
+            </p>
+            <p className="mt-2 font-serif text-xl text-sage">
+              Come back in 3 minutes
+            </p>
+            <p className="mt-2 text-xs text-sage-deep/70">
+              Emergency regulation.
+              <br />
+              Tap here when you are activated.
+            </p>
+          </Link>
         </section>
 
         {/* Progress */}
