@@ -1,23 +1,5 @@
 import { NextResponse } from "next/server";
 
-// Premium text-to-speech endpoint.
-//
-// Tries providers in order until one works. Each provider is enabled
-// by its own environment variable so you can configure whichever is
-// easiest to sign up for:
-//
-//   1. ELEVENLABS_API_KEY — the single best TTS on the market today.
-//      Warm, truly human voices. Free tier (10k characters/month)
-//      requires no credit card. Voice defaults to "Rachel" (warm,
-//      calm, genuinely soothing female).
-//
-//   2. OPENAI_API_KEY — OpenAI's TTS-1-HD model with the "nova"
-//      voice. Also excellent. Requires credit on the OpenAI account.
-//
-// When neither is configured, the route returns 503 with a signal to
-// the client, which falls back to the browser's built-in
-// SpeechSynthesis API. The UX still works in every environment.
-
 export const runtime = "nodejs";
 
 type Body = {
@@ -26,11 +8,7 @@ type Body = {
   speed?: number;
 };
 
-// ElevenLabs default voice: Nicole — an American female ASMR-style
-// whisper voice. Specifically designed for the soothing, close-to-
-// the-ear quality you want for subliminals and guided meditations.
-// Override by setting ELEVENLABS_VOICE_ID in your env to any voice
-// from https://elevenlabs.io/app/voice-library
+// ElevenLabs default voice: Nicole — American female ASMR-style whisper.
 const DEFAULT_ELEVENLABS_VOICE_ID = "piTKgcLEGmPE4e6mEKli";
 
 async function tryElevenLabs(
@@ -41,7 +19,6 @@ async function tryElevenLabs(
   if (!key) return null;
   const voiceId =
     process.env.ELEVENLABS_VOICE_ID ?? DEFAULT_ELEVENLABS_VOICE_ID;
-
   const clampedSpeed = Math.max(0.7, Math.min(1.2, speed));
 
   try {
@@ -58,10 +35,6 @@ async function tryElevenLabs(
           text,
           model_id: "eleven_turbo_v2_5",
           voice_settings: {
-            // Nicole's whisper comes from low stability (breath
-            // variation) + low speed + no speaker boost. No audio
-            // tags — turbo reads them literally instead of
-            // interpreting them as vocal gestures.
             stability: 0.2,
             similarity_boost: 0.75,
             style: 0,
@@ -78,7 +51,6 @@ async function tryElevenLabs(
       return null;
     }
 
-  try {
     const audio = await res.arrayBuffer();
     return new Response(audio, {
       status: 200,
@@ -89,7 +61,7 @@ async function tryElevenLabs(
       },
     });
   } catch (err) {
-    console.error("[tts] ElevenLabs response read threw", err);
+    console.error("[tts] ElevenLabs threw", err);
     return null;
   }
 }
@@ -155,20 +127,14 @@ export async function POST(req: Request) {
   const voice = body.voice ?? "nova";
   const speed = typeof body.speed === "number" ? body.speed : 0.9;
 
-  // Try ElevenLabs first — best quality.
   const eleven = await tryElevenLabs(text, speed);
   if (eleven) return eleven;
 
-  // Fall back to OpenAI if configured.
   const openai = await tryOpenAI(text, voice, speed);
   if (openai) return openai;
 
-  // Neither configured — tell the client to use browser fallback.
   return NextResponse.json(
-    {
-      error: "Premium voice not configured.",
-      fallback: "browser",
-    },
+    { error: "Premium voice not configured.", fallback: "browser" },
     { status: 503 },
   );
 }
