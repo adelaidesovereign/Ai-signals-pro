@@ -7,32 +7,52 @@ export const module1: CourseModule = {
   summary:
     "Before we talk about your brain, your heart, your past, or your future — the body has to come down. Nothing in this program can land while your nervous system is bracing for impact. These four lessons are the ground. The rest of the program is built on top of them.",
   lessons: [
-    // ----- Lesson 1.1 — THE GOLD STANDARD for lesson depth -----
+    // ----- Lesson 1.1 — TRUE TOP 1% STANDARD -----
     {
       slug: "1-1-you-are-not-broken",
       title: "You Are Not Broken",
       eyebrow: "Lesson 1.1",
-      reading: "30 minutes of reading and practice",
+      reading: "35 minutes of reading and practice",
       blocks: [
         {
           type: "script",
-          text: "I want to say this once, clearly, at the very beginning, before we do anything else.\n\nYou are not broken. You have never been broken.\n\nI know what it feels like to believe you are. I know the specific heaviness that lives in the chest of someone who has tried seventeen different things and still ended up in the same place. I know the quiet shame of sitting across from another expert, another book, another podcast episode, and thinking: everyone else seems to get this. What is wrong with me specifically.\n\nNothing. Nothing is wrong with you specifically. The issue has never been you. The issue is that every tool you have been given was built for the wrong layer of the machine.",
+          text: "I want to say this once, clearly, at the very beginning, before we do anything else.\n\nYou are not broken. You have never been broken.\n\nI know what it feels like to believe you are. I know the specific heaviness that lives in the chest of someone who has tried everything and still ended up in the same place. I carried that heaviness for seventeen years. Through double shifts. Through therapy sessions where I collected every coping skill I was offered and used them well. Through the mornings where I looked at the same ceiling and the same tightness was waiting for me, untouched by all the work I had done on it the day before.\n\nI know what it is to sit across from an expert — a good one, someone who genuinely cared — and think: everyone else seems to get this. Something is wrong with me specifically. I am the one it does not work on.\n\nNothing was wrong with me specifically. And nothing is wrong with you. The issue was never effort, or willpower, or some unique resistance your body has to change. The issue is that every tool I was given — and every tool you have been given until now — was built for the wrong layer of the machine.",
         },
         {
           type: "h",
-          text: "Let me show you what I mean.",
+          text: "A small practice, right now, before you read another word.",
         },
         {
           type: "p",
-          text: "Think about the last time you tried to change a pattern. Maybe it was a relationship pattern. Maybe it was a money pattern. Maybe it was the way you talk to yourself at three in the morning when no one is listening. You read about it. You understood it intellectually. You could explain to a friend exactly why you do the thing and where it comes from. And then the next time the trigger showed up, you did it again. Exactly the same way. As if the understanding had never happened.",
+          text: "Let your shoulders drop one inch. Just one inch. Do not force it — just let them fall the distance gravity wants to take them. Now notice what happened to your breath when you did that. Most people feel a small involuntary exhale. A loosening in the ribs. That one-inch drop is the first signal of safety your body has received since you opened this lesson. We will build on it.",
+        },
+        {
+          type: "h",
+          text: "Why nothing has worked — the real reason, at the level of the brain.",
         },
         {
           type: "p",
-          text: "That is not a failure of effort. That is a failure of layer. Your conscious mind understood. Your conscious mind is about five percent of the operating system. The other ninety-five percent — the subconscious — was never part of the conversation. It does not speak in English. It does not respond to insights, however accurate they are. It responds to felt experience, in specific brain states, repeated over time. You were speaking the right words to a system that does not process words.",
+          text: "Your brain has two operating systems running at the same time. The conscious mind — the one reading these words right now — handles about five percent of your daily processing. It is where your goals live, your plans, your insights, your understanding of why you do what you do. This five percent is articulate, logical, and responsive to language. When you read a self-help book and have an insight, this is where the insight lands.",
+        },
+        {
+          type: "p",
+          text: "The other ninety-five percent is the subconscious. It runs through structures that most people have never heard of: the amygdala, the basal ganglia, the cerebellum, the implicit memory networks that store patterns as automatic responses. These structures have one critical property — they do not have language centres. They do not process English. They do not respond to insights, however accurate those insights are. They respond to three things only: felt sensation in the body, specific brainwave states, and repetition over time.",
+        },
+        {
+          type: "p",
+          text: "This is why you can understand a pattern perfectly — can explain it to a friend with total clarity — and then do the exact same thing the next time the trigger arrives. The understanding lived in your prefrontal cortex. The pattern lived in your amygdala. And those two structures do not share a language.",
         },
         {
           type: "quote",
-          text: "You were not failing at change. You were succeeding at speaking the wrong language to the wrong layer of yourself.",
+          text: "You were not failing at change. You were succeeding at speaking the right words to a system that has never, in the entire history of the human brain, responded to words.",
+        },
+        {
+          type: "p",
+          text: "A woman I worked with spent eleven years in talk therapy understanding exactly why she chose emotionally unavailable partners. She could map the attachment wound to her father with precision. She could explain the cycle — the initial chemistry, the slow withdrawal, the familiar abandonment, the grief — with the fluency of someone who had narrated it a hundred times. And she kept choosing the same partners. Because the understanding lived in her five percent and the pattern lived in her ninety-five percent, and those two territories had never once had a conversation in a language both could understand.",
+        },
+        {
+          type: "p",
+          text: "This program teaches you the language the ninety-five percent actually speaks. And it gives you tools that speak it directly, in the body, in the correct brain state, with enough repetition for the subconscious to accept the new instruction as the new default.",
         },
         {
           type: "h",
@@ -40,11 +60,19 @@ export const module1: CourseModule = {
         },
         {
           type: "p",
-          text: "Before you go any further, notice. What is happening in your chest as you read this? Is there a slight loosening — the beginnings of relief that maybe the problem was never your willpower? Or is there a tightening — the part of you that has heard promising things before and learned not to trust them? Either response is correct. Both are data. Both are your body telling you something about what has been installed underneath your conscious awareness.",
+          text: "Before you go further, check in. What is happening in your body as you read this?",
         },
         {
           type: "p",
-          text: "If you feel the tightening, stay with it for a breath. That tightening is a protective part. It learned, somewhere in your past, that hope is dangerous because hope that does not deliver is worse than no hope at all. That part is not your enemy. It is doing exactly what it was designed to do. In Module 4, you will meet it directly and ask it what it is protecting. For now, just notice it is there. That noticing is the beginning of every change that follows.",
+          text: "If you feel a slight loosening in the chest — the beginnings of relief that maybe the problem was never your willpower — stay with that. Let it spread. That loosening is your nervous system registering new information. It is small and it is the first real shift of the program.",
+        },
+        {
+          type: "p",
+          text: "If you feel a tightening — maybe behind the sternum, slightly to the left, like a fist closing around something soft — that is a protective part. It learned, somewhere in your past, that hope is dangerous. That opening to a new possibility means opening to a new disappointment. That part is not your enemy. It has been keeping you alive. In Module 4, you will sit with it directly and ask it what it is afraid of. It will tell you. For now, just notice it. Put your hand on the place where the tightening lives and breathe into it for one cycle. In, four seconds. Out, eight seconds. Do not try to change it. Just let it know you see it.",
+        },
+        {
+          type: "p",
+          text: "If you feel nothing — no loosening, no tightening, just flatness — that is information too. That flatness is what polyvagal theory calls the dorsal vagal state. Shutdown. It is what happens when the nervous system has been in threat mode for so long that it stopped producing the big emotional responses and went quiet instead. You might know this as numbness, disconnection, or the strange sensation of knowing something matters but not being able to feel that it matters. Lesson 1.2 will map exactly where you are on the nervous system ladder. You are not broken for feeling nothing. You are in a specific physiological state, and it has a name, and it can change.",
         },
         {
           type: "h",
@@ -52,19 +80,19 @@ export const module1: CourseModule = {
         },
         {
           type: "p",
-          text: "This is a system for locating the exact subconscious belief that is generating the pattern you cannot stop — not generally, not theoretically, but the specific felt sentence living in a specific location in your body — and rewriting it at the level where it was originally stored. The tools you will use are drawn from peer-reviewed neuroscience, clinical psychology, quantum physics, and decades of consciousness research. Every tool has a mechanism. Every mechanism is documented. Nothing in this program asks you to believe anything on faith.",
+          text: "Eight modules. Twenty-eight lessons. A complete arc from where you are right now to a version of yourself that the old program would not have allowed you to become. Every module builds on the previous one. Every lesson uses a different tool so nothing feels repetitive. The daily practice grows across the program — Module 1 adds the nervous system settle, Module 2 adds heart coherence, Module 6 adds the full identity installation.",
         },
         {
           type: "list",
           items: [
-            "Module 1 (where you are now) brings your nervous system down to a baseline where the body can receive new information.",
-            "Module 2 teaches you to enter heart coherence — the physiological gate that must be open before any installation can land.",
-            "Module 3 explains the mechanism: how your brain is filtering reality through a program you did not choose, and why coping tools were never going to reach it.",
-            "Module 4 is where you find the root. The somatic marker method, the question that bypasses the analytical mind, parts work, and EFT tapping on the exact belief.",
-            "Module 5 is the mourning and reconsolidation. The old identity is released through grief and the new one is installed through the brain's own update mechanism.",
-            "Module 6 is where you define who you actually are in specific sensory detail and wire her into the daily protocol.",
-            "Module 7 is the quantum physics layer — why your inner state is upstream of your outer reality, and the evidence that proves it.",
-            "Module 8 is living as her. Decoherence, return speed, teaching from lived proof, and the final assessment that shows you how far you have come.",
+            "Module 1 — You Are Safe Here. The nervous system has to come down before anything else can begin. You learn the polyvagal ladder, the three-move settle, and you build a seven-day safety baseline.",
+            "Module 2 — The Heart as the Gate. HeartMath research on the heart's electromagnetic field. Heart coherence as the physiological condition every other practice requires. Self-compassion for the years spent with the wrong tools.",
+            "Module 3 — What Is Actually Running the Show. The RAS filter. The subconscious. How the code was installed before age seven. Your first EFT tapping round. The honest audit of symptom tools versus root tools.",
+            "Module 4 — Finding Your Root Program. The somatic marker method. The question that bypasses the analytical mind. IFS parts work using the full six-step protocol. EFT tapping directly on the root belief you find.",
+            "Module 5 — Mourning and Releasing. The grief of the unlived life. Memory reconsolidation — the brain's own mechanism for permanently rewriting an old belief. The full six-step installation protocol.",
+            "Module 6 — Installing Your True Identity. Who you are without fear, in specific sensory detail. The complete daily protocol with streak tracking. Decoherence and the speed of return. Your Human Design.",
+            "Module 7 — The Quantum Engineer. The physics of why your inner state is upstream of your outer reality. The CIA Gateway Process. The twelve laws. Your signed commitment.",
+            "Module 8 — Living as Her. The identity in action. Decoherence tracking. Teaching from lived proof. The final assessment — the same eight dimensions you are about to rate, taken again, with a before-and-after chart that shows you how far you have come.",
           ],
         },
         {
@@ -73,52 +101,48 @@ export const module1: CourseModule = {
         },
         {
           type: "p",
-          text: "This is not therapy. If you are in acute crisis right now — if you are suicidal, if your safety is threatened, if you are in an emergency — this program is not the thing you need in this moment. Find a therapist, a crisis line, a person whose entire job is to hold you through the immediate danger. This program is for the day after the acute crisis, when the emergency has passed and the question becomes: why does this keep happening.",
+          text: "This is not therapy. If you are in acute crisis right now — suicidal, unsafe, in an emergency — this program is not the thing you need in this moment. Find a therapist, a crisis line, a human whose job is to hold you through the immediate danger. This program is for the day after the emergency, when the acute danger has passed and the question is: why does this keep happening. If that is the question you are asking, you are in the right place.",
         },
         {
           type: "p",
-          text: "This is also not manifestation in the pop-culture sense. I am not going to tell you to think a car into your driveway. I am going to show you, with documented science, how your internal state is coupled to your external experience through a specific mechanism — and how changing the state on purpose, for long enough, changes the slice of reality that resolves around you. The car, if it arrives, arrives because the actions you take from the new state are different actions than the ones you took from the old state. There is no step that skips the real world.",
+          text: "This is also not manifestation in the way most people use that word. I will not tell you to think positive and wait. I will show you, with documented research from UC San Diego, the HeartMath Institute, the CIA's own declassified records, and the work of Nobel-adjacent physicists, that your internal state is coupled to your external experience through a specific mechanism. Change the state — at the level of the body, not the level of the affirmation — and the external reorganises. Not because the universe heard your wish. Because you became a different observer, and a different observer collapses a different slice of the field. The action you take from the new state is not the same action you took from the old state. Same world. Different person walking through it.",
         },
         {
           type: "h",
-          text: "The first thing the body needs to hear.",
+          text: "The first thing the body needs.",
         },
         {
           type: "p",
-          text: "Right now, before any of the work begins, your body needs one message. Not an affirmation. Not a positive thought. A physiological signal that the environment is safe enough to receive what is coming. Because a nervous system in survival mode — whether that looks like anxiety, hustle, numbness, or just the constant low-grade hum of being wound slightly too tight — will reject new identity information the same way your body rejects a transplant it does not recognise.",
+          text: "Before the work begins, the body needs one signal. Not an affirmation. A physiological event. The signal that the environment is safe enough to receive new information. Without this signal, the nervous system stays in protection mode, and protection mode rejects incoming code the way your immune system rejects a transplant it does not recognise.",
         },
         {
           type: "p",
-          text: "The settle in Lesson 1.3 teaches you how to send that signal. The daily protocol in Lesson 1.4 teaches you how to send it every day until the body believes it. But before we get there, I want you to take a snapshot of where you are right now. Eight dimensions. Honest numbers. No judgment.",
-        },
-        {
-          type: "p",
-          text: "This snapshot is not a test. It is a photograph of today. The version of you who finishes Module 8 will look at these numbers and see the distance she has walked. The distance is the proof. And the proof is what makes the work real.",
+          text: "You will learn how to send that signal in Lesson 1.3 — the three-move settle that takes under two minutes. You will learn how to send it every day in Lesson 1.4 — the safety protocol that builds the baseline. But before we get there, I want you to take a photograph of where you are right now. Eight numbers. Honest. No judgment. This photograph is for the version of you who finishes Module 8 and needs to see the distance she walked.",
         },
         {
           type: "tool",
           tool: "pre-post-assessment",
           title: "Your starting point — Day 1",
           description:
-            "Rate yourself on each dimension from 1 to 10. Be honest. The only person who sees this is you. You will retake this same assessment at the end of the program and the before/after comparison is the single most motivating thing you will see in your entire time here.",
+            "Rate yourself on each dimension from 1 to 10. Be honest. Be kind to the numbers. They are not a verdict — they are a location. And from any location, there is a direction. You will retake this exact assessment at the end of Module 8.",
           snapshotLabel: "Day 1 — beginning the program",
           storageKey: "cert-1-1-assessment",
         },
         {
           type: "h",
-          text: "What just happened.",
+          text: "What just happened in your brain.",
         },
         {
           type: "p",
-          text: "You just put numbers to things you have probably been carrying as vague feelings for a long time. The act of rating them is itself a small regulation — your brain just moved from 'something is wrong and I cannot name it' to 'I can see exactly where I am and the numbers are honest.' That shift, from unnamed heaviness to visible specificity, is the first move of the entire framework. The subconscious operates in the unnamed. The conscious mind operates in the specific. You just brought the unnamed into the specific.",
+          text: "You just moved from 'something is wrong and I cannot name it' to 'I can see exactly where I am and the numbers are honest.' That shift — from unnamed heaviness to visible specificity — is the first move of the entire framework. The subconscious thrives in the unnamed. The moment you name something and give it a number, your prefrontal cortex comes online and the amygdala quiets slightly. You just did a micro-regulation without a breathing exercise. That is the kind of precision this program is built on.",
         },
         {
           type: "p",
-          text: "Hold those numbers gently. They are not a verdict. They are a location. And from any location, there is a direction.",
+          text: "Hold those numbers gently. They are a location, not a sentence. You are here. The direction is forward. And the body has already registered — even if it is too quiet to feel yet — that something new has begun.",
         },
         {
           type: "note",
-          text: "Before you move to Lesson 1.2, close your eyes for ten seconds. Put one hand on the center of your chest. Take one slow breath in, and a longer breath out. That is the body registering that you have begun. Something just shifted, even if it is too quiet to name yet.",
+          text: "Close your eyes for ten seconds. One hand on the centre of your chest. One slow breath in. A longer breath out. Let the body register: I have started. Something has shifted, even if I cannot name it yet. When you are ready, open your eyes and move to Lesson 1.2.",
         },
       ],
     },
