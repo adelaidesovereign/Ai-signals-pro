@@ -205,6 +205,8 @@ export default async function InnerCirclePage() {
                 phrases={track.phrases}
                 durationSeconds={track.durationMinutes * 60}
                 beatFrequency={track.beatFrequency}
+                ambient={track.ambient}
+                solfeggio={track.solfeggio}
               />
             ))}
           </div>

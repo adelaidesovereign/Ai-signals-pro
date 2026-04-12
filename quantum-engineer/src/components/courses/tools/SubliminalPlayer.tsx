@@ -2,24 +2,29 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ThetaAudio } from "@/lib/audio/theta";
+import { AmbientAudio } from "@/lib/audio/ambient";
+import type { AmbientKind, SolfeggioFrequency } from "@/lib/audio/ambient";
 import { softSpeak, cancelSpeech, waitForVoices } from "@/lib/audio/voice";
 
-// A full subliminal track — plays theta binaural beats + ambient drone
-// in the background and speaks identity phrases in a soft voice at a
-// slow cadence. 100% browser-side, no audio files, no API keys.
+// A full subliminal track — plays theta binaural beats, an optional
+// ambient soundscape (rain, ocean, forest), an optional solfeggio
+// frequency tone, and speaks identity phrases in a soft voice at a
+// slow cadence. 100% browser-side, no audio files.
 
 type Props = {
   title: string;
   description: string;
   phrases: string[];
-  // Seconds of silence AFTER each phrase finishes speaking. Kept
-  // short (default 4) so the cadence feels like a soft ongoing voice
-  // rather than one phrase spoken and then forgotten.
+  // Seconds of silence AFTER each phrase finishes speaking.
   phraseGapSeconds?: number;
   // How long the whole track runs in seconds.
   durationSeconds?: number;
   // Theta frequency (4-8 Hz). Default 6 = mid-theta.
   beatFrequency?: number;
+  // Optional ambient soundscape layered under the theta.
+  ambient?: AmbientKind;
+  // Optional solfeggio frequency tone layered in at low volume.
+  solfeggio?: SolfeggioFrequency;
 };
 
 export function SubliminalPlayer({
@@ -29,6 +34,8 @@ export function SubliminalPlayer({
   phraseGapSeconds = 4,
   durationSeconds = 22 * 60,
   beatFrequency = 6,
+  ambient,
+  solfeggio,
 }: Props) {
   const [playing, setPlaying] = useState(false);
   const [elapsed, setElapsed] = useState(0);
@@ -36,6 +43,7 @@ export function SubliminalPlayer({
   const [showPhrase, setShowPhrase] = useState(false);
 
   const audioRef = useRef<ThetaAudio | null>(null);
+  const ambientRef = useRef<AmbientAudio | null>(null);
   const tickRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const phraseRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const orderRef = useRef<number[]>([]);
@@ -61,6 +69,10 @@ export function SubliminalPlayer({
     if (audioRef.current) {
       audioRef.current.stop().catch(() => {});
       audioRef.current = null;
+    }
+    if (ambientRef.current) {
+      ambientRef.current.stop().catch(() => {});
+      ambientRef.current = null;
     }
   }
 
@@ -107,6 +119,18 @@ export function SubliminalPlayer({
     const audio = new ThetaAudio({ beatFrequency });
     audioRef.current = audio;
     await audio.start();
+
+    // Layered ambient soundscape + optional solfeggio tone.
+    if (ambient || solfeggio) {
+      const ambientAudio = new AmbientAudio({
+        kind: ambient ?? "none",
+        volume: 0.22,
+        solfeggio,
+        solfeggioVolume: 0.03,
+      });
+      ambientRef.current = ambientAudio;
+      await ambientAudio.start();
+    }
 
     setPlaying(true);
     setElapsed(0);
